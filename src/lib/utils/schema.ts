@@ -177,6 +177,26 @@ export type FAQCategoryInput = {
   list: Array<{ title: string; content: string }>;
 };
 
+export type BreadcrumbItemInput = {
+  label?: string;
+  href?: string;
+};
+
+export type TeamMemberInput = {
+  name?: string;
+  role?: string;
+  image?: string;
+  description?: string;
+  social?: {
+    enable?: boolean;
+    url?: string;
+    list?: Array<{
+      enable?: boolean;
+      url?: string;
+    }>;
+  };
+};
+
 export const buildOrganizationSchema = ({
   locale,
   siteUrl,
@@ -491,4 +511,167 @@ export const buildArticleSchema = ({
   inLanguage: getSchemaLanguageTag(locale),
   mainEntityOfPage: url,
 });
+
+export const buildBreadcrumbSchema = ({
+  locale,
+  siteUrl,
+  items,
+}: {
+  locale?: string;
+  siteUrl: string;
+  items: BreadcrumbItemInput[];
+}) => {
+  if (!items || items.length === 0) {
+    return null;
+  }
+
+  const itemListElement = items
+    .filter((item) => item.label && item.href)
+    .map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: plainify(item.label || ""),
+      item: new URL(item.href as string, siteUrl).href,
+    }))
+    .filter((entry) => entry.name && entry.item);
+
+  if (itemListElement.length < 2) {
+    return null;
+  }
+
+  return {
+    "@type": "BreadcrumbList",
+    "@id": createSchemaId(siteUrl, `breadcrumbs-${getSchemaLocale(locale)}`),
+    inLanguage: getSchemaLanguageTag(locale),
+    itemListElement,
+  };
+};
+
+export const buildAboutPageSchema = ({
+  locale,
+  siteUrl,
+  url,
+  title,
+  description,
+}: {
+  locale?: string;
+  siteUrl: string;
+  url: string;
+  title?: string;
+  description?: string;
+}) => ({
+  "@type": "AboutPage",
+  "@id": createSchemaId(url, "about"),
+  url,
+  name: title || "About MMC FP",
+  description: description || ORG_PROFILE.description[getSchemaLocale(locale)],
+  inLanguage: getSchemaLanguageTag(locale),
+  about: {
+    "@id": createSchemaId(siteUrl, "organization"),
+  },
+  mainEntity: {
+    "@id": createSchemaId(siteUrl, "organization"),
+  },
+});
+
+const extractSocialLinks = (member: TeamMemberInput) => {
+  if (!member.social) return [];
+
+  if (Array.isArray(member.social)) {
+    return member.social
+      .filter((link) => link?.url)
+      .map((link) => link.url as string)
+      .filter(Boolean);
+  }
+
+  if (member.social.list) {
+    return member.social.list
+      .filter((link) => link?.enable && link?.url)
+      .map((link) => link.url as string)
+      .filter(Boolean);
+  }
+
+  return member.social.url ? [member.social.url] : [];
+};
+
+export const buildTeamSchema = ({
+  locale,
+  siteUrl,
+  url,
+  title,
+  description,
+  members,
+}: {
+  locale?: string;
+  siteUrl: string;
+  url: string;
+  title?: string;
+  description?: string;
+  members: TeamMemberInput[];
+}) => {
+  if (!members || members.length === 0) {
+    return null;
+  }
+
+  const inLanguage = getSchemaLanguageTag(locale);
+  const personNodes = members
+    .filter((member) => member?.name)
+    .map((member, index) => {
+      const memberId = createSchemaId(
+        siteUrl,
+        `team-member-${slugifyKey(member?.name) || index + 1}`,
+      );
+      const socialLinks = extractSocialLinks(member);
+
+      return {
+        "@type": "Person",
+        "@id": memberId,
+        name: member?.name,
+        jobTitle: member?.role,
+        description: member?.description && plainify(member.description),
+        image: member?.image ? new URL(member.image, siteUrl).href : undefined,
+        worksFor: {
+          "@id": createSchemaId(siteUrl, "organization"),
+        },
+        sameAs: socialLinks.length ? socialLinks : undefined,
+      };
+    })
+    .filter((node) => node.name);
+
+  if (personNodes.length === 0) {
+    return null;
+  }
+
+  const itemListId = createSchemaId(url, "team-item-list");
+
+  const teamPageNode = {
+    "@type": "AboutPage",
+    "@id": createSchemaId(url, "team"),
+    url,
+    name: title || "Leadership & Team",
+    description:
+      description ||
+      "Meet the leadership team guiding MMC FP and delivering measurable growth outcomes.",
+    inLanguage,
+    about: {
+      "@id": createSchemaId(siteUrl, "organization"),
+    },
+    mainEntity: {
+      "@id": itemListId,
+    },
+  };
+
+  const itemListNode = {
+    "@type": "ItemList",
+    "@id": itemListId,
+    inLanguage,
+    itemListElement: personNodes.map((person, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: person["@id"],
+    })),
+  };
+
+  return [teamPageNode, itemListNode, ...personNodes];
+};
 

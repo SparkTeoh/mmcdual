@@ -1,6 +1,8 @@
 ---
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils.ts";
 import { humanize } from "@/lib/utils/textConverter";
+import SchemaSnippet from "@/layouts/components/widgets/SchemaSnippet.astro";
+import { buildBreadcrumbSchema } from "@/lib/utils/schema";
 
 // Props
 interface Props {
@@ -57,6 +59,16 @@ if (hiddenPaths && hiddenPaths.length > 0) {
     };
   });
 }
+
+const siteUrl = Astro.site?.href ?? new URL("/", Astro.url).href;
+const breadcrumbSchema = buildBreadcrumbSchema({
+  locale: Astro.currentLocale,
+  siteUrl,
+  items: breadcrumbParts.map(({ label, href }) => ({
+    label: typeof label === "string" ? label : String(label),
+    href,
+  })),
+});
 ---
 
 <nav aria-label="Breadcrumb" class:list={[className]} {...rest}>
@@ -78,3 +90,4 @@ if (hiddenPaths && hiddenPaths.length > 0) {
     }
   </ol>
 </nav>
+<SchemaSnippet data={breadcrumbSchema} />

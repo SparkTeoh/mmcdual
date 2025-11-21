@@ -5,7 +5,12 @@ import {
   loadAndConvertToSvg,
 } from "@realfavicongenerator/image-adapter-node";
 import faviconGenerator from "@realfavicongenerator/generate-favicon";
-import config from "../.astro/config.generated.json" assert { type: "json" };
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const configPath = path.join(__dirname, "../.astro/config.generated.json");
+const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
 
 // Constants
 const FAVICON_DIR = "./public/images/favicons/";

@@ -35,7 +35,7 @@
     "quickLinks": "Quick Links",
     "legal": "Legal",
     "resources": "Resources",
-    "description": "MMC FP is a San Francisco-based design and technology company founded in 2016. Their mission is to democratize design by making professional branding tools accessible to everyone.",
+    "description": "<strong class=\"text-accent\">MMC FP Sdn Bhd</strong><br />199701019804 (0435301-X)<br />59.20, Exchange 106,<br />Tun Razak Exchange (TRX),<br />55188 Kuala Lumpur<br />CMSL: eCMSL/A0224/2008",
     "copyright": "Copyright {{ year }} / All Rights Reserved By MMC FP / Built with love using [Astro Themes](https://getastrothemes.com/)",
     "_comment": "We kindly appreciate it if you retain the theme copyright. Thank you for supporting Getastrothemes!"
   }
