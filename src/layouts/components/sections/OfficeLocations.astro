@@ -4,6 +4,8 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import OptimizedImage from "../utilities/OptimizedImage.astro";
 import CustomButton from "../CustomButton.astro";
+import SchemaSnippet from "@/layouts/components/widgets/SchemaSnippet.astro";
+import { buildOfficeSchema } from "@/lib/utils/schema";
 
 type OfficeInfo = {
   enable: boolean; // Determines if the content and/or image are displayed
@@ -38,11 +40,27 @@ let actualContent = {
 // Extracting required values from 'content' object
 let { title, enable, button, subtitle, list } =
   actualContent as sectionType;
+
+const siteUrl = Astro.site?.href ?? new URL("/", Astro.url).href;
+const officeEntry = list?.find((item) => item.enable);
+const officeSchema = officeEntry
+  ? buildOfficeSchema({
+      locale: Astro.currentLocale,
+      url: `${Astro.url.href.replace(/#.*$/, "")}#office`,
+      office: {
+        title: officeEntry.title,
+        content: officeEntry.content,
+        image: officeEntry.image
+          ? new URL(officeEntry.image, siteUrl).href
+          : undefined,
+      },
+    })
+  : null;
 ---
 
 {
   enable && (
-    <section>
+    <section id="office">
       <div class="container">
         <div class:list={["flex flex-col justify-start gap-12 md:gap-16"]}>
           <div class="flex flex-col flex-wrap justify-between gap-8 lg:flex-row lg:items-center">
@@ -127,6 +145,7 @@ let { title, enable, button, subtitle, list } =
           </div>
         </div>
       </div>
+      <SchemaSnippet data={officeSchema} />
     </section>
   )
 }

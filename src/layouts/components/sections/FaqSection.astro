@@ -5,6 +5,8 @@ import { markdownify } from "@/lib/utils/textConverter";
 import AccordionList from "@/layouts/components/widgets/AccordionList.astro";
 import type { FAQCategory, FAQItem, Section } from "@/types";
 import CustomButton from "../CustomButton.astro";
+import SchemaSnippet from "@/layouts/components/widgets/SchemaSnippet.astro";
+import { buildFaqSchema } from "@/lib/utils/schema";
 
 // Type for this section data
 type sectionType = Section & {
@@ -67,11 +69,21 @@ list = limit && list ? list.slice(0, limit as number) : list;
 if (!showCategories) {
   list = list?.slice(0, 1);
 }
+
+const siteUrl = Astro.site?.href ?? new URL("/", Astro.url).href;
+const faqSchema = list
+  ? buildFaqSchema({
+      locale: Astro.currentLocale,
+      categories: list,
+      url: `${Astro.url.href.replace(/#.*$/, "")}#faq`,
+      siteUrl,
+    })
+  : null;
 ---
 
 {
   enable && (
-    <section>
+    <section id="faq">
       <div class="container">
         <div
           class:list={[
@@ -168,6 +180,7 @@ if (!showCategories) {
           )}
         </div>
       </div>
+      <SchemaSnippet data={faqSchema} />
     </section>
   )
 }

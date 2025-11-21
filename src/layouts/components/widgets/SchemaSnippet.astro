@@ -1,0 +1,13 @@
+---
+type Props = {
+  data?: Record<string, any> | Record<string, any>[] | null;
+};
+
+const { data } = Astro.props as Props;
+if (!data || (Array.isArray(data) && data.length === 0)) {
+  return;
+}
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(data, null, 2)} />
+

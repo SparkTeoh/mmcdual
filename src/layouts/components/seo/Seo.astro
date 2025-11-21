@@ -52,6 +52,18 @@ if (
       href: getLocaleUrlCTM(Astro.url.href, lang.languageCode),
     });
   });
+  
+  // Add x-default tag pointing to the default language version
+  // This helps search engines understand which version to show to users
+  // whose language preference doesn't match any of the available languages
+  const defaultLangUrl = getLocaleUrlCTM(
+    Astro.url.href,
+    config.settings.multilingual.defaultLanguage,
+  );
+  alternateTags.push({
+    hreflang: "x-default",
+    href: defaultLangUrl,
+  });
 }
 ---
 

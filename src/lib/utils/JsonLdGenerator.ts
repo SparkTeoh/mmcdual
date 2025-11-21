@@ -8,6 +8,13 @@ import { absoluteUrl } from "./absoluteUrl";
 import { getLocaleUrlCTM } from "@/lib/utils/i18nUtils";
 import trailingSlashChecker from "./trailingSlashChecker";
 import social from "@/config/social.json";
+import {
+  buildOrganizationSchema,
+  buildWebsiteSchema,
+  createSchemaId,
+  getSchemaLanguageTag,
+  getSchemaLocale,
+} from "./schema";
 
 // This component dynamically generates appropriate JSON-LD data based on the page type
 export type JSONLDProps = {
@@ -18,6 +25,7 @@ export type JSONLDProps = {
   categories?: string[]; // Categories or tags for blog posts or case studies
   author?: string; // Author for blog posts or case studies
   pageType?: string; // Page type
+  schemaNodes?: Record<string, any>[];
 
   [key: string]: any;
 };
@@ -32,46 +40,55 @@ export default function JsonLdGenerator(content: JSONLDProps, Astro: any) {
     lang,
     alternateLangs = [], // Array of alternate language URLs
     config,
+    schemaNodes = [],
   } = content || {};
 
   if (!lang) {
     lang = config.settings.multilingual.defaultLanguage;
   }
+  const resolvedSchemaNodes = Array.isArray(schemaNodes) ? schemaNodes : [];
 
-  // Generate JSON-LD data dynamically based on page type
-  let jsonLdData: Record<string, any> = {
-    "@context": "https://schema.org",
+  const schemaLocale = getSchemaLocale(lang);
+  const inLanguage = getSchemaLanguageTag(lang);
+  const siteUrl = trailingSlashChecker(new URL("/", Astro.url).href);
+  const organizationLogo = absoluteUrl(config.site.logo, Astro);
+  const sameAs = social.main.filter((item) => item.enable).map((item) => item.url);
+  const canonicalUrl = canonical?.startsWith("http")
+    ? canonical
+    : new URL(canonical || Astro.url.href, Astro.url).href;
+  const pageImage = image;
+
+  const webPageNode: Record<string, any> = {
+    "@type": pageType || "WebPage",
+    "@id": createSchemaId(canonicalUrl, "webpage"),
+    url: canonicalUrl,
+    name: title,
+    description,
+    inLanguage,
+    isPartOf: {
+      "@id": createSchemaId(siteUrl, "website"),
+    },
+    publisher: {
+      "@id": createSchemaId(siteUrl, "organization"),
+    },
   };
 
-  switch (pageType) {
-    default:
-      jsonLdData["@type"] = "WebPage";
-      jsonLdData.name = title;
-      jsonLdData.description = description;
-      jsonLdData.image = image;
-      jsonLdData.url = canonical;
-
-      if (lang) {
-        jsonLdData.inLanguage = lang;
-      }
+  if (pageImage) {
+    webPageNode.primaryImageOfPage = {
+      "@type": "ImageObject",
+      url: pageImage,
+    };
+    webPageNode.image = pageImage;
   }
 
-  // Add site metadata to `isPartOf` of jsonLdData
-  const siteTitle =
-    config.site.title +
-    (config.site.tagline &&
-      (config.site.taglineSeparator || " - ") + config.site.tagline);
-
-  jsonLdData["isPartOf"] = {
-    "@type": "WebSite",
-    name: siteTitle,
-    description: config.site.description,
-    url: trailingSlashChecker(Astro.url.origin),
-  };
+  if (content?.date) {
+    webPageNode.datePublished = content.date;
+    webPageNode.dateModified = content.date;
+  }
 
   // Add alternate languages if provided
   if (alternateLangs.length > 0) {
-    jsonLdData.alternateLanguage = alternateLangs
+    webPageNode.alternateLanguage = alternateLangs
       .filter((alt: any) => Astro.currentLocale !== alt.languageCode)
       .map((alt: any) => ({
         "@type": "WebPage",
@@ -80,18 +97,23 @@ export default function JsonLdGenerator(content: JSONLDProps, Astro: any) {
       }));
   }
 
-  // Add `publisher` to jsonLdData
-  jsonLdData.publisher = {
-    "@type": "Organization",
-    name: config.seo.author,
-    url: trailingSlashChecker(Astro.url.origin),
-    sameAs: social.main.filter((item) => item.enable).map((item) => item.url),
-    logo: {
-      "@type": "ImageObject",
-      url: absoluteUrl(config.site.logo, Astro),
-    },
-  };
+  const graphNodes = [
+    webPageNode,
+    buildWebsiteSchema({
+      locale: schemaLocale,
+      siteUrl,
+    }),
+    buildOrganizationSchema({
+      locale: schemaLocale,
+      siteUrl,
+      logo: organizationLogo,
+      sameAs,
+    }),
+    ...resolvedSchemaNodes,
+  ];
 
-  // Utility to remove empty or undefined keys
-  return jsonLdData;
+  return {
+    "@context": "https://schema.org",
+    "@graph": graphNodes,
+  };
 }

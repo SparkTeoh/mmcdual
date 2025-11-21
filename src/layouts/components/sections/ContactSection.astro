@@ -8,6 +8,8 @@ import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import { markdownify, toLowerCase } from "@/lib/utils/textConverter";
 import SocialComponent from "@/layouts/components/social/Social.astro";
 import config from ".astro/config.generated.json" assert { type: "json" };
+import SchemaSnippet from "@/layouts/components/widgets/SchemaSnippet.astro";
+import { buildContactSchema } from "@/lib/utils/schema";
 
 const {
   settings: { contactFormAction, contactFormProvider },
@@ -72,6 +74,18 @@ let {
   contactList,
 } = actualContent as pricingSectionType;
 
+const siteUrl = Astro.site?.href ?? new URL("/", Astro.url).href;
+const sectionUrl = `${Astro.url.href.replace(/#.*$/, "")}#contact`;
+const contactSchema = buildContactSchema({
+  locale: Astro.currentLocale,
+  url: sectionUrl,
+  siteUrl,
+  channels: contactList?.list?.map((item) => ({
+    label: item.label,
+    value: item.value,
+  })),
+});
+
 // Generate ID from label (Required for Input Radio and Checkbox)
 const genIdFromLabel = (label: string) => toLowerCase(label).replace(" ", "-");
 
@@ -123,7 +137,7 @@ form = {
 
 {
   enable && (
-    <section class="relative">
+    <section id="contact" class="relative">
       <div class:list={["container"]}>
         <div
           class:list={[
@@ -469,6 +483,7 @@ form = {
           )}
         </div>
       </div>
+      <SchemaSnippet data={contactSchema} />
     </section>
   )
 }
