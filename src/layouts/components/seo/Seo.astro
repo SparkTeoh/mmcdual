@@ -46,10 +46,17 @@ if (
   config.settings.multilingual.enable &&
   !canonical.includes("blog/category/")
 ) {
+  // Normalize the current URL to use the configured base URL (Astro.site)
+  // This ensures hreflang URLs always use the correct domain
+  const normalizedUrl = new URL(Astro.url.href, Astro.site).href;
+  
+  // Generate hreflang tags for all supported languages
+  // This ensures reciprocal linking: if page A links to page B, page B links back to page A
+  // Each page includes hreflang tags for ALL language versions, including itself
   supportedLanguages.forEach((lang) => {
     alternateTags.push({
       hreflang: lang.languageCode,
-      href: getLocaleUrlCTM(Astro.url.href, lang.languageCode),
+      href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
     });
   });
   
@@ -57,7 +64,7 @@ if (
   // This helps search engines understand which version to show to users
   // whose language preference doesn't match any of the available languages
   const defaultLangUrl = getLocaleUrlCTM(
-    Astro.url.href,
+    normalizedUrl,
     config.settings.multilingual.defaultLanguage,
   );
   alternateTags.push({

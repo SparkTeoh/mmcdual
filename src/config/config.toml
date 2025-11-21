@@ -4,7 +4,7 @@
   description      = "A highly customizable consulting & business astro theme built with Tailwind CSS and Astro Js" # Shared description for SEO and OpenGraph
   tagline          = "Corporate Business & Consulting Astro Js Theme"
   taglineSeparator = "" # default is " - " 
-  baseUrl          = "https://looka-astro.netlify.app" # Base URL for the site and used in OpenGraph meta tags.
+  baseUrl          = "https://mmc.financial" # Base URL for the site and used in OpenGraph meta tags.
   logo             = "/images/logo.svg" # Path to the site's logo
   logoAlternate    = "" # Path to the site's logo
   logoText         = "" # Text displayed next to the logo (removed - using logo image only)

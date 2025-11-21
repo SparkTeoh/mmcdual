@@ -269,10 +269,16 @@ export const getLocaleUrlCTM = (
     const segments = u.split("/");
     const lang = languageCodes.find((item) => segments.includes(item));
 
+    // If no language code found in URL, return the URL as-is (it's already language-neutral)
+    if (!lang) {
+      // Ensure it starts with '/' for consistency
+      return u.startsWith("/") ? u : `/${u}`;
+    }
+
     const urlWithoutLang = u.replace(`/${lang}`, "");
 
     // if urlWithoutLang equal to empty string, return '/'
-    if (urlWithoutLang === "") return "/";
+    if (urlWithoutLang === "" || urlWithoutLang === "/") return "/";
 
     return urlWithoutLang;
   };
@@ -305,8 +311,11 @@ export const getLocaleUrlCTM = (
   updatedUrl = trailingSlashChecker(updatedUrl);
 
   // Reconstruct the complete URL if the original URL is absolute, meaning it includes both a protocol and a hostname.
-  if (isAbsoluteUrl) {
-    updatedUrl = new URL(url).origin + updatedUrl;
+  if (isAbsoluteUrl && !isExternalUrl) {
+    // Use the configured base URL for internal URLs to ensure consistency
+    // This is especially important for hreflang tags which must use the canonical domain
+    const baseUrl = new URL(config.site.baseUrl);
+    updatedUrl = baseUrl.origin + updatedUrl;
 
     if (hash) {
       updatedUrl = `${updatedUrl}#${hash}`;
