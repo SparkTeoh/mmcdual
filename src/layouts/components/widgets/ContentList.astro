@@ -135,12 +135,80 @@ if (list.length === 0) return;
   }
 </div>
 {
-  content === "blog" && pagination?.enable && (
-    <Pagination
-      class="pt-8"
-      collection="blog"
-      currentPage={pagination?.currentPage || 1}
-      totalPages={totalPages}
-    />
+  content === "blog" && pagination?.enable && totalPages > 1 && (
+    <div class="pt-8 text-center" id="pagination">
+      <button
+        id="load-more"
+        class="btn btn-primary rounded-full px-8 py-3 text-white transition hover:bg-primary/90"
+        data-current-page={pagination?.currentPage || 1}
+        data-total-pages={totalPages}
+      >
+        Load More
+      </button>
+    </div>
   )
 }
+
+<script>
+  const loadMoreBtn = document.getElementById("load-more") as HTMLButtonElement | null;
+  const blogContainer = document.querySelector(".blog-search-results");
+
+  if (loadMoreBtn && blogContainer) {
+    loadMoreBtn.addEventListener("click", async () => {
+      const currentPageAttr = loadMoreBtn.getAttribute("data-current-page");
+      const totalPagesAttr = loadMoreBtn.getAttribute("data-total-pages");
+
+      if (!currentPageAttr || !totalPagesAttr) return;
+
+      const currentPage = parseInt(currentPageAttr);
+      const totalPages = parseInt(totalPagesAttr);
+      const nextPage = currentPage + 1;
+
+      if (nextPage > totalPages) {
+        loadMoreBtn.style.display = "none";
+        return;
+      }
+
+      loadMoreBtn.textContent = "Loading...";
+      loadMoreBtn.disabled = true;
+
+      try {
+        // Construct URL for the next page
+        const currentPath = window.location.pathname.replace(/\/$/, "");
+        
+        let nextUrl = "";
+        if (currentPath.includes("/page/")) {
+             nextUrl = currentPath.replace(/\/page\/\d+/, `/page/${nextPage}`);
+        } else {
+             nextUrl = `${currentPath}/page/${nextPage}`;
+        }
+
+        const response = await fetch(nextUrl);
+        if (!response.ok) throw new Error("Failed to load more posts");
+
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
+        const newPosts = doc.querySelectorAll(".blog-search-results > *");
+
+        newPosts.forEach((post) => {
+          blogContainer.appendChild(post);
+        });
+
+        loadMoreBtn.setAttribute("data-current-page", nextPage.toString());
+        
+        if (nextPage >= totalPages) {
+          loadMoreBtn.style.display = "none";
+        }
+      } catch (error) {
+        console.error(error);
+        loadMoreBtn.textContent = "Error loading posts";
+      } finally {
+        if (loadMoreBtn.textContent === "Loading...") {
+            loadMoreBtn.textContent = "Load More";
+            loadMoreBtn.disabled = false;
+        }
+      }
+    });
+  }
+</script>

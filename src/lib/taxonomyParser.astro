@@ -25,8 +25,20 @@ export const getTaxonomy = async (
     taxonomyPages = [...taxonomyPages];
     taxonomyPages.forEach((category: string) => {
       if (category) {
-        const slug = slugifyyy(category);
-        slug && uniqueTaxonomies.set(category, { name: category, slug });
+        // Generate a URL-friendly slug. For non-Latin languages (e.g. Chinese),
+        // slugify can return an empty string, which previously caused the
+        // category list to be empty in those locales.
+        let slug = slugifyyy(category);
+
+        // Fallback: if slugify returns an empty string, fall back to a
+        // whitespace-normalized version of the original text. Browsers
+        // handle non‑ASCII path segments correctly and this keeps category
+        // filtering working in all languages.
+        if (!slug) {
+          slug = category.trim().replace(/\s+/g, "-");
+        }
+
+        uniqueTaxonomies.set(category, { name: category, slug });
       }
     });
   });

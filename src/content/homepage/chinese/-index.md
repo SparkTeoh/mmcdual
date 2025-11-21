@@ -18,15 +18,15 @@ servicesSection:
   showServicesAs: "slider" # "slider" | "static"
   # limit: 3 # number / false
 
-  # button:
-  #   enable: true
-  #   label: "Voir tous les services"
-  #   url: "/services"
-  #   rel: ""
-  #   target: ""
-  #   showIcon: "true"
-  #   variant: "outline" # "fill", "outline", "outline-white", "text"
-  #   hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+  button:
+    enable: true
+    label: "查看所有服务"
+    url: "/services"
+    rel: ""
+    target: ""
+    showIcon: "true"
+    variant: "outline-white" # "fill", "outline", "outline-white", "text"
+    hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
 
 # Override Default Content of `/sections/call-to-action.md`
 # Uncomment key values that you want to override

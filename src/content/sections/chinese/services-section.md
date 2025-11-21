@@ -8,7 +8,7 @@ subtitle: "我们的服务"
 # If you enable this button, the slider navigation buttons will be hidden, and this button will be displayed.
 button:
   enable: true
-  label: "查看全部服务"
+  label: "查看所有服务"
   url: "/services"
   rel: ""
   target: ""

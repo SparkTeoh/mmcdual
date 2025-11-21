@@ -12,6 +12,7 @@
   "widgets": {
     "postSearchTitle": "搜索文章",
     "postSearchFormPlaceholder": "输入关键词…",
+    "categoriesAll": "全部",
     "categoriesTitle": "分类",
     "recentPostsTitle": "最新文章"
   },

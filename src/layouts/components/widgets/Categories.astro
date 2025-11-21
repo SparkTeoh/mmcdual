@@ -48,6 +48,12 @@ categories = categories.map((category) => {
 });
 
 const t = await useTranslations(Astro.currentLocale as string);
+const allLabel = t("widgets.categoriesAll") || "All";
+
+const allUrl = getLocaleUrlCTM(
+  `/${config.settings.blogFolder}/`,
+  Astro.currentLocale as string,
+);
 
 // Sort categories by count
 categories = categories.sort((a, b) => b.count - a.count);
@@ -55,32 +61,30 @@ categories = categories.sort((a, b) => b.count - a.count);
 
 {
   categories && categories.length > 0 && (
-    <div class="space-y-4">
-      <h2 class="text-h5 border-border-light/50 mb-4 border-b pb-4">
-        {t("widgets.categoriesTitle")}
-      </h2>
-      <div>
-        {categories.map((category) => (
-          <div class="group/category relative flex items-center gap-4 py-1 first:pt-0 last:pb-0">
-            <span class="group-hover/category:text-primary inline-block transition duration-300 group-hover/category:translate-x-1">
-              <Icons icon="ChevronRight" />
-            </span>
-            <span
-              class="group-hover/category:text-primary truncate transition duration-300"
-              set:html={category.name}
-            />
-            <a
-              href={category.slug}
-              class="absolute inset-0"
-              title={`Filter posts by ${category.name}`}
-            />
-            <div
-              class="bg-theme-light group-hover/category:bg-primary/10 group-hover/category:text-primary ml-auto flex h-9 w-9 items-center justify-center rounded-full text-sm transition duration-300"
-              set:html={category.count}
-            />
-          </div>
-        ))}
-      </div>
+    <div class="flex flex-wrap items-center justify-center gap-4 md:gap-8">
+      <a
+        href={allUrl}
+        class={`text-sm font-medium transition duration-300 hover:text-primary ${
+          Astro.url.pathname === allUrl ||
+          Astro.url.pathname === allUrl.replace(/\/$/, "")
+            ? "text-primary border border-primary px-3 py-1 rounded"
+            : "text-text-default"
+        }`}
+      >
+        {allLabel}
+      </a>
+      {categories.map((category) => (
+        <a
+          href={category.slug}
+          class={`text-sm font-medium transition duration-300 hover:text-primary ${
+            Astro.url.pathname.includes(category.slug)
+              ? "text-primary"
+              : "text-text-default"
+          }`}
+        >
+          {category.name}
+        </a>
+      ))}
     </div>
   )
 }

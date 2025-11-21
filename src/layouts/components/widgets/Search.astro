@@ -80,33 +80,19 @@ const btnLabelReadMoreI18n = t("common.readMore");
 const notFoundImage = await bgOptimizedImage("/images/404.svg");
 ---
 
-<div class="space-y-4">
-  <h2 class="text-h5 border-border-light/50 mb-4 border-b pb-4">
-    {t("widgets.postSearchTitle")}
-  </h2>
-  <div>
-    <form method="post" class="relative" id="search">
+<div class="w-full">
+  <form method="post" class="relative w-full" id="search">
+    <div class="relative flex items-center">
+      <span class="absolute left-4 text-gray-400">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </span>
       <input
         type="search"
-        placeholder={t("widgets.postSearchFormPlaceholder")}
-        class="border-border-light focus:ring-border-light/25 focus:border-border-light placeholder:text-text-default/70 h-full w-full border py-4 pl-5 shadow-none outline-0 placeholder:text-sm focus:ring-4"
+        placeholder="Type & hit Enter ..."
+        class="w-full rounded-full bg-[#333333] py-4 pl-12 pr-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary border-none"
       />
-      <button
-        type="submit"
-        class="has-icon-moving-animation absolute top-1 right-1 flex h-[calc(100%-0.5rem)] w-12 items-center justify-center bg-slate-100">
-        <span class="sr-only">Subscribe</span>
-        <span
-          class="icons-wrapper ms-2 -mb-px inline-flex min-h-[.9em] min-w-[1em] items-center justify-center">
-          <span class="icon icon-before flex items-center justify-center">
-            <Icons class="text-text-default h-6 w-6" icon="ArrowUpRight" />
-          </span>
-          <span class="icon icon-after flex items-center justify-center">
-            <Icons class="text-text-default h-6 w-6" icon="ArrowUpRight" />
-          </span>
-        </span>
-      </button>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
 
 <script

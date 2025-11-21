@@ -30,7 +30,10 @@ export async function getStaticPaths() {
 
       const paths = categories.map((category) => ({
         params: {
-          category: slugifyyy(category.slug),
+          // `category.slug` is already a URL-safe slug coming from
+          // `getTaxonomy`. Re- slugifying it can return an empty string for
+          // non‑Latin languages (e.g. Chinese), which breaks category routes.
+          category: category.slug,
           lang:
             lang.languageCode === defaultLanguage && !showDefaultLangInUrl
               ? undefined

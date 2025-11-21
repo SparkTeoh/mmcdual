@@ -50,14 +50,11 @@ const createBreadcrumbParts = (pathname: string) => {
 // Generate breadcrumb parts
 let breadcrumbParts = createBreadcrumbParts(Astro.url.pathname);
 
-// Removed hidden paths
+// Remove any breadcrumb parts whose label matches hiddenPaths
 if (hiddenPaths && hiddenPaths.length > 0) {
-  breadcrumbParts = breadcrumbParts.map((part) => {
-    return {
-      ...part,
-      href: !hiddenPaths?.includes(part.label) ? part.href : "",
-    };
-  });
+  breadcrumbParts = breadcrumbParts.filter(
+    (part) => !hiddenPaths.includes(String(part.label)),
+  );
 }
 
 const siteUrl = Astro.site?.href ?? new URL("/", Astro.url).href;

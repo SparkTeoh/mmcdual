@@ -49,7 +49,7 @@
   servicesFolder  = "services" # Folder where services are stored
   portfolioFolder = "case-studies" # Folder where case-studies or projects or portfolio are stored
 
-  pagination   = 4 # Number of posts displayed on each page blog list page
+  pagination   = 9 # Number of posts displayed on each page blog list page
   stickyHeader = true # Enables or disable sticky feature of header
   brandName    = "MMC" # Name to be displayed in the footer as big text
 

@@ -21,7 +21,7 @@ indexServicesSection:
 
   button:
     enable: false
-    label: "查看全部服务"
+    label: "查看所有服务"
     url: "/services"
     rel: ""
     target: ""
@@ -58,12 +58,15 @@ servicesSection:
   # showServicesAs: "static" # "slider" | "static"; (default "slider"); weather to show services as slider or static list
   # limit: 3 # number / false (default "3"); Limit the number of services to be displayed (Only work if showServicesAs is static)
 
-  # button:
-  #   enable: true
-  #   label: "Voir Tous les Services"
-  #   url: "/services"
-  #   rel: ""
-  #   target: ""
+  button:
+    enable: true
+    label: "查看所有服务"
+    url: "/services"
+    rel: ""
+    target: ""
+    showIcon: "true"
+    variant: "outline" # "fill", "outline", "outline-white", "text"
+    hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
 
 # "FAQ" Section located in Services Single Page
 faqSection:
