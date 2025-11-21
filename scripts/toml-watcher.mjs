@@ -25,20 +25,19 @@ function convertTomlToJson() {
   }
 }
 
-/**
- * Run immediately if JSON is missing
- */
-if (!fs.existsSync(outputFilePath)) {
-  // console.log("[toml-watcher] JSON not found. Generating...");
-  convertTomlToJson();
-}
+const shouldWatch = process.argv.includes("--watch");
 
-/**
- * Watch TOML file for changes
- */
-fs.watch(configFilePath, (eventType) => {
-  if (eventType === "change") {
-    // console.log("[toml-watcher] TOML file changed. Regenerating...");
-    convertTomlToJson();
-  }
-});
+// Always run once to ensure config is synced before exiting or watching
+convertTomlToJson();
+
+if (shouldWatch) {
+  /**
+   * Watch TOML file for changes
+   */
+  fs.watch(configFilePath, (eventType) => {
+    if (eventType === "change") {
+      // console.log("[toml-watcher] TOML file changed. Regenerating...");
+      convertTomlToJson();
+    }
+  });
+}
