@@ -5,7 +5,6 @@ import { markdownify } from "@/lib/utils/textConverter";
 import { splitProtectedText } from "@/lib/utils/splitProtectedText";
 import SocialComponent from "@/components/social/Social.astro";
 import Logo from "@/components/global/Logo.astro";
-import logoWhite from "@/assets/images/MMCWHITE.webp";
 import social from "@/config/social.json";
 import SubscriptionForm from "@/components/widgets/SubscriptionForm.astro";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
@@ -46,7 +45,7 @@ const copyrightParts = splitProtectedText(copyrightText);
     <div class="grid pt-16 md:pt-32 lg:grid-cols-2 xl:grid-cols-3">
       <!-- Logo, Description and Social -->
       <div class="flex flex-col gap-y-5 lg:pe-10">
-        <Logo image={logoWhite} />
+        <Logo logoPath="/images/MMCWHITE.svg" logoHeight={60} />
         {
           footerDescription && (
             <p class="opacity-90" set:html={markdownify(footerDescription)} />

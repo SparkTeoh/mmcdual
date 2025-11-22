@@ -72,11 +72,13 @@ const { stickyHeader, navigationButton } = config.settings;
             {config.settings.multilingual.enable && !isCategoryFilteredPage && (
               <LanguageSwitcher />
             )}
-            <CustomButton
-              {...navigationButton}
-              variant="outline"
-              label={navigationButton.label || t("navigation.buttonLabel")}
-            />
+            {navigationButton.enable && (
+              <CustomButton
+                {...navigationButton}
+                variant="outline"
+                label={navigationButton.label || t("navigation.buttonLabel")}
+              />
+            )}
           </div>
         )
       }

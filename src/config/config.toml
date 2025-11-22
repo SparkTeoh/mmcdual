@@ -85,7 +85,7 @@
 
   # Navigation Button In Header
   [settings.navigationButton]
-    enable   = true
+    enable   = false
     label    = "" # Check src/i18n/en.json and src/i18n/zh.json for changing the navigation button label in different languages or directly add value here if you are not using internationalization feature
     url      = "/contact/"
     showIcon = "true" # "true" or "false"
