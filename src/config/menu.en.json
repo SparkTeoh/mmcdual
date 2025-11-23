@@ -104,7 +104,7 @@
     },
     {
       "enable": true,
-      "name": "Faq",
+      "name": "FAQ",
       "url": "/faq/"
     },
     {
@@ -116,7 +116,7 @@
   "footerMenuLegal": [
     {
       "enable": true,
-      "name": "Terms of Conditions",
+      "name": "Terms & Conditions",
       "url": "/terms-conditions/"
     },
     {

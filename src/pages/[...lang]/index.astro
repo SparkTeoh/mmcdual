@@ -20,6 +20,8 @@ const homepage = await getEntryCTM("homepage", "-index", Astro.currentLocale);
 ---
 
 <Base {...homepage?.data} homepage={true}>
+  <!-- Hidden H1 for SEO - not displayed visually but accessible to screen readers and search engines -->
+  <h1 class="sr-only">{homepage?.data?.title || (Astro.currentLocale === "zh" ? "值得信赖的马来西亚持牌财务规划公司" : "Trusted Licensed Financial Planning Firm In Malaysia")}</h1>
   <HomeBanner />
   <Customers />
   <AboutUs />
