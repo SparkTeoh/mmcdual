@@ -2,10 +2,25 @@
 import Icons from "@/helpers/Icons.astro";
 import { getLocaleUrlCTM, supportedLanguages } from "@/lib/utils/i18nUtils";
 import trailingSlashChecker from "@/lib/utils/trailingSlashChecker";
+import config from ".astro/config.generated.json" assert { type: "json" };
 
 const currentLocale = Astro.currentLocale;
+// 检查是否是 blog 文章页面（不是 blog 总页面，也不是 category 页面）
+const isBlogPost = Astro.url.pathname.includes(`/${config.settings.blogFolder}/`) && 
+                  !Astro.url.pathname.includes("/category/") &&
+                  !Astro.url.pathname.endsWith(`/${config.settings.blogFolder}/`) &&
+                  !Astro.url.pathname.endsWith(`/${config.settings.blogFolder}`);
+
 const languages = supportedLanguages.map((lang) => {
-  const href = getLocaleUrlCTM(Astro.url.pathname, lang.languageCode as string);
+  let href: string;
+  
+  if (isBlogPost) {
+    // 如果是 blog 文章页面，跳转到另一个语言的 blog 总页面
+    href = getLocaleUrlCTM(`/${config.settings.blogFolder}/`, lang.languageCode as string);
+  } else {
+    // 其他页面保持原逻辑
+    href = getLocaleUrlCTM(Astro.url.pathname, lang.languageCode as string);
+  }
 
   // Don't include current locale in url
   if (href === trailingSlashChecker(Astro.url.pathname)) {

@@ -164,7 +164,7 @@ const notFoundImage = await bgOptimizedImage("/images/404.svg");
         // HTML template For Not found
         const notFoundHTML = `
             <div class="text-center space-y-10 w-full col-span-2">
-              <img class="w-96 mx-auto" src=${notFoundImage} alt="404" />
+              <img class="w-96 mx-auto" src=${notFoundImage} alt="404 Page Not Found - MMC Financial Planning blog search results" />
               <p class="text-h6">
                 No Posts Found For <span class="text-primary">"${searchTerm}"</span>
               </p>
@@ -210,7 +210,7 @@ const notFoundImage = await bgOptimizedImage("/images/404.svg");
               <path d="M7 17 17 7"></path>
             </svg>
           </span>
-          <img src="${post.image}" alt="${post.title}" loading="lazy" class="h-62.5! min-w-full object-cover transition duration-500 group-hover:scale-105">
+          <img src="${post.image}" alt="${post.imageAlt || post.title || 'MMC Financial Planning blog post'}" loading="lazy" class="h-62.5! min-w-full object-cover transition duration-500 group-hover:scale-105">
           <a class="absolute inset-0 z-30" href="${post.slug}" title="${learnMoreI18n} ${post.title}"></a>
         </div>
         <div>
@@ -257,7 +257,7 @@ const notFoundImage = await bgOptimizedImage("/images/404.svg");
         <img
           src="${post.image}"
           class="w-full h-full object-cover absolute top-0 left-0"
-          alt="${post.title}"
+          alt="${post.imageAlt || post.title || 'MMC Financial Planning blog post'}"
           loading="lazy"
           decoding="async"
         />
@@ -283,7 +283,7 @@ const notFoundImage = await bgOptimizedImage("/images/404.svg");
                 src="${post.authorImage || ""}"
                 data-image-component="true"
                 class="w-10 h-10 border-2 border-dark/15 rounded-full"
-                alt="${post.author || "Allium Johnson"}"
+                alt="${post.author ? post.author + ' - MMC Financial Planning author' : 'MMC Financial Planning team member and author'}"
                 loading="lazy"
                 decoding="async"
                 width="160"

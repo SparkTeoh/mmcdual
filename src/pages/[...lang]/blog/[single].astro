@@ -71,6 +71,7 @@ const articleSchema = buildArticleSchema({
 
 <Base
   {...post.data}
+  post={post}
   structuredData={{
     pageType: "Article",
     schemaNodes: [articleSchema],

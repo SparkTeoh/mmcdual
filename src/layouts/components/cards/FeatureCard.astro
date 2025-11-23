@@ -24,7 +24,7 @@ const { icon, title, description, alternateLayout } = Astro.props;
         <OptimizedImage
           class="h-8 w-8"
           src={icon}
-          alt={`icon related to ${title}`}
+          alt={title ? `${title} icon - MMC Financial Planning feature` : "MMC Financial Planning feature icon"}
         />
       </div>
     )

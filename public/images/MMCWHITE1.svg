@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 444.48 178.94">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-3 {
+        fill: url(#_未命名的渐变_146);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-5 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="156.41" y1="153.97" x2="309.46" y2="-142.65" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#95886c"/>
+      <stop offset=".09" stop-color="#ab9b7e"/>
+      <stop offset=".18" stop-color="#b9a88b"/>
+      <stop offset=".25" stop-color="#bfad90"/>
+      <stop offset=".53" stop-color="#ad9c80"/>
+      <stop offset=".78" stop-color="#9a8a6e"/>
+      <stop offset=".91" stop-color="#9b8b6f"/>
+      <stop offset=".96" stop-color="#a29173"/>
+      <stop offset=".99" stop-color="#ae9c7b"/>
+      <stop offset="1" stop-color="#b5a280"/>
+    </linearGradient>
+    <linearGradient id="_未命名的渐变_146" data-name="未命名的渐变 146" x1="307.77" y1="104.72" x2="444.48" y2="104.72" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dcd0be"/>
+      <stop offset=".21" stop-color="#e7dfd4"/>
+      <stop offset=".5" stop-color="#f4f1eb"/>
+      <stop offset=".77" stop-color="#fcfbfa"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-.89" y1="83.88" x2="228.22" y2="82.46" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="107.58" y1="16.47" x2="253.75" y2="137.7" xlink:href="#linear-gradient"/>
+  </defs>
+  <polyline class="cls-4" points="281.7 0 209.62 72.21 167.78 30.51 125.3 31.03 125.3 178.94 167.26 178.94 167.26 95.01 208.97 136.46 313.56 32.64"/>
+  <polygon class="cls-5" points="293.93 93.71 293.93 178.94 251.71 178.94 251.71 136.33 293.93 93.71"/>
+  <polyline class="cls-5" points="125.2 95.7 83.67 136.46 41.96 95.01 41.96 178.94 0 178.94 0 31.03 42.48 30.51 84.32 72.21 125.3 31.03"/>
+  <path class="cls-3" d="M387.08,150.65c-26.86,0-45.92-18.86-45.92-45.92s19.07-45.92,45.92-45.92c14.35,0,26.45,5.74,36.08,16.81l21.32-19.68c-13.53-16.4-34.24-25.42-59.04-25.42-17.87,0-33.89,4.95-46.7,13.65-17.68,12.01-29.22,31.18-30.97,54.38l.03,12.72c1.85,23.2,13.51,42.35,31.29,54.29,12.71,8.54,28.55,13.39,46.15,13.39,25.01,0,45.72-9.02,59.25-25.63l-21.32-19.68c-9.64,11.28-21.73,17.02-36.08,17.02Z"/>
+  <polygon class="cls-2" points="42.48 30.51 41.96 95.01 83.67 136.46 125.3 95.68 125.3 31.03 84.32 72.21 42.48 30.51"/>
+  <polygon class="cls-5" points="167.78 30.51 167.26 95.01 167.26 178.94 125.3 178.94 125.3 31.03 167.78 30.51"/>
+  <polygon class="cls-1" points="167.78 30.51 209.62 72.21 208.97 136.46 167.26 95.01 167.78 30.51"/>
+</svg>

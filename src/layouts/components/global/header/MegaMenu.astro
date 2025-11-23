@@ -167,7 +167,7 @@ const hasEnableMenu = menu.menus?.filter((menu) => menu.enable) || [];
             <OptimizedImage
               class="mx-auto block w-[80%]"
               src={menu.testimonial.image}
-              alt="customer"
+              alt={menu.testimonial.content ? `${menu.testimonial.content.substring(0, 50)}... - MMC Financial Planning customer testimonial` : "MMC Financial Planning satisfied customer testimonial"}
             />
           </div>
         </div>

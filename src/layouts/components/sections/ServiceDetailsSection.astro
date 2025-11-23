@@ -90,7 +90,7 @@ const { serviceDetailsMarquee: marquee } = (
                     )}
                     <OptimizedImage
                       src={item.image}
-                      alt={toSentenceCase("Image about " + item.title)}
+                      alt={item.imageAlt || toSentenceCase(item.title + " - MMC Financial Planning service detail")}
                       class="h-72 w-full object-cover transition duration-500 md:h-80"
                     />
                     {item.button?.enable && (

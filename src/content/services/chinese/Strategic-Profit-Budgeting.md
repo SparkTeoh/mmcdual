@@ -3,6 +3,7 @@ title: "战略利润预算体系"
 description: "别让未来的利润听天由命。我们助您跳出传统会计的「后视镜」思维，构建一套具有前瞻性的战略财务模型。通过科学预测收入目标、优化成本结构并规划现金流，我们将财务数据转化为企业增长的导航仪，确保每一个战略决策都有据可依。"
 
 image: "/images/services/1.jpg"
+imageAlt: "战略利润预算体系 - MMC 財務規劃前瞻性財務模型，科學預測收入目標與現金流"
 icon: "ChartNoAxesCombined" # Changed icon to reflect Finance/Growth
 
 # Short intro about this service
@@ -30,26 +31,31 @@ details:
   list:
     - enable: true
       image: "/images/services/service-details/1.jpg"
+      imageAlt: "收入目标科学建模 - MMC 財務規劃按產品、渠道和客戶群進行多維收入預測"
       title: "收入目标科学建模"
       description: "拒绝拍脑袋定目标。我们科学拆解您的收入来源，按产品、渠道和客户群进行多维预测，确保增长目标既具野心又可落地。"
 
     - enable: true
       image: "/images/services/service-details/2.jpg"
+      imageAlt: "成本结构深度优化 - MMC 財務規劃重構損益表結構，實現利潤率最大化"
       title: "成本结构深度优化"
       description: "识别能带来增长的「好成本」，砍掉吞噬利润的「坏成本」。我们助您重构损益表 (P&L) 结构，实现利润率最大化。"
 
     - enable: true
       image: "/images/services/service-details/3.jpg"
+      imageAlt: "现金流压力测试 - MMC 財務規劃模擬多種商業場景，確保企業流動性充足"
       title: "现金流压力测试"
       description: "利润不等于现金。我们通过模拟多种商业场景（如销量下滑、账期延长），确保企业拥有充足的流动性来抵御风险或扩张。"
 
     - enable: true
       image: "/images/services/service-details/4.jpg"
+      imageAlt: "盈亏平衡与敏感度分析 - MMC 財務規劃基於數據的定價和促銷決策分析"
       title: "盈亏平衡与敏感度分析"
       description: "精准掌握价格、销量或成本的微小波动会如何影响底线利润。让您的每一个定价和促销决策，都基于数据而非直觉。"
 
     - enable: true
       image: "/images/services/service-details/5.jpg"
+      imageAlt: "月度预算差异复盘机制 - MMC 財務規劃預算與實際對比，快速調整戰術"
       title: "月度预算差异复盘机制"
       description: "没有追踪的预算只是一纸空文。我们协助建立「预算 vs 实际」的月度复盘机制，及时发现偏差，快速调整战术。"
 

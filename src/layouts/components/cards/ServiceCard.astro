@@ -16,7 +16,7 @@ interface Props {
 
 const { content, class: className, ...rest } = Astro.props;
 const t = await useTranslations(Astro.currentLocale as string);
-const { image, icon, title, description } = content.data;
+const { image, imageAlt, icon, title, description } = content.data;
 
 let slug = getLocaleUrlCTM(content.id, Astro.currentLocale, content.collection);
 ---
@@ -27,7 +27,7 @@ let slug = getLocaleUrlCTM(content.id, Astro.currentLocale, content.collection);
       image && (
         <OptimizedImage
           src={image}
-          alt={toSentenceCase("Image about " + title)}
+          alt={imageAlt || toSentenceCase(title + " - MMC Financial Planning strategic budgeting and profit growth services")}
           width={416}
           height={288}
           class="h-72 w-full min-w-full object-cover"

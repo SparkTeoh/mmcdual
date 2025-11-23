@@ -19,7 +19,7 @@ const { translations: t, author, date, categories } = Astro.props.content;
               width={20}
               height={20}
               src={author.image}
-              alt={author.title || "author image"}
+              alt={author.title ? `${author.title} - MMC Financial Planning author` : "MMC Financial Planning team member and author"}
               class="h-5 w-5 rounded-full"
             />
           )}

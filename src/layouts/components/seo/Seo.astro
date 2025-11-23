@@ -2,6 +2,7 @@
 import { getLocaleUrlCTM, supportedLanguages } from "@/lib/utils/i18nUtils";
 import { plainify, removeWhitespace } from "@/lib/utils/textConverter";
 import config from ".astro/config.generated.json" with { type: "json" };
+import { hasAlternateLangPost } from "@/lib/contentParser.astro";
 
 // Load the configuration
 let {
@@ -50,15 +51,46 @@ if (
   // This ensures hreflang URLs always use the correct domain
   const normalizedUrl = new URL(Astro.url.href, Astro.site).href;
   
-  // Generate hreflang tags for all supported languages
-  // This ensures reciprocal linking: if page A links to page B, page B links back to page A
-  // Each page includes hreflang tags for ALL language versions, including itself
-  supportedLanguages.forEach((lang) => {
-    alternateTags.push({
-      hreflang: lang.languageCode,
-      href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
+  // 检查是否是 blog 文章页面
+  const isBlogPost = Astro.url.pathname.includes(`/${config.settings.blogFolder}/`) && 
+                     !Astro.url.pathname.includes("/category/") &&
+                     !Astro.url.pathname.endsWith(`/${config.settings.blogFolder}/`);
+  
+  if (isBlogPost && Astro.props.post?.id) {
+    // 对于 blog 文章，只添加有对应语言版本的 hreflang
+    const postId = Astro.props.post.id;
+    
+    for (const lang of supportedLanguages) {
+      // 当前语言总是添加
+      if (lang.languageCode === Astro.currentLocale) {
+        alternateTags.push({
+          hreflang: lang.languageCode,
+          href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
+        });
+      } else {
+        // 检查是否有对应语言版本
+        const hasAlternate = await hasAlternateLangPost(
+          "blog",
+          postId,
+          Astro.currentLocale,
+        );
+        if (hasAlternate) {
+          alternateTags.push({
+            hreflang: lang.languageCode,
+            href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
+          });
+        }
+      }
+    }
+  } else {
+    // 非 blog 文章页面，使用原来的逻辑（为所有语言添加）
+    supportedLanguages.forEach((lang) => {
+      alternateTags.push({
+        hreflang: lang.languageCode,
+        href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
+      });
     });
-  });
+  }
   
   // Add x-default tag pointing to the default language version
   // This helps search engines understand which version to show to users

@@ -20,7 +20,7 @@ type Props = {
 };
 
 let { content, options, class: className } = Astro.props;
-let { title, slug, categories, image, masonryImage } = content || {};
+let { title, slug, categories, image, imageAlt, masonryImage } = content || {};
 
 const t = await useTranslations(Astro.currentLocale as string);
 slug = getLocaleUrlCTM(slug, Astro.currentLocale, content.collection);
@@ -35,7 +35,7 @@ slug = getLocaleUrlCTM(slug, Astro.currentLocale, content.collection);
           class="h-80 w-full min-w-full object-cover md:h-auto md:min-h-80"
           src={masonryImage}
           width={(400 * 3) / Number(options.columns || 3)}
-          alt={title}
+          alt={imageAlt || title || "MMC Financial Planning case study portfolio"}
         />
       ) : (
         <OptimizedImage
@@ -43,7 +43,7 @@ slug = getLocaleUrlCTM(slug, Astro.currentLocale, content.collection);
           width={(400 * 3) / Number(options.columns || 3)}
           height={(240 * 3) / Number(options.columns || 3)}
           src={image}
-          alt={title}
+          alt={imageAlt || title || "MMC Financial Planning case study portfolio"}
         />
       )}
       <div>
@@ -88,7 +88,7 @@ slug = getLocaleUrlCTM(slug, Astro.currentLocale, content.collection);
           class="h-80! w-full min-w-full object-cover transition duration-500 group-hover:scale-105 md:h-auto! md:min-h-80"
           src={masonryImage}
           width={(400 * 3) / Number(options.columns || 3)}
-          alt={title}
+          alt={imageAlt || title || "MMC Financial Planning case study portfolio"}
         />
       ) : (
         <OptimizedImage
@@ -96,7 +96,7 @@ slug = getLocaleUrlCTM(slug, Astro.currentLocale, content.collection);
           width={(400 * 3) / Number(options.columns || 3)}
           height={(300 * 3) / Number(options.columns || 3)}
           src={image}
-          alt={title}
+          alt={imageAlt || title || "MMC Financial Planning case study portfolio"}
         />
       )}
       <div

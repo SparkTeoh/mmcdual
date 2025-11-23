@@ -20,12 +20,12 @@ let {
 
 let { title } = config.site;
 
-// Default logo dimensions: 3553x1488 (aspect ratio ~2.39:1)
+// Default logo dimensions: 605.04x240.85 (aspect ratio ~2.51:1)
 // For footer white logo: 2817x1276 (aspect ratio ~2.21:1)
 // Set logo height to fill navigation bar (py-4 = 16px top + 16px bottom = 32px padding)
 // Navigation bar total height ~64px, logo should fill the available space (around 60px)
 const defaultLogoHeight = 60; // Height in pixels - large enough to fill navigation bar without gaps
-const defaultLogoWidth = Math.round((3553 / 1488) * defaultLogoHeight); // Calculate width to maintain aspect ratio (~143px)
+const defaultLogoWidth = Math.round((605.04 / 240.85) * defaultLogoHeight); // Calculate width to maintain aspect ratio (~151px)
 
 // Use custom dimensions if provided, otherwise use defaults
 const logoHeight = customLogoHeight || defaultLogoHeight;
@@ -34,7 +34,7 @@ const logoWidth = customLogoWidth || (customLogoPath?.includes("MMCWHITE")
   : defaultLogoWidth);
 
 // Direct path to SVG logo in public folder for fastest loading
-const logoPath = customLogoPath || "/images/MMCLOGO.svg";
+const logoPath = customLogoPath || "/images/MMCLOGO1.svg";
 ---
 
 <a

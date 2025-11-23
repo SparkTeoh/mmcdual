@@ -129,7 +129,7 @@ if (!enable) return;
                         inlineSvg={true}
                         class="absolute inset-0 -z-10 h-full! w-full object-cover"
                         src={item.background?.image}
-                        alt={toSentenceCase("A image about " + item.title)}
+                        alt={item.title?.value ? `${item.title.value} - MMC Financial Planning service impact and results` : "MMC Financial Planning strategic budgeting and profit growth impact"}
                       />
                     )}
                 </div>

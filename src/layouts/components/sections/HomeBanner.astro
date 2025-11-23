@@ -71,7 +71,7 @@ if (mainBlock.disableSlider) slides = [slides[0]];
           <div class="swiper-slide">
             <OptimizedImage
               src={item.backgroundImage}
-              alt="Banner Image"
+              alt={item.title ? `${item.title} - MMC Financial Planning` : "MMC Financial Planning strategic budgeting and profit growth consultancy banner"}
               class="kenburns kenburns-top h-full! min-w-full! object-cover"
               sizes="(max-width: 640px) 200vw, (min-width: 1320px) 1320w, 100vw"
               data-content={item.backgroundImage}

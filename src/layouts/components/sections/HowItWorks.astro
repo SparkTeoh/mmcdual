@@ -58,7 +58,7 @@ let {
           <OptimizedImage
             class="h-full w-full object-cover md:object-top-left"
             src={bgPatternImage}
-            alt="pattern"
+            alt={title ? `${title} background pattern - MMC Financial Planning process` : "MMC Financial Planning strategic process background"}
           />
         </div>
       )}
@@ -127,6 +127,7 @@ let {
                     src={item.images.background}
                     preserveAspectRatio="none"
                     class="has-inherited-colors text-primary inset-0 -z-10 h-full min-h-[250px] w-full min-w-full object-cover opacity-50 lg:absolute lg:min-h-full"
+                    alt={item.title ? `${item.title} background - MMC Financial Planning process step` : "MMC Financial Planning strategic process step background"}
                   />
                 )}
                 {item.images &&

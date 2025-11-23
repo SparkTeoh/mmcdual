@@ -59,7 +59,7 @@ posts = limit && posts ? posts.slice(0, limit as number) : posts;
           <OptimizedImage
             class="h-full w-full object-cover md:object-top-left"
             src={bgPatternImage}
-            alt="pattern"
+            alt={title ? `${title} - Decorative background pattern for MMC Financial Planning blog section` : "Decorative background pattern for MMC Financial Planning blog and insights section"}
           />
         </div>
       )}

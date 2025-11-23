@@ -71,4 +71,39 @@ export const getEntryCTM = async <C extends CollectionKey>(
 
   return entries && (entries[0] as CollectionEntry<C>);
 };
+
+/**
+ * 检查文章是否有另一种语言版本
+ * @param collectionName 集合名称（如 "blog"）
+ * @param currentPostId 当前文章的 ID（如 "english/post-13.mdx"）
+ * @param currentLang 当前语言代码（如 "en" 或 "zh"）
+ * @returns 如果存在另一种语言版本返回 true，否则返回 false
+ */
+export const hasAlternateLangPost = async <C extends CollectionKey>(
+  collectionName: C,
+  currentPostId: string,
+  currentLang: string,
+): Promise<boolean> => {
+  // 获取另一种语言代码（en <-> zh）
+  const alternateLang = currentLang === "en" ? "zh" : "en";
+  
+  // 提取文件名（如 post-13）
+  const fileName = currentPostId
+    .replace(/\.mdx?$/, "")
+    .split("/")
+    .pop();
+  
+  if (!fileName) {
+    return false;
+  }
+  
+  // 获取另一种语言的对应文章
+  const alternatePosts = await getCollectionCTM(collectionName, alternateLang);
+  const alternatePost = alternatePosts.find((post) => {
+    const postFileName = post.id.replace(/\.mdx?$/, "").split("/").pop();
+    return postFileName === fileName;
+  });
+  
+  return alternatePost !== undefined;
+};
 ---
