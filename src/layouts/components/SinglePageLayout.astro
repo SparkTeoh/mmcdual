@@ -8,6 +8,7 @@ import OptimizedImage from "./utilities/OptimizedImage.astro";
 import { markdownify, slugifyyy } from "@/lib/utils/textConverter";
 import config from ".astro/config.generated.json" assert { type: "json" };
 import dateFormat from "@/lib/utils/dateFormat";
+import buildToc from "@/lib/utils/buildToc";
 
 const { content, layout = "modern" } = Astro.props;
 const { title, date, image, imageAlt, author, excerpt, categories, masonryImage } =
@@ -119,7 +120,7 @@ const tocEnabled = tableOfContents?.enable && headings?.length > 0;
       }
       <div class="w-full max-w-full space-y-8 lg:max-w-4xl">
         <!-- Table of Contents -->
-        {tocEnabled && <TableOfContents toc={headings} marker={false} />}
+        {tocEnabled && <TableOfContents toc={buildToc(headings)} marker={false} />}
 
         <!-- Main Content -->
         {

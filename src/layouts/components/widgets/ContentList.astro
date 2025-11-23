@@ -178,36 +178,76 @@ if (list.length === 0) return;
         
         let nextUrl = "";
         if (currentPath.includes("/page/")) {
-             nextUrl = currentPath.replace(/\/page\/\d+/, `/page/${nextPage}`);
+          // Replace existing page number
+          nextUrl = currentPath.replace(/\/page\/\d+/, `/page/${nextPage}`);
         } else {
-             nextUrl = `${currentPath}/page/${nextPage}`;
+          // Add page path
+          nextUrl = `${currentPath}/page/${nextPage}`;
+        }
+        
+        // Ensure trailing slash for consistency
+        if (!nextUrl.endsWith("/")) {
+          nextUrl += "/";
         }
 
-        const response = await fetch(nextUrl);
-        if (!response.ok) throw new Error("Failed to load more posts");
+        console.log("Loading more posts from:", nextUrl);
+
+        const response = await fetch(nextUrl, {
+          headers: {
+            "Accept": "text/html",
+          },
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Failed to load more posts: ${response.status} ${response.statusText}`);
+        }
 
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, "text/html");
-        const newPosts = doc.querySelectorAll(".blog-search-results > *");
+        
+        // Try to find the blog container in the response
+        const newPostsContainer = doc.querySelector(".blog-search-results");
+        
+        if (!newPostsContainer) {
+          console.error("Could not find .blog-search-results in response");
+          throw new Error("Invalid response structure");
+        }
 
+        const newPosts = newPostsContainer.querySelectorAll(":scope > *");
+
+        if (newPosts.length === 0) {
+          console.warn("No posts found in response");
+          // Hide button if no more posts
+          loadMoreBtn.style.display = "none";
+          return;
+        }
+
+        // Clone and append each post
         newPosts.forEach((post) => {
-          blogContainer.appendChild(post);
+          const clonedPost = post.cloneNode(true) as Element;
+          blogContainer.appendChild(clonedPost);
         });
 
         loadMoreBtn.setAttribute("data-current-page", nextPage.toString());
         
         if (nextPage >= totalPages) {
           loadMoreBtn.style.display = "none";
+        } else {
+          loadMoreBtn.textContent = "Load More";
+          loadMoreBtn.disabled = false;
         }
       } catch (error) {
-        console.error(error);
+        console.error("Load more error:", error);
         loadMoreBtn.textContent = "Error loading posts";
-      } finally {
-        if (loadMoreBtn.textContent === "Loading...") {
+        loadMoreBtn.disabled = false;
+        
+        // Show error for a few seconds, then restore button
+        setTimeout(() => {
+          if (loadMoreBtn.textContent === "Error loading posts") {
             loadMoreBtn.textContent = "Load More";
-            loadMoreBtn.disabled = false;
-        }
+          }
+        }, 3000);
       }
     });
   }
