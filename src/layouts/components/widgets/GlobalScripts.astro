@@ -13,8 +13,6 @@
     await loadPrelineComponents();
 
     // AOS - https://github.com/michalsnik/aos
-    // Load AOS CSS dynamically to avoid render-blocking
-    await import("aos/dist/aos.css");
     const AOS = await import("aos");
     AOS.init({
       duration: 700,
@@ -40,27 +38,23 @@
     initMagneticHoverAnimation();
   });
 
-  // Lucide Icons - Tree-shaken imports (only imports icons that are actually used)
+  // Lucide Icons
   async function initLucide() {
     const iconElems = document.querySelectorAll("[data-lucide]");
-    if (iconElems.length === 0) return;
+    const lucideModule = await import("lucide");
 
-    // Import the tree-shaken icon registry
-    // This only includes icons used in the codebase, allowing bundlers to tree-shake
-    const { iconMap, createElement } = await import("@/lib/icons/lucideIcons");
-
-    // Render icons
     iconElems.forEach((iconElem) => {
       const iconName = iconElem.getAttribute("data-lucide");
       if (!iconName) return;
 
-      const IconDef = iconMap[iconName];
+      // @ts-expect-error
+      const IconDef = lucideModule[iconName];
       if (!IconDef) {
-        console.warn(`Lucide icon "${iconName}" not found in registry`);
+        console.warn(`Lucide icon "${iconName}" not found`);
         return;
       }
 
-      const svg = createElement(IconDef, {
+      const svg = lucideModule.createElement(IconDef, {
         ...Object.fromEntries(
           [...iconElem.attributes].map((attr) => [attr.name, attr.value]),
         ),

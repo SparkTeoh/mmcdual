@@ -235,38 +235,7 @@ services =
     }
   </div>
   <script>
-    // Lazy load Swiper only when the services section becomes visible
-    // This reduces initial JavaScript payload for non-critical carousels
-    function initServicesSwiper() {
-      const swiperElement = document.querySelector(".services-swiper");
-      if (!swiperElement) return;
-
-      // Check if IntersectionObserver is supported
-      if (!("IntersectionObserver" in window)) {
-        // Fallback: load immediately if IntersectionObserver is not supported
-        loadSwiper();
-        return;
-      }
-
-      // Create observer to load Swiper when section is about to enter viewport
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              loadSwiper();
-              observer.disconnect(); // Only load once
-            }
-          });
-        },
-        {
-          rootMargin: "100px", // Start loading 100px before element is visible
-        }
-      );
-
-      observer.observe(swiperElement);
-    }
-
-    async function loadSwiper() {
+    window.addEventListener("load", async function () {
       const { Swiper } = await import("swiper");
       const { EffectFade, Navigation, Controller, Autoplay } = await import(
         "swiper/modules"
@@ -297,13 +266,6 @@ services =
           prevEl: ".services-slider-btn-prev",
         },
       });
-    }
-
-    // Initialize when DOM is ready
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initServicesSwiper);
-    } else {
-      initServicesSwiper();
-    }
+    });
   </script>
 </section>
