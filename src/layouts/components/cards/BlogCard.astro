@@ -180,7 +180,7 @@ let slug = getLocaleUrlCTM(content.id, Astro.currentLocale, content.collection);
           </h2>
         )}
         <div class="flex flex-wrap-reverse justify-between gap-x-8 gap-y-6">
-          {author && (
+          {author && authorEntry && authorEntry.image && (
             <div class="flex items-center gap-4">
               <OptimizedImage
                 alt={author ? `${author} - MMC Financial Planning author` : "MMC Financial Planning team member and author"}

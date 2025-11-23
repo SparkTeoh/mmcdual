@@ -197,6 +197,7 @@ const blogCollection = defineCollection({
       categories: z.array(z.string()).default(["others"]),
       author: z.string().optional(),
       excerpt: z.string().optional(),
+      imageAlt: z.string().optional(),
       settings: z
         .object({
           content: z.enum(["blog"]).optional(),
