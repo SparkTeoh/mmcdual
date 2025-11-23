@@ -35,24 +35,32 @@ export async function getStaticPaths() {
         return [];
       }
 
-      return services.map((service) => ({
-        params: {
-          lang:
-            lang.languageCode === defaultLanguage && !showDefaultLangInUrl
-              ? undefined
-              : lang.languageCode,
-          single:
-            service.data?.customSlug ||
-            service.id
-              .replace(/\.mdx?|\.md/g, "")
-              .split("/")
-              .pop(),
-        },
-        props: {
-          service,
-          serviceIndex,
-        },
-      }));
+      return services.map((service) => {
+        // Generate slug from filename or use customSlug
+        const slug = service.data?.customSlug ||
+          service.id
+            .replace(/\.mdx?|\.md/g, "")
+            .split("/")
+            .pop();
+        
+        // Convert slug to lowercase to ensure consistent URL format
+        // Astro routes are case-insensitive, but URLs should be lowercase for SEO
+        const normalizedSlug = slug ? slug.toLowerCase() : slug;
+        
+        return {
+          params: {
+            lang:
+              lang.languageCode === defaultLanguage && !showDefaultLangInUrl
+                ? undefined
+                : lang.languageCode,
+            single: normalizedSlug,
+          },
+          props: {
+            service,
+            serviceIndex,
+          },
+        };
+      });
     }),
   );
 

@@ -106,4 +106,40 @@ export const hasAlternateLangPost = async <C extends CollectionKey>(
   
   return alternatePost !== undefined;
 };
+
+/**
+ * 检查服务页面是否有另一种语言版本
+ * @param collectionName 集合名称（如 "services"）
+ * @param currentServiceId 当前服务的 ID（如 "english/Incentive-Performance-Framework.md"）
+ * @param currentLang 当前语言代码（如 "en" 或 "zh"）
+ * @returns 如果存在另一种语言版本返回 true，否则返回 false
+ */
+export const hasAlternateLangService = async <C extends CollectionKey>(
+  collectionName: C,
+  currentServiceId: string,
+  currentLang: string,
+): Promise<boolean> => {
+  // 获取另一种语言代码（en <-> zh）
+  const alternateLang = currentLang === "en" ? "zh" : "en";
+  
+  // 提取文件名（如 Incentive-Performance-Framework）
+  const fileName = currentServiceId
+    .replace(/\.mdx?$/, "")
+    .split("/")
+    .pop();
+  
+  if (!fileName) {
+    return false;
+  }
+  
+  // 获取另一种语言的对应服务
+  const alternateServices = await getCollectionCTM(collectionName, alternateLang);
+  const alternateService = alternateServices.find((service) => {
+    const serviceFileName = service.id.replace(/\.mdx?$/, "").split("/").pop();
+    // 比较时使用小写，因为URL是大小写不敏感的
+    return serviceFileName?.toLowerCase() === fileName.toLowerCase();
+  });
+  
+  return alternateService !== undefined;
+};
 ---

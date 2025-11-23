@@ -20,7 +20,7 @@ function formatDate(date: Date | string | undefined): string | undefined {
   let dateObj: Date;
   
   if (typeof date === "string") {
-    // Handle YYYY-MM-DD format
+    // Handle YYYY-MM-DD format - most common in frontmatter
     if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
       return `${date}T00:00:00+00:00`;
     }
@@ -35,8 +35,8 @@ function formatDate(date: Date | string | undefined): string | undefined {
     return undefined;
   }
   
-  // Convert to ISO string and replace Z with +00:00 for consistency
-  return dateObj.toISOString().replace("Z", "+00:00");
+  // Convert to ISO string and replace Z or .000Z with +00:00 for consistency
+  return dateObj.toISOString().replace(/\.000Z$/, "+00:00").replace(/Z$/, "+00:00");
 }
 
 /**

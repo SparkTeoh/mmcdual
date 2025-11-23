@@ -2,7 +2,7 @@
 import { getLocaleUrlCTM, supportedLanguages } from "@/lib/utils/i18nUtils";
 import { plainify, removeWhitespace, truncateTitle, truncateMetaDescription } from "@/lib/utils/textConverter";
 import config from ".astro/config.generated.json" with { type: "json" };
-import { hasAlternateLangPost } from "@/lib/contentParser.astro";
+import { hasAlternateLangPost, hasAlternateLangService } from "@/lib/contentParser.astro";
 
 // Load the configuration
 let {
@@ -42,8 +42,11 @@ description = plainify(
 // Truncate description to recommended SEO length (150-160 characters)
 description = truncateMetaDescription(description, 160);
 
+// Generate canonical URL using the current page's actual URL
+// Use pathname to ensure we get the correct URL format (Astro routes are case-insensitive)
+const currentUrl = new URL(Astro.url.pathname, Astro.site);
 canonical = getLocaleUrlCTM(
-  new URL(Astro.url.href, Astro.site).href,
+  currentUrl.href,
   Astro.currentLocale,
 );
 
@@ -54,8 +57,9 @@ if (
   !canonical.includes("blog/category/")
 ) {
   // Normalize the current URL to use the configured base URL (Astro.site)
-  // This ensures hreflang URLs always use the correct domain
-  const normalizedUrl = new URL(Astro.url.href, Astro.site).href;
+  // Use pathname to ensure consistent URL format
+  // This ensures hreflang URLs always use the correct domain and format
+  const normalizedUrl = new URL(Astro.url.pathname, Astro.site).href;
   
   // 检查是否是 blog 文章页面
   const isBlogPost = Astro.url.pathname.includes(`/${config.settings.blogFolder}/`) && 
@@ -89,26 +93,95 @@ if (
       }
     }
   } else {
-    // 非 blog 文章页面，使用原来的逻辑（为所有语言添加）
-    supportedLanguages.forEach((lang) => {
-      alternateTags.push({
-        hreflang: lang.languageCode,
-        href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
+    // 检查是否是服务页面
+    const isServicePage = Astro.url.pathname.includes(`/${config.settings.servicesFolder}/`) && 
+                         !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}/`) &&
+                         !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}`);
+    
+    if (isServicePage && Astro.props.service?.id) {
+      // 对于服务页面，只添加有对应语言版本的 hreflang
+      const serviceId = Astro.props.service.id;
+      
+      for (const lang of supportedLanguages) {
+        // 当前语言总是添加
+        if (lang.languageCode === Astro.currentLocale) {
+          alternateTags.push({
+            hreflang: lang.languageCode,
+            href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
+          });
+        } else {
+          // 检查是否有对应语言版本
+          const hasAlternate = await hasAlternateLangService(
+            "services",
+            serviceId,
+            Astro.currentLocale,
+          );
+          if (hasAlternate) {
+            alternateTags.push({
+              hreflang: lang.languageCode,
+              href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
+            });
+          }
+        }
+      }
+    } else {
+      // 其他页面，使用原来的逻辑（为所有语言添加）
+      supportedLanguages.forEach((lang) => {
+        alternateTags.push({
+          hreflang: lang.languageCode,
+          href: getLocaleUrlCTM(normalizedUrl, lang.languageCode),
+        });
       });
-    });
+    }
   }
   
   // Add x-default tag pointing to the default language version
   // This helps search engines understand which version to show to users
   // whose language preference doesn't match any of the available languages
-  const defaultLangUrl = getLocaleUrlCTM(
-    normalizedUrl,
-    config.settings.multilingual.defaultLanguage,
-  );
-  alternateTags.push({
-    hreflang: "x-default",
-    href: defaultLangUrl,
-  });
+  // For blog posts and service pages, only add x-default if the default language version exists
+  const isBlogPost = Astro.url.pathname.includes(`/${config.settings.blogFolder}/`) && 
+                     !Astro.url.pathname.includes("/category/") &&
+                     !Astro.url.pathname.endsWith(`/${config.settings.blogFolder}/`);
+  const isServicePage = Astro.url.pathname.includes(`/${config.settings.servicesFolder}/`) && 
+                       !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}/`) &&
+                       !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}`);
+  
+  let shouldAddXDefault = true;
+  
+  if (isBlogPost && Astro.props.post?.id) {
+    // For blog posts, check if default language version exists
+    const defaultLang = config.settings.multilingual.defaultLanguage;
+    if (defaultLang !== Astro.currentLocale) {
+      const hasDefaultLang = await hasAlternateLangPost(
+        "blog",
+        Astro.props.post.id,
+        Astro.currentLocale,
+      );
+      shouldAddXDefault = hasDefaultLang || defaultLang === Astro.currentLocale;
+    }
+  } else if (isServicePage && Astro.props.service?.id) {
+    // For service pages, check if default language version exists
+    const defaultLang = config.settings.multilingual.defaultLanguage;
+    if (defaultLang !== Astro.currentLocale) {
+      const hasDefaultLang = await hasAlternateLangService(
+        "services",
+        Astro.props.service.id,
+        Astro.currentLocale,
+      );
+      shouldAddXDefault = hasDefaultLang || defaultLang === Astro.currentLocale;
+    }
+  }
+  
+  if (shouldAddXDefault) {
+    const defaultLangUrl = getLocaleUrlCTM(
+      normalizedUrl,
+      config.settings.multilingual.defaultLanguage,
+    );
+    alternateTags.push({
+      hreflang: "x-default",
+      href: defaultLangUrl,
+    });
+  }
 }
 ---
 
