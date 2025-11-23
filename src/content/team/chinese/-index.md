@@ -1,7 +1,7 @@
 ---
-title: "领导团队 | MMC财务规划"
-metaTitle: "领导团队 | MMC财务规划"
-metaDescription: "认识MMC经验丰富的财务规划团队。持牌财务规划师，拥有18年以上专业经验，已帮助500+马来西亚中小企业实现可持续利润增长。自2008年获得大马证监会许可。"
+title: "领导团队 | MMC Financial"
+metaTitle: "领导团队 | MMC Financial"
+metaDescription: "认识MMC Financial经验丰富的财务规划团队。持牌财务规划师，拥有18年以上专业经验，已帮助500+马来西亚中小企业实现可持续利润增长。自2008年获得大马证监会许可。"
 keywords: ["财务规划团队马来西亚", "持牌财务规划师", "企业财务顾问", "中小企业财务顾问", "战略预算专家", "业务增长顾问"]
 robots: "index, follow"
 disableTagline: true

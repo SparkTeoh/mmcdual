@@ -1,6 +1,6 @@
 import mdx from "@astrojs/mdx";
 import remarkToc from "remark-toc";
-import sitemap from "@astrojs/sitemap";
+// import sitemap from "@astrojs/sitemap"; // Disabled - using custom sitemap.xml.ts endpoint
 import tailwindcss from "@tailwindcss/vite";
 import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
@@ -37,7 +37,10 @@ export default defineConfig({
       prefixDefaultLocale: showDefaultLangInUrl,
     },
   },
-  integrations: [sitemapConfig.enable ? sitemap() : null, AutoImport({
+  integrations: [
+    // Disable @astrojs/sitemap in favor of custom sitemap.xml.ts endpoint
+    // sitemapConfig.enable ? sitemap() : null,
+    AutoImport({
     imports: [
       "@/components/CustomButton.astro",
       "@/shortcodes/Accordion.astro",
