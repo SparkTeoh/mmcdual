@@ -61,10 +61,13 @@ if (
   // This ensures hreflang URLs always use the correct domain and format
   const normalizedUrl = new URL(Astro.url.pathname, Astro.site).href;
   
-  // 检查是否是 blog 文章页面
+  // 检查是否是 blog 文章页面或服务页面（在文件顶部声明，避免重复声明）
   const isBlogPost = Astro.url.pathname.includes(`/${config.settings.blogFolder}/`) && 
                      !Astro.url.pathname.includes("/category/") &&
                      !Astro.url.pathname.endsWith(`/${config.settings.blogFolder}/`);
+  const isServicePage = Astro.url.pathname.includes(`/${config.settings.servicesFolder}/`) && 
+                       !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}/`) &&
+                       !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}`);
   
   if (isBlogPost && Astro.props.post?.id) {
     // 对于 blog 文章，只添加有对应语言版本的 hreflang
@@ -93,11 +96,7 @@ if (
       }
     }
   } else {
-    // 检查是否是服务页面
-    const isServicePage = Astro.url.pathname.includes(`/${config.settings.servicesFolder}/`) && 
-                         !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}/`) &&
-                         !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}`);
-    
+    // 检查是否是服务页面（使用已声明的变量）
     if (isServicePage && Astro.props.service?.id) {
       // 对于服务页面，只添加有对应语言版本的 hreflang
       const serviceId = Astro.props.service.id;
@@ -139,13 +138,7 @@ if (
   // This helps search engines understand which version to show to users
   // whose language preference doesn't match any of the available languages
   // For blog posts and service pages, only add x-default if the default language version exists
-  const isBlogPost = Astro.url.pathname.includes(`/${config.settings.blogFolder}/`) && 
-                     !Astro.url.pathname.includes("/category/") &&
-                     !Astro.url.pathname.endsWith(`/${config.settings.blogFolder}/`);
-  const isServicePage = Astro.url.pathname.includes(`/${config.settings.servicesFolder}/`) && 
-                       !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}/`) &&
-                       !Astro.url.pathname.endsWith(`/${config.settings.servicesFolder}`);
-  
+  // (使用已声明的 isBlogPost 和 isServicePage 变量)
   let shouldAddXDefault = true;
   
   if (isBlogPost && Astro.props.post?.id) {
