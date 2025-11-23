@@ -4,47 +4,43 @@ enable: true # Control the visibility of this section across all pages where it 
 infoBlock:
   enable: true
   content: |
-    Our team of seasoned consultants provides actionable insights and innovative strategies to help businesses thrive in today's highly competitive environment.
+    Most strategic plans fail in execution. We bridge the gap between your financial goals and your team's daily actions, giving you clarity, control, and a clear path to your next level of growth.
 
 mainBlock:
   disableSlider: false # if this is true then slider will be disabled and only first slide from below will be shown
   slides:
-    - title: "The bigger the company gets, the thinner the profit?"
+    - title: "Turn Your Business Into A Predictable Profit Machine."
       description: |
-        Growth ≠ Profit. Out-of-control costs and cash flow are eating away at your profits.
-
-        What you need is not just effort, but a profit-oriented management system.
+        Stop guessing your numbers. Master the system of Strategic Budgeting and Performance Management to double your profits and regain control of your cash flow.
       backgroundImage: "/images/banner/1.jpg"
       button:
         enable: true
-        label: "Unlock Profit Growth"
+        label: "Start Scaling Now ↗"
         url: "/contact"
         rel: ""
         target: ""
         showIcon: "true"
         variant: "outline-white" # "fill", "outline", "outline-white", "text"
         hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-    - title: "The team is bigger, but no one cares about profit?"
-      description: "The problem is not the employees, but the mechanism. The profit budgeting system makes the team 'automatically focus on profit'."
+    - title: "Is Your Team Built For Growth Or Just Busy Being Busy?"
+      description: "Chaos kills expansion. We help you restructure your organization, align every KPI with financial goals, and transform your workforce into a unified execution engine."
       backgroundImage: "/images/banner/2.jpg"
       button:
         enable: true
-        label: "Build an Active Team"
+        label: "Optimize My Team ↗"
         url: "/contact"
         rel: ""
         target: ""
         showIcon: "true"
         variant: "outline-white" # "fill", "outline", "outline-white", "text"
         hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-    - title: "Is your organizational structure a growth engine or a stumbling block?"
+    - title: "Don't Just Run A Business. Build An Investable Asset."
       description: |
-        Chaotic structure will turn expansion into a disaster. The profit budgeting system is not just a financial system,
-
-        but also a growth-oriented organizational design blueprint that puts everyone in the right position to drive profit goals.
+        Investors buy certainty. Equip your company with a crystal-clear Financial Roadmap that proves your value, attracts capital, and secures your ultimate exit strategy.
       backgroundImage: "/images/banner/3.jpg"
       button:
         enable: true
-        label: "Restructure Growth Architecture"
+        label: "Maximize Company Value ↗"
         url: "/contact"
         rel: ""
         target: ""

@@ -82,9 +82,9 @@ members:
           label: "x-twitter"
           icon: "/images/icons/social/twitter.svg"
           url: "https://twitter.com/"
-  - image: "/images/team/4.jpg"
-    name: "Mark Thompson"
-    role: "技術總監"
+  - image: "/images/team/Spark.webp"
+    name: "Spark Liang"
+    role: "Managing Director"
     social:
       enable: true
       list:
@@ -96,9 +96,9 @@ members:
           label: "x-twitter"
           icon: "/images/icons/social/twitter.svg"
           url: "https://twitter.com/"
-  - image: "/images/team/5.jpg"
-    name: "Michael Davis"
-    role: "行銷策略總監"
+  - image: "/images/team/summer 1.webp"
+    name: "Summer Oh"
+    role: "Operation Manager"
     social:
       enable: true
       list:
@@ -110,9 +110,9 @@ members:
           label: "x-twitter"
           icon: "/images/icons/social/twitter.svg"
           url: "https://twitter.com/"
-  - image: "/images/team/6.jpg"
-    name: "Linda White"
-    role: "業務發展總監"
+  - image: "/images/team/jinger.webp"
+    name: "Jing Er Lim"
+    role: "Business Development Manager"
     social:
       enable: true
       list:
@@ -124,10 +124,9 @@ members:
           label: "x-twitter"
           icon: "/images/icons/social/twitter.svg"
           url: "https://twitter.com/"
-
-  - image: "/images/team/7.jpg"
-    name: "Jessica Harris"
-    role: "設計總監"
+  - image: "/images/team/kaelyn.webp"
+    name: "Kaelyn Tan"
+    role: "Business Consultant"
     social:
       enable: true
       list:

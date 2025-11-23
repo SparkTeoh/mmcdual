@@ -16,7 +16,12 @@
       "hasMegaMenu": true,
       "services": {
         "enable": true,
-        "name": "SERVICES"
+        "name": "View All Services"
+      },
+      "testimonial": {
+        "enable": true,
+        "content": "Accounting records your history. We design your future.<br><br>While traditional firms focus on compliance and tax, we focus on Strategic Budgeting and Profit Engineering. We don't just report the numbers; we give you the tools to change them.",
+        "image": "/images/team/PhillipTay.webp"
       }
     },
     {

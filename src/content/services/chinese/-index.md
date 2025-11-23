@@ -16,7 +16,7 @@ indexServicesSection:
 
   # cta: "slider-nav" # "link" | "slider-nav" ( Define weather call to action button should be slider control or a link )
   # colorScheme: "light" # "dark" | "light"; (default "dark"); weather to show services in light or dark color scheme
-  # showServicesAs: "static" # "slider" | "static"; (default "slider"); weather to show services as slider or static list
+  showServicesAs: "static" # "slider" | "static"; (default "slider"); weather to show services as slider or static list
   limit: false # number / false (default "3"); Limit the number of services to be displayed (Only work if showServicesAs is static)
 
   button:
@@ -71,8 +71,8 @@ servicesSection:
 # "FAQ" Section located in Services Single Page
 faqSection:
   enable: true # Control the visibility of this section across all services single
-  title: "关于品牌或服务的问题？我们随时提供帮助"
-  # subtitle: ""
+  title: "从基础预算到顶层退出规划，<br>我们都有答案"
+  subtitle: "不知道从何开始？"
   sectionLayout: "horizontal"
   minimalFaqLayout: true
   faqLayoutOnly: false
@@ -80,7 +80,7 @@ faqSection:
 
   button:
     enable: true
-    label: "浏览所有常见问题"
+    label: "查看客户的常见问题"
     url: "/faq"
     rel: ""
     target: ""

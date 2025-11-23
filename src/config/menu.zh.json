@@ -16,7 +16,12 @@
       "hasMegaMenu": true,
       "services": {
         "enable": true,
-        "name": "服务项目"
+        "name": "查看所有服务"
+      },
+      "testimonial": {
+        "enable": true,
+        "content": "拒绝'看后账'，开启'算赢账'。<br><br>我们不是您的记账员，而是您的战略财务合伙人。我们打通财务与业务的壁垒，帮您定目标、分责任、建机制，用上市公司的CFO思维，为您的企业保驾护航。",
+        "image": "/images/team/PhillipTay.webp"
       }
     },
     {

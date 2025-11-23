@@ -1,6 +1,6 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-description: "We are honored to work alongside these distinguished partners."
+description: "**Chosen by Market Leaders |** <br> Empowering these visionary companies with the financial clarity to scale."
 
 marquee:
   marqueeElementWidth: "11.25rem"

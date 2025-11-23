@@ -1,6 +1,6 @@
 ---
 title: "Frequently Asked Questions"
-metaDescription: "This is a example description"
+metaDescription: "Expert answers on increasing profit, managing cash flow, and setting KPIs. Learn how MMC's Profit Budgeting System transforms businesses in Malaysia."
 draft: false
 
 sectionLayout: "vertical"
@@ -9,154 +9,91 @@ showCategories: true
 minimalFaqLayout: false
 
 list:
-  - label: "General Information"
+  - label: "About MMC & Our System"
     list:
       - featured: true
         active: true
-        title: "What services do you offer?"
+        title: "How can MMC help me increase my company's profit?"
         content: |
-          We offer a wide range of services including web development, branding, and digital marketing to help businesses grow and succeed.
+          We don't just give advice; we install a complete **Strategic Budgeting System** into your business. 
+          
+          Many businesses struggle with high revenue but low profit because of hidden costs and misaligned teams. Our system helps you:
+          
+          1.  **Scientific Budgeting:** Set accurate targets for Revenue, Cost, and Cash Flow.
+          2.  **Cost Optimization:** Identify and cut "bad costs" while investing in "good costs."
+          3.  **Team Alignment:** Ensure every employee's KPI is linked directly to the company's profit goals.
+          
+          This data-driven approach turns your business into a predictable profit machine.
+      - featured: true
+        active: false
+        title: "Are you a licensed financial institution?"
+        content: |
+          Yes. MMC FP Sdn Bhd is a licensed financial planning institution authorized by the **Securities Commission Malaysia (SC)**. We hold a valid **Capital Markets Services Licence (CMSL)** (Reg. No: eCMSL/A0224/2008). This ensures all our strategic advice meets the highest regulatory standards in Malaysia.
+      - featured: false
+        active: false
+        title: "Is your system suitable for my industry?"
+        content: |
+          Our **Strategic Budgeting System** is built on universal financial and management principles that apply to almost every business model.
+          
+          Whether you are in **Manufacturing, Retail, Services, Trading, or Technology**, the core challenges are the same: How to manage cash flow? How to set KPIs? How to scale profitably? We have successfully transformed over **500+ enterprises** across diverse sectors using this proven methodology.
 
-          - Focused workshop to identify core values and USP.
-          - In-depth workshop to establish a clear and differentiated brand identity.
-            1. Focused workshop to identify core values and USP.
-            2. In-depth workshop to establish a clear and differentiated brand identity.
-            3. Comprehensive brand positioning strategy encompassing all aspects of your brand.
-          - Comprehensive brand positioning strategy encompassing all aspects of your brand.  
-            - Focused workshop to identify core values and USP.
-            - In-depth workshop to establish a clear and differentiated brand identity.
-            - Comprehensive brand positioning strategy encompassing all aspects of your brand.
-      - featured: true
-        active: false
-        title: "How can I request a quote or proposal?"
-        content: |
-          You can request a quote by filling out the [contact form](#) on our site or emailing us directly at [info@looka.com](#) with your project details.
-      - featured: false
-        active: false
-        title: "What is your turnaround time for projects?"
-        content: |
-          Our turnaround time depends on the project's complexity, but we typically deliver within 2-4 weeks for standard projects.
-      - featured: false
-        active: false
-        title: "Do you offer custom solutions?"
-        content: |
-          Yes, we specialize in custom solutions tailored to meet the unique needs of your business or project.
-      - featured: false
-        active: false
-        title: "What industries do you cater to?"
-        content: |
-          We cater to a wide range of industries including technology, healthcare, education, and retail, among others.
-      - featured: false
-        active: false
-        title: "How can I contact support?"
-        content: |
-          For support, please email us at [support@looka.com](#) or use the live chat feature on our website for immediate assistance.
-  - label: "Maintenance"
-    list:
-      - featured: false
-        active: true
-        title: "Do you provide ongoing maintenance services?"
-        content: |
-          Yes, we offer comprehensive maintenance packages to ensure your website or application stays updated and secure.
-
-          - **Essentials**: Focused workshop to identify core values and USP.
-          - **Growth**: In-depth workshop to establish a clear and differentiated brand identity.
-          - **Enterprise**: Comprehensive brand positioning strategy encompassing all aspects of your brand.
-      - featured: false
-        active: false
-        title: "How do I report a technical issue?"
-        content: |
-          You can report technical issues via our [support form](#) or by emailing us at [tech@looka.com](#) with a detailed description of the problem.
-      - featured: true
-        active: false
-        title: "What is included in your maintenance plans?"
-        content: |
-          Our maintenance plans include regular updates, backups, performance checks, and security monitoring to keep your systems running smoothly.
-      - featured: true
-        active: false
-        title: "How often do you perform updates?"
-        content: |
-          Updates are performed monthly or as needed, depending on the maintenance package you select.
-      - featured: true
-        active: false
-        title: "Do you handle website hosting?"
-        content: |
-          Yes, we provide reliable hosting services as part of our maintenance plans or as a standalone service.
-      - featured: true
-        active: false
-        title: "Can I upgrade my maintenance package?"
-        content: |
-          Absolutely, you can upgrade your maintenance package at any time by contacting our support team.
-  - label: "User Information"
-    list:
-      - featured: false
-        active: true
-        title: "How do I create an account?"
-        content: |
-          Creating an account is easy. Simply click on the "Sign Up" button on our website and follow the instructions.
-
-          - **Essentials**: Focused workshop to identify core values and USP.
-          - **Growth**: In-depth workshop to establish a clear and differentiated brand identity.
-          - **Enterprise**: Comprehensive brand positioning strategy encompassing all aspects of your brand.
-      - featured: false
-        active: false
-        title: "Can I update my personal details?"
-        content: |
-          Yes, you can update your personal details by logging into your account and navigating to the profile settings page.
-      - featured: false
-        active: false
-        title: "How do I reset my password?"
-        content: |
-          To reset your password, click on the "Forgot Password" link on the login page and follow the prompts.
-      - featured: false
-        active: false
-        title: "What should I do if I suspect unauthorized access?"
-        content: |
-          If you suspect unauthorized access, immediately change your password and contact our support team for further assistance.
-      - featured: false
-        active: false
-        title: "Do you store user data securely?"
-        content: |
-          Yes, we prioritize data security and employ advanced encryption techniques to safeguard user information.
-      - featured: true
-        active: false
-        title: "Can I delete my account?"
-        content: |
-          Yes, you can request account deletion by contacting our support team. Please note that this action is irreversible.
-  - label: "Financial Information"
+  - label: "Courses & Training"
     list:
       - featured: true
         active: true
-        title: "What payment methods do you accept?"
+        title: "Who should attend your Strategic Budgeting Course?"
         content: |
-          We accept various payment methods including credit cards, PayPal, and bank transfers for your convenience.
+          Our courses are specifically designed for **Business Owners, CEOs, Directors, and Senior Management** who want to move from "managing by gut feeling" to "managing by data."
+          
+          If you want to learn **how to solve cash flow problems**, **design effective employee incentive schemes**, or **prepare your company for IPO/funding**, this course provides the strategic roadmap you need.
+      - featured: false
+        active: false
+        title: "What is covered in the curriculum?"
+        content: |
+          We take you through a comprehensive "Three-Stage Rocket" journey to business transformation:
+          
+          - **Stage 1: The Profit Engine (Budgeting):** Learn to build a financial model that predicts and secures future profits.
+          - **Stage 2: The Execution Engine (Management):** Master the art of **KPI setting** and **Incentive Design** to make your team fight for your goals.
+          - **Stage 3: The Value Engine (Capital):** Understand **Business Valuation** and how to build a company that investors love.
+      - featured: false
+        active: false
+        title: "Do you offer corporate training for teams?"
+        content: |
+          Yes. Implementing a new system requires the whole leadership team to speak the same language. We highly recommend business owners bring their CFOs, HR Directors, and key department heads. We offer customized group arrangements to ensure your team can hit the ground running immediately after the training.
 
-          - **Essentials**: Focused workshop to identify core values and USP.
-          - **Growth**: In-depth workshop to establish a clear and differentiated brand identity.
-          - **Enterprise**: Comprehensive brand positioning strategy encompassing all aspects of your brand.
+  - label: "Consulting & Advisory"
+    list:
       - featured: true
-        active: false
-        title: "Do you offer refunds?"
+        active: true
+        title: "I need more than a course. Do you offer implementation services?"
         content: |
-          Refunds are available under specific conditions as outlined in our refund policy. Please refer to our [terms and conditions](#) for details.
+          Absolutely. For companies that want faster results and hands-on guidance, we offer **Strategic Consulting Services**.
+          
+          Our consultants work directly with you to:
+          - Analyze your financial health and cash flow gaps.
+          - Restructure your organization for growth.
+          - Design and implement bespoke **KPI and Commission Schemes**.
+          - Facilitate monthly/quarterly management reviews to ensure execution.
+          
+          Click "Contact Us" to schedule a discovery call with our principal consultants.
       - featured: false
         active: false
-        title: "Is my payment information secure?"
+        title: "Can you help with company valuation and exit planning?"
         content: |
-          Yes, all payment information is processed securely using industry-standard encryption and trusted payment gateways.
+          Yes. A key part of our methodology is **Capital Management**.
+          
+          Whether you are looking to raise funds, sell your business (M&A), or go public (IPO), we help you build the **Financial Roadmap** required by investors. We guide you in optimizing your financial structure and governance to maximize your company's valuation when you decide to exit.
+
+  - label: "Getting Started"
+    list:
       - featured: false
-        active: false
-        title: "Do you provide invoices for transactions?"
+        active: true
+        title: "How do I know which solution is right for me?"
         content: |
-          Yes, we provide detailed invoices for every transaction, which are emailed to you upon successful payment.
-      - featured: false
-        active: false
-        title: "Can I set up recurring payments?"
-        content: |
-          Yes, recurring payments can be set up for subscription-based services. Contact our billing team for assistance.
-      - featured: false
-        active: false
-        title: "What currencies do you accept?"
-        content: |
-          We primarily accept payments in USD but also support other major currencies. Contact us for specific details.
+          Every business is at a different stage of growth. 
+          
+          - If you want to **learn the system** and implement it yourself, our **Course** is the best starting point.
+          - If you need **experts to build it for you**, our **Consulting** service is ideal.
+          
+          The best way to find out is to speak with us. Submit an inquiry, and our team will conduct a brief assessment to recommend the path that yields the highest ROI for your specific situation.
 ---

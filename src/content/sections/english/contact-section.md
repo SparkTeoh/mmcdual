@@ -1,26 +1,26 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-title: "Contact Us for More Information"
-description: "Whether you're seeking expert assistance, our dedicated team is prepared to support you every step of the way."
-subtitle: "Contact"
+title: "Ready to Transform Your Business?"
+description: "Whether you need to optimize your profits, structure your team, or prepare for an exit, our consultants are ready to guide you."
+subtitle: "Contact Us"
 
 contactList:
   enable: true
   list:
     # For icon names, see [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
     - icon: "Phone"
-      label: "Call us now"
-      value: "+1-202-555-0190"
+      label: "Call / WhatsApp"
+      value: "+6011-27368039"
     - icon: "Mail"
       label: "Email us"
-      value: "example@gmail.com"
-    - icon: "Send"
-      label: "Chat with us"
-      value: "@example"
+      value: "admin@mmcfin.com"
+    - icon: "MapPin"
+      label: "Visit Us"
+      value: "MMC FP Sdn Bhd, Kuala Lumpur, Malaysia"
 
 social:
   enable: true
-  title: "Follow us on social media"
+  title: "Follow us for updates"
   # # uncomment below list if you want to override `src/config/social.json` data
   # list:
   #   - enable: true
@@ -30,132 +30,99 @@ social:
 
 # Check config.toml file for form action related settings
 form:
-  emailSubject: "New form submission from looka website" # Customized email subject (applicable when anyone submit form, form submission may receive by email depend on provider)
+  emailSubject: "New Inquiry from MMC Website" # Customized email subject
   submitButton:
-    label: "Submit Your Response"
+    label: "Get Your Free Strategy Session"
     showIcon: "true"
-    variant: "outline" # "fill", "outline", "outline-white", "text"
-    hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
+    variant: "fill" # "fill", "outline", "outline-white", "text"
+    hoverEffect: "magnetic" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
   # This note will show at the end of form
   # note: |
   #   Your data is safe with us. We respect your privacy and never share your information. <br /> Read our [Privacy Policy](/privacy-policy/).
   inputs:
     - label: ""
-      placeholder: "Full Name"
-      name: "Full Name" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Your Full Name"
+      name: "Full Name"
       required: true
       halfWidth: true
       defaultValue: ""
     - label: ""
-      placeholder: "Email Address"
-      name: "Email Address" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Work Email Address"
+      name: "Email Address"
       required: true
       type: "email"
       halfWidth: true
       defaultValue: ""
     - label: ""
-      placeholder: "Phone Number"
-      name: "Phone Number" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Phone Number (WhatsApp)"
+      name: "Phone Number"
       required: true
       type: "text"
       halfWidth: true
       defaultValue: ""
     - label: ""
-      placeholder: "Company"
-      name: "Company" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "Company Name"
+      name: "Company"
       required: true
       type: "text"
       halfWidth: true
       defaultValue: ""
     - label: ""
-      placeholder: "Subject"
-      name: "Subject" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "I am interested in..."
+      name: "Service Interest"
       required: true
       halfWidth: true
       dropdown:
-        type: "" # select | search - default is select
+        type: "select" # select | search - default is select
         search: # if type is search then it will work
           placeholder: ""
         items:
-          - label: "Example 01"
-            value: "Example 01"
-          - label: "Example 02"
-            value: "Example 02"
-          - label: "Example 03"
-            value: "Example 03"
+          - label: "Profit Budgeting Course (3 Days)"
+            value: "Course"
+          - label: "Corporate Consulting (System Implementation)"
+            value: "Consulting"
+          - label: "Valuation & Exit Planning"
+            value: "Exit Planning"
+          - label: "Others / General Inquiry"
+            value: "General"
     - label: ""
-      placeholder: "Subject With Search"
-      name: "Subject With Search" # This is crucial. Its indicate under which name you want to receive this field data
+      placeholder: "How did you hear about us?"
+      name: "Source"
       required: true
       halfWidth: true
       dropdown:
-        type: "search" # select | search - default is select
-        search: # if type is search then it will work
-          placeholder: "Subject With Search"
+        type: "select"
         items:
-          - label: "Lowni Saiki"
-            value: "Lowni Saiki"
-          - label: "Sikow Pow"
-            value: "Sikow Pow"
-          - label: "Kenbi Shaktun"
-            value: "Kenbi Shaktun"
-          - label: "Aruyyo Kawn"
-            value: "Aruyyo Kawn"
-          - label: "Marong Lowbbi"
-            value: "Marong Lowbbi"
+          - label: "Google Search"
+            value: "Google"
+          - label: "Social Media (Facebook/Instagram/LinkedIn)"
+            value: "Social Media"
+          - label: "Referral from Friend/Partner"
+            value: "Referral"
+          - label: "Webinar / Event"
+            value: "Event"
+          - label: "Other"
+            value: "Other"
     - label: ""
       tag: "textarea"
       defaultValue: ""
-      rows: "4" # Only work if tag is textarea
-      placeholder: "Enter your message."
-      name: "Message" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
+      rows: "4"
+      placeholder: "Briefly describe your biggest business challenge right now (Optional)"
+      name: "Message"
+      required: false
       halfWidth: false
-    - label: "Google Search" # only valid for type="checkbox" & type === "radio"
-      checked: false # only valid for type="checkbox" & type === "radio"
-      name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
-      groupLabel: "How did you hear about us?" # Radio Inputs Label
-      group: "source" # when you add group then it will omit space between the same group radio input
-      type: "radio"
-      halfWidth: true
-      defaultValue: ""
-    - label: "Social Media" # only valid for type="checkbox" & type === "radio"
-      name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
-      groupLabel: "" # Radio Inputs Label
-      group: "source" # when you add group then it will omit space between the same group radio input
-      type: "radio"
-      halfWidth: true
-      defaultValue: ""
-    - label: "Referral" # only valid for type="checkbox" & type === "radio"
-      name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
-      groupLabel: "" # Radio Inputs Label
-      group: "source" # when you add group then it will omit space between the same group radio input
-      type: "radio"
-      halfWidth: true
-      defaultValue: ""
-    - label: "Other" # only valid for type="checkbox" & type === "radio"
-      name: "User Source" # This is crucial. Its indicate under which name you want to receive this field data
-      required: true
-      groupLabel: "" # Radio Inputs Label
-      group: "source" # when you add group then it will omit space between the same group radio input
-      type: "radio"
-      halfWidth: true
-      defaultValue: ""
-    - label: "I agree to the terms and conditions and [privacy policy](/contact/)." # only valid for type="checkbox" & type === "radio"
-      name: "Agreed Privacy" # This is crucial. Its indicate under which name you want to receive this field data
-      value: "Agreed" # Value that will be submit (applicable for type="checkbox" & type === "radio")
-      checked: false # only valid for type="checkbox" & type === "radio"
+    - label: "I agree to the terms and conditions and [privacy policy](/privacy-policy/)." 
+      name: "Agreed Privacy"
+      value: "Agreed"
+      checked: false
       required: true
       type: "checkbox"
       halfWidth: false
       defaultValue: ""
-    - note: success # info | warning | success | deprecated | hint
+    - note: success
       parentClass: "hidden text-sm message success"
-      content: We have received your message! We'll get back to you as soon as possible.
-    - note: deprecated # info | warning | success | deprecated | hint
+      content: Thank you! We have received your inquiry. Our consultant will contact you via WhatsApp/Email shortly.
+    - note: deprecated
       parentClass: "hidden text-sm message error"
-      content: Something went wrong! please use this mail - [looka-astro-theme@gmail.com](mailto:looka-astro-theme@gmail.com) to submit a ticket!
+      content: Something went wrong! Please try again or email us directly at admin@mmcfin.com.
 ---

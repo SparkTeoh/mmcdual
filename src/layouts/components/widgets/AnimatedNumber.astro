@@ -29,6 +29,19 @@ const {
 const addZero = (content: string) => {
   return "0".repeat(Number(content.length));
 };
+
+// Check if value is numeric (including numbers with decimals, percentages, etc.)
+const isNumeric = (value: string | number | undefined): boolean => {
+  if (value === undefined || value === null) return false;
+  const str = String(value).trim();
+  // Check if it's a pure number or number with suffix like "100%", "3x", etc.
+  // But exclude text values like "Zero", "IPO", "Maximized", etc.
+  if (str === "" || str === "Zero" || str === "零" || str === "IPO" || str === "Maximized" || str === "Maximise" || str === "最大化" || str === "One" || str === "一") {
+    return false;
+  }
+  // Check if it starts with a digit or can be parsed as a number
+  return /^[\d.+-]/.test(str) || !isNaN(Number(str));
+};
 ---
 
 <div
@@ -52,8 +65,14 @@ const addZero = (content: string) => {
       "data-type": content.type && content.type.toLowerCase(),
       style: { "--odometer-duration": transitionTime },
     }}
-    class:list={[{ odometer: enable }, childClassName]}
-    set:html={enable && content.value && animateOn !== "click"
+    class:list={[
+      { 
+        odometer: enable && isNumeric(content.value),
+        "non-numeric": enable && !isNumeric(content.value)
+      }, 
+      childClassName
+    ]}
+    set:html={enable && content.value && animateOn !== "click" && isNumeric(content.value)
       ? addZero(content.value as string)
       : content.value}
   />
@@ -86,8 +105,28 @@ const addZero = (content: string) => {
 
           numbers.forEach((numEl) => {
             const countNumber = numEl.getAttribute("data-count");
-
-            numEl.textContent = countNumber;
+            
+            // For non-numeric values (like "Zero", "IPO", "Maximized"), set textContent directly
+            // For numeric values, let odometer handle it
+            if (countNumber) {
+              const isNonNumeric = countNumber === "Zero" || 
+                                   countNumber === "零" ||
+                                   countNumber === "IPO" || 
+                                   countNumber === "Maximized" || 
+                                   countNumber === "Maximise" || 
+                                   countNumber === "最大化" ||
+                                   countNumber === "One" ||
+                                   countNumber === "一" ||
+                                   (!/^[\d.+-]/.test(countNumber) && isNaN(Number(countNumber)));
+              
+              if (isNonNumeric) {
+                // For non-numeric values, directly set textContent
+                numEl.textContent = countNumber;
+              } else {
+                // For numeric values, odometer will handle it
+                numEl.textContent = countNumber;
+              }
+            }
           });
 
           // Run once only (like ScrollTrigger once:true)

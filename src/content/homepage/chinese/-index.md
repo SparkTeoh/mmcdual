@@ -13,10 +13,10 @@ servicesSection:
     enable: true
     position: "bottom"
 
-  # cta: "link" # "link" | "slider-nav"
-  colorScheme: "dark" # "dark" | "light"
-  showServicesAs: "slider" # "slider" | "static"
-  # limit: 3 # number / false
+  # cta: "link" # "link" | "slider-nav" ( Define weather call to action button should be slider control or a link )
+  colorScheme: "dark" # "dark" | "light"; (default "dark"); weather to show services in light or dark color scheme
+  showServicesAs: "slider" # "slider" | "static"; (default "slider"); weather to show services as slider or static list
+  # limit: 3 # number / false (default "3"); Limit the number of services to be displayed (Only work if showServicesAs is static)
 
   button:
     enable: true

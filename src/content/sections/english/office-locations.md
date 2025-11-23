@@ -1,7 +1,7 @@
 ---
 enable: true
-title: "Discover the Office Location Best Suited for Your Success"
-subtitle: "Locations"
+title: "The Exchange 106 @ TRX"
+subtitle: "Strategically Located"
 
 button:
   enable: false
@@ -19,13 +19,11 @@ list:
     image: "/images/office/1.jpg"
     backgroundImage: "/images/office/1.jpg"
     content: |
-      123 Lowe Street,
-
-      Green City, State, 12345
-
-      Phone: (123) 456-7890
-
-      Email: hq@looka.com
+      59.20, Exchange 106,
+      
+      Tun Razak Exchange (TRX),
+      
+      55188 Kuala Lumpur
 
       Business Hours: Monday - Friday: 9:00 AM - 6:00 PM
   - enable: false # if this false then only background image will show

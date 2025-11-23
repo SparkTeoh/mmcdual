@@ -71,8 +71,8 @@ servicesSection:
 # "FAQ" Section located in Services Single Page
 faqSection:
   enable: true # Control the visibility of this section across all services single
-  title: "Unsure About Branding? We've Got You Covered"
-  # subtitle: ""
+  title: "From budgeting basics to complex exit strategies, we have the answers."
+  subtitle: "Still Have Questions About Growing Your Profit?"
   sectionLayout: "horizontal"
   minimalFaqLayout: true
   faqLayoutOnly: false
@@ -80,7 +80,7 @@ faqSection:
 
   button:
     enable: true
-    label: "See All FAQS"
+    label: "Explore our FAQs"
     url: "/faq"
     rel: ""
     target: ""

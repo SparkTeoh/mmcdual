@@ -1,12 +1,10 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-title: "We believe, a truly good enterprise:<br><strong style=\"color: var(--color-accent);\">Earns profits while achieving<br>customer and team success.</strong>"
+title: "Profit With Purpose:<br><strong style=\"color: var(--color-accent);\">Elevating Your Business By Elevating Your People.</strong>"
 description: |
-  This is precisely where our mission lies. At MMC, we are not just pursuing double growth in revenue and profit; we are committed to systematizing this concept.
-
-  We install a budget management system for your enterprise, and its core is to enable employees to care about profit like a boss. Because in this system, customer achievements will be clearly measured, and team achievements will be directly linked to fair and generous returns.
-
-  We use the most scientific financial blueprint to create a good enterprise that makes bosses feel at ease and teams fight for common goals. We are your growth partners and fellow travelers in realizing this corporate ideal.
+  This is our Why. At MMC, we believe that sustainable profit is the byproduct of a thriving team and satisfied clients.
+  <br><br>We exist to systematize this belief. Through our Profit Budgeting System, we turn financial data into a common language for your entire company. We replace ambiguity with clarity, and stagnation with motivation.
+  <br><br>Our goal is to build a business where the team cares about the bottom line as much as you do—creating a fair, high-performance environment where everyone wins. Let us help you build the company you’ve always imagined.
 
 marquee:
   marqueeElementWidth: "25rem"

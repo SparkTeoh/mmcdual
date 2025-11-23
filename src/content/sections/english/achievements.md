@@ -1,9 +1,11 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-title: "Drive Growth with Data, Lock in Profit with Systems"
-subtitle: "Our Philosophy"
+title: "Fuel Growth with Data. Lock In Profit with Systems."
+subtitle: "Our Core Philosophy"
 description: |
-  We firmly believe that every great business decision stems from scientific measurement rather than vague feelings. Our expert team, relying on over 18 years of licensed experience, brings you not only cross-industry profound insights but also a set of practical profit growth systems validated by over 500 enterprises.
+  Great business decisions aren't made on gut feeling—they're built on precise financial data. 
+  Backed by 18+ years of licensed expertise, we don't just offer advice; we install 
+  a battle-tested profit operating system that has already transformed over 500 enterprises.
 
 button:
   enable: false
@@ -18,11 +20,11 @@ button:
 featureList:
   # For icon names, see [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
   - icon: "ChartSpline" 
-    title: "Data-Driven Decisions, Bid Farewell to Guesswork"
-    description: "We teach you to understand and utilize the most core financial data of your enterprise, ensuring every investment and every expansion is evidence-based and yields expected results."
+    title: "Stop Guessing, Start Knowing"
+    description: "We empower you to master your financial dashboard. Every investment and expansion plan is backed by hard data, ensuring predictable outcomes instead of hopeful gambles."
   - icon: "BadgeCheck"
-    title: "System Implementation, Not Empty Talk"
-    description: "Our expertise lies not only in financial planning but also in transforming complex financial logic into simple actions and systems that every industry and every team can execute."
+    title: "Systems That Actually Work"
+    description: "Theory is useless without execution. We translate complex financial logic into simple, actionable steps that your team can execute immediately, regardless of your industry."
 
 statsBlock:
   enable: true
@@ -30,21 +32,21 @@ statsBlock:
     - prependValue: ""
       value: "98"
       appendValue: "%"
-      title: "Customer Recommendation Rate"
-      description: "Our clients are not only highly satisfied with the results but are also willing to recommend us to their entrepreneur friends."
+      title: "Client Referral Rate"
+      description: "Our clients don't just get results; they become our biggest advocates, trusting us enough to recommend their peers."
     - prependValue: ""
       value: "500"
       appendValue: "+"
-      title: "Successful Enterprise Deployments"
-      description: "Over 500 enterprises have successfully installed and are running our Profit OS™ profit operating system."
+      title: "Profit Systems Installed"
+      description: "More than 500 companies are currently running on our proprietary Profit OS™, driving efficiency and growth daily."
     - prependValue: ""
       value: "18"
       appendValue: "+"
-      title: "Licensed Experience"
-      description: "Certified by the Malaysian Securities Commission (SC) since 2008, with over 18 years of professional financial planning and corporate consulting experience."
+      title: "Years of Licensed Authority"
+      description: "Fully regulated by the Securities Commission Malaysia (SC) since 2008. We bring nearly two decades of compliance and consulting excellence."
     - prependValue: ""
       value: "30"
       appendValue: "%+"
-      title: "Average Profit Growth"
-      description: "This is the verified average profit growth achieved by our clients after implementing the system."
+      title: "Average Profit Increase"
+      description: "The verified bottom-line growth our clients achieve after implementing our Profit Budgeting System."
 ---

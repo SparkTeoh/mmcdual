@@ -96,8 +96,12 @@ const hasEnableMenu = menu.menus?.filter((menu) => menu.enable) || [];
         <div class="flex flex-col gap-10 text-sm lg:me-5 lg:py-8">
           <div class="flex flex-col gap-5">
             {menu.services.name && (
-              <legend
-                class="border-border-light/40 border-b pb-3 tracking-wider opacity-80"
+              <a
+                href={getLocaleUrlCTM(
+                  "/services/",
+                  Astro.currentLocale,
+                )}
+                class="border-border-light/40 border-b pb-3 tracking-wider opacity-80 transition-opacity duration-300 hover:opacity-100 hover:text-primary"
                 set:html={menu.services.name}
               />
             )}

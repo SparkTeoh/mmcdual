@@ -1,22 +1,25 @@
 ---
-title: "Team"
-description: "The core advisory team at MMC FP draws on expertise in strategy, technology, and operations to create sustained growth momentum for our clients."
+title: "Our Leadership"
+description: "Built on a legacy of expertise. Driven by a new vision of growth."
 draft: false
 
 leadershipTeam:
   enable: true # Control the visibility of this section across all pages where it is used
-  title: "Founded in 1997,\nWe focus on one thing:\nAchieving sustainable growth\nthrough financial planning.\n"
+  title: "Since 1997, We've Done One Thing:\nDriving Sustainable Growth Through Financial Strategy.\n"
+  
+  # Revised Description: More narrative, emotive, and professional.
   description: |-
-    MMC Financial Planning was founded in 1997 and obtained formal authorization from the Securities Commission Malaysia (SC) in 2008. For more than two decades, under the guidance of founders PC Lim and Phillip Tay, we have remained rooted in the field of corporate financial planning, supporting the growth of hundreds of enterprises.<br><br>
-    Today, this invaluable experience and deep insight have been passed on to a new generation of leaders. We have fully inherited the market-tested management philosophy that places "budget management" at its core, while infusing it with renewed vitality and perspectives that align with the modern business landscape.<br><br>
-    We believe that truly effective management consulting is not abstract theory, but wisdom forged in practice and meant to be shared. This wisdom is what empowers us to help your company move from "accidental wins" to "inevitable growth."
-  subtitle: "Three generations, one focus"
+    MMC Financial Planning was established in 1997 and officially licensed by the Securities Commission Malaysia (SC) in 2008. For over two decades, under the pioneering leadership of founders PC Lim and Phillip Tay, we have remained steadfast in our commitment to corporate financial planning, becoming the silent engine behind the growth of hundreds of enterprises.<br><br>
+    Today, this rich legacy of insight and experience has been entrusted to a new generation of leadership. We have not only inherited the battle-tested philosophy of "Strategic Budgeting" but have also evolved it to meet the dynamic demands of the modern business era.<br><br>
+    We believe that true management consulting isn't about abstract theory—it's about practical wisdom forged in the fires of real business challenges. This wisdom is our greatest asset in helping your company transition from "accidental success" to "inevitable growth."
+  
+  subtitle: "Three Generations of Focus"
   layout: "horizontal"
   leadershipTeam: true
 
   quote:
     enable: true
-    value: "My mission is to turn the wisdom our predecessors accumulated over the past two decades into tangible growth for your company."
+    value: "My mission is to translate twenty years of accumulated wisdom into measurable, explosive growth for your business."
     attribution: "- Spark Liang, Managing Director"
 
   button:
@@ -78,9 +81,9 @@ members:
           label: "x-twitter"
           icon: "/images/icons/social/twitter.svg"
           url: "https://twitter.com/"
-  - image: "/images/team/4.jpg"
-    name: "Mark Thompson"
-    role: "Technical Director"
+  - image: "/images/team/Spark.webp"
+    name: "Spark Liang"
+    role: "Managing Director"
     social:
       enable: true
       list:
@@ -92,9 +95,9 @@ members:
           label: "x-twitter"
           icon: "/images/icons/social/twitter.svg"
           url: "https://twitter.com/"
-  - image: "/images/team/5.jpg"
-    name: "Michael Davis"
-    role: "Marketing Strategy Director"
+  - image: "/images/team/summer 1.webp"
+    name: "Summer Oh"
+    role: "Operation Manager"
     social:
       enable: true
       list:
@@ -106,9 +109,9 @@ members:
           label: "x-twitter"
           icon: "/images/icons/social/twitter.svg"
           url: "https://twitter.com/"
-  - image: "/images/team/6.jpg"
-    name: "Linda White"
-    role: "Business Development Director"
+  - image: "/images/team/jinger.webp"
+    name: "Jing Er Lim"
+    role: "Business Development Manager"
     social:
       enable: true
       list:
@@ -120,10 +123,9 @@ members:
           label: "x-twitter"
           icon: "/images/icons/social/twitter.svg"
           url: "https://twitter.com/"
-
-  - image: "/images/team/7.jpg"
-    name: "Jessica Harris"
-    role: "Design Director"
+  - image: "/images/team/kaelyn.webp"
+    name: "Kaelyn Tan"
+    role: "Business Consultant"
     social:
       enable: true
       list:
