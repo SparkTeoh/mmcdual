@@ -23,6 +23,8 @@ if (response) return response;
 ---
 
 <Base {...entry?.data}>
+  <!-- Hidden H1 for SEO - not displayed visually but accessible to screen readers and search engines -->
+  <h1 class="sr-only">{entry?.data?.title || (Astro.currentLocale === "zh" ? "财务规划服务 | MMC Financial" : "Financial Planning Services | MMC Financial Planning")}</h1>
   <ServicesSection content={entry?.data.indexServicesSection} />
   <CallToAction />
 </Base>
