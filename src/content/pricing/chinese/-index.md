@@ -1,6 +1,10 @@
 ---
-title: "量身定制，匹配您当前的发展阶段"
-description: "无论您需要的是团队内训、专项问题解决，还是长期的战略辅导，我们都有成熟的交付体系。"
+title: "定价与方案 | MMC财务规划"
+metaTitle: "定价与方案 | MMC财务规划"
+metaDescription: "持牌财务规划服务的透明定价。为马来西亚中小企业提供战略预算管理、企业财务规划和利润增长解决方案。自2008年获得大马证监会许可。立即获取定制报价。"
+keywords: ["财务规划定价", "战略预算成本", "企业财务顾问定价", "中小企业财务规划方案", "外部CFO定价", "企业估值成本"]
+robots: "index, follow"
+disableTagline: true
 draft: false
 hasCustomLineAnimationBg: true
 

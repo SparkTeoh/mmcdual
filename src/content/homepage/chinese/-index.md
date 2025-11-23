@@ -1,6 +1,10 @@
 ---
-title: ""
-description: "以中文视角呈现 MMC FP 的顾问服务与成功案例。"
+title: "MMC财务规划 | 马来西亚持牌企业财务规划"
+metaTitle: "MMC财务规划 | 马来西亚持牌企业财务规划"
+metaDescription: "利润增长停滞？MMC FP是大马证监会认证的财务规划师，已帮助500+马来西亚中小企业通过战略预算管理和企业财务规划实现30%+利润增长。我们提供专业的财务规划服务，包括战略预算管理、现金流优化、KPI设定、激励机制设计、企业估值和退出规划。自2008年获得大马证监会许可，18年专业经验。获取专业指导，开启增长之路。"
+keywords: ["战略预算管理", "企业财务规划", "利润倍增系统", "马来西亚中小企业顾问", "持牌财务规划师", "大马证监会认证", "外部CFO", "现金流管理", "KPI设定", "企业估值"]
+robots: "index, follow"
+disableTagline: true
 
 # Override Default Content of `/sections/services-section.md`
 # Uncomment key values that you want to override

@@ -1,7 +1,7 @@
 ---
 import { absoluteUrl } from "@/lib/utils/absoluteUrl";
 import config from ".astro/config.generated.json" with { type: "json" };
-import { plainify, removeWhitespace } from "@/lib/utils/textConverter";
+import { plainify, removeWhitespace, truncateTitle, truncateMetaDescription } from "@/lib/utils/textConverter";
 
 // Destructure optional props with default fallback to config values
 let {
@@ -16,6 +16,19 @@ let {
   ogType = config.opengraph.ogType,
   ogLocale = config.opengraph.ogLocale,
 } = Astro.props;
+
+// Set ogLocale dynamically based on current locale if not explicitly provided
+// Map language codes to Open Graph locale format
+const localeMap: Record<string, string> = {
+  en: "en_US",
+  zh: "zh_CN",
+};
+
+// Use current locale if ogLocale is not provided or is the default
+if (!ogLocale || ogLocale === config.opengraph.ogLocale) {
+  const currentLocale = Astro.currentLocale || config.settings.multilingual.defaultLanguage;
+  ogLocale = localeMap[currentLocale] || config.opengraph.ogLocale;
+}
 
 // Get the possible value for title and description and remove any line breaks and extra spaces
 title = plainify(metaTitle ? metaTitle : title ? title : config.site.title);
@@ -41,6 +54,10 @@ if (!disableTagline) {
     (config.site.tagline &&
       (config.site.taglineSeparator || " - ") + config.site.tagline);
 }
+
+// Truncate title and description for optimal Open Graph display
+title = truncateTitle(title, 60);
+description = truncateMetaDescription(description, 160);
 ---
 
 <!-------------------------

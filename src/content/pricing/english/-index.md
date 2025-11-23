@@ -1,6 +1,10 @@
 ---
-title: "Pricing"
-metaDescription: "This is a example description"
+title: "Pricing & Packages | MMC Financial Planning"
+metaTitle: "Pricing & Packages | MMC Financial Planning"
+metaDescription: "Transparent pricing for licensed financial planning services. Strategic budgeting, corporate financial advisory, and profit growth solutions for Malaysian SMEs. SC Licensed since 2008. Get a custom quote today."
+keywords: ["Financial Planning Pricing", "Strategic Budgeting Cost", "Corporate Financial Advisory Pricing", "SME Financial Planning Packages", "External CFO Pricing", "Business Valuation Cost"]
+robots: "index, follow"
+disableTagline: true
 draft: false
 hasCustomLineAnimationBg: true
 

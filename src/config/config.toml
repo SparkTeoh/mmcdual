@@ -1,8 +1,8 @@
 # Site Configuration
 [site]
-  title            = "MMC FP" # Shared title for SEO and OpenGraph
-  description      = "A highly customizable consulting & business astro theme built with Tailwind CSS and Astro Js" # Shared description for SEO and OpenGraph
-  tagline          = "Corporate Business & Consulting Astro Js Theme"
+  title            = "MMC Financial Planning" # Shared title for SEO and OpenGraph
+  description      = "Licensed financial planning firm helping Malaysian SMEs achieve profit growth through strategic budgeting, corporate financial advisory, and exit planning. SC Licensed since 2008." # Shared description for SEO and OpenGraph
+  tagline          = "Licensed Financial Planning Form in Malaysia"
   taglineSeparator = "" # default is " - " 
   baseUrl          = "https://mmc.financial" # Base URL for the site and used in OpenGraph meta tags.
   logo             = "/images/logo.svg" # Path to the site's logo
@@ -25,8 +25,8 @@
 # Specific SEO configurations that complement the general site settings.
 # -----------------------------------------------------------------------------------------------------------------------------------
 [seo]
-  author   = "Getastrothemes"
-  keywords = ["business astro theme, consulting astro theme"] # SEO keywords
+  author   = "MMC Financial Planning"
+  keywords = ["Strategic Budgeting", "Corporate Financial Planning", "Profit Growth Strategies", "SME Financial Advisory Malaysia", "Cash Flow Management", "KPI Setting", "Incentive Framework", "Business Valuation", "Exit Planning", "IPO Readiness", "Licensed Financial Planner Malaysia", "Securities Commission Licensed", "External CFO Services"] # SEO keywords
   robots   = "index, follow" # Instructs search engines on how to crawl and index the pages.
 
   [seo.robotsTxt]

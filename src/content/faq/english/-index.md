@@ -1,6 +1,10 @@
 ---
-title: "Frequently Asked Questions"
-metaDescription: "Expert answers on increasing profit, managing cash flow, and setting KPIs. Learn how MMC's Profit Budgeting System transforms businesses in Malaysia."
+title: "Frequently Asked Questions | MMC Financial Planning"
+metaTitle: "Frequently Asked Questions | MMC Financial Planning"
+metaDescription: "Get expert answers on increasing profit, managing cash flow, and setting KPIs. Learn how MMC's licensed Profit Budgeting System helps 500+ Malaysian SMEs achieve 30%+ profit growth. SC Licensed since 2008."
+keywords: ["Financial Planning FAQ", "Strategic Budgeting Questions", "SME Financial Planning FAQ", "Profit Growth FAQ", "Cash Flow Management FAQ", "KPI Setting FAQ", "Licensed Financial Planner FAQ"]
+robots: "index, follow"
+disableTagline: true
 draft: false
 
 sectionLayout: "vertical"

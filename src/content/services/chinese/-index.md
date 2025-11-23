@@ -1,6 +1,10 @@
 ---
-title: "服务方案"
-description: "这一页汇整我们提供的核心顾问服务，协助你找到最适合的解方。"
+title: "财务规划服务 | MMC财务规划"
+metaTitle: "财务规划服务 | MMC财务规划"
+metaDescription: "通过MMC持牌财务规划服务转变您的业务。为马来西亚中小企业提供战略预算管理、现金流管理、KPI设定、企业估值和退出规划服务。自2008年获得大马证监会许可。立即开始。"
+keywords: ["战略预算服务", "企业财务规划", "现金流管理", "KPI设定服务", "企业估值马来西亚", "退出规划", "IPO准备", "中小企业财务顾问", "外部CFO服务", "财务规划马来西亚"]
+robots: "index, follow"
+disableTagline: true
 draft: false
 hasCustomLineAnimationBg: true
 

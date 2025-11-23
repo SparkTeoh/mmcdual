@@ -1,6 +1,10 @@
 ---
-title: "常见问题"
-description: "以下整理合作时最常见的提问，若有其他疑问欢迎直接联系团队。"
+title: "常见问题 | MMC财务规划"
+metaTitle: "常见问题 | MMC财务规划"
+metaDescription: "获取关于增加利润、管理现金流和设定KPI的专业答案。了解MMC持牌利润预算系统如何帮助500+马来西亚中小企业实现30%+利润增长。自2008年获得大马证监会许可。"
+keywords: ["财务规划常见问题", "战略预算问题", "中小企业财务规划常见问题", "利润增长常见问题", "现金流管理常见问题", "KPI设定常见问题", "持牌财务规划师常见问题"]
+robots: "index, follow"
+disableTagline: true
 draft: false
 
 sectionLayout: "vertical"

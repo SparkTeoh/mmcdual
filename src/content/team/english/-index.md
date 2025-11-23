@@ -1,6 +1,10 @@
 ---
-title: "Our Leadership"
-description: "Built on a legacy of expertise. Driven by a new vision of growth."
+title: "Our Leadership Team | MMC Financial Planning"
+metaTitle: "Our Leadership Team | MMC Financial Planning"
+metaDescription: "Meet the experienced financial planning team at MMC. Licensed financial planners with 18+ years of expertise helping 500+ Malaysian SMEs achieve sustainable profit growth. SC Licensed since 2008."
+keywords: ["Financial Planning Team Malaysia", "Licensed Financial Planners", "Corporate Financial Advisors", "SME Financial Consultants", "Strategic Budgeting Experts", "Business Growth Consultants"]
+robots: "index, follow"
+disableTagline: true
 draft: false
 
 leadershipTeam:

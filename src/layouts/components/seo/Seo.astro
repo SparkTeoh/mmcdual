@@ -1,6 +1,6 @@
 ---
 import { getLocaleUrlCTM, supportedLanguages } from "@/lib/utils/i18nUtils";
-import { plainify, removeWhitespace } from "@/lib/utils/textConverter";
+import { plainify, removeWhitespace, truncateTitle, truncateMetaDescription } from "@/lib/utils/textConverter";
 import config from ".astro/config.generated.json" with { type: "json" };
 import { hasAlternateLangPost } from "@/lib/contentParser.astro";
 
@@ -28,6 +28,9 @@ if (!disableTagline) {
       (config.site.taglineSeparator || " - ") + config.site.tagline);
 }
 
+// Truncate title to recommended SEO length (50-60 characters)
+title = truncateTitle(title, 60);
+
 description = plainify(
   metaDescription
     ? metaDescription
@@ -35,6 +38,9 @@ description = plainify(
       ? description
       : config.site.description,
 );
+
+// Truncate description to recommended SEO length (150-160 characters)
+description = truncateMetaDescription(description, 160);
 
 canonical = getLocaleUrlCTM(
   new URL(Astro.url.href, Astro.site).href,

@@ -120,3 +120,28 @@ export const toSentenceCase = (content: string) => {
 export function removeWhitespace(text: string) {
   return text.replace(/\s+/g, " ").trim();
 }
+
+// Truncate text to a maximum length, cutting at word boundaries
+export function truncateText(text: string, maxLength: number, suffix: string = "...") {
+  if (!text || text.length <= maxLength) {
+    return text;
+  }
+  
+  // Find the last space before maxLength
+  const truncated = text.substring(0, maxLength);
+  const lastSpace = truncated.lastIndexOf(" ");
+  
+  // If we found a space, cut there; otherwise cut at maxLength
+  const cutPoint = lastSpace > 0 ? lastSpace : maxLength;
+  return text.substring(0, cutPoint).trim() + suffix;
+}
+
+// Truncate title for SEO (50-60 characters recommended)
+export function truncateTitle(title: string, maxLength: number = 60) {
+  return truncateText(title, maxLength);
+}
+
+// Truncate meta description for SEO (150-160 characters recommended)
+export function truncateMetaDescription(description: string, maxLength: number = 160) {
+  return truncateText(description, maxLength);
+}

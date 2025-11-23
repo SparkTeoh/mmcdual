@@ -1,6 +1,10 @@
 ---
-title: "Services"
-metaDescription: "This is a example description"
+title: "Financial Planning Services | MMC Financial Planning"
+metaTitle: "Financial Planning Services | MMC Financial Planning"
+metaDescription: "Transform your business with MMC's licensed financial planning services. Strategic budgeting, cash flow management, KPI setting, business valuation, and exit planning for Malaysian SMEs. SC Licensed since 2008. Get started today."
+keywords: ["Strategic Budgeting Services", "Corporate Financial Planning", "Cash Flow Management", "KPI Setting Services", "Business Valuation Malaysia", "Exit Planning", "IPO Readiness", "SME Financial Advisory", "External CFO Services", "Financial Planning Malaysia"]
+robots: "index, follow"
+disableTagline: true
 draft: false
 hasCustomLineAnimationBg: true
 

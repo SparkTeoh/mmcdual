@@ -64,7 +64,7 @@ const formattedTitle = markdownTitle.replace(
         <div class="flex flex-wrap items-center justify-between gap-6 lg:flex-nowrap">
           <div class="max-w-xl" data-aos="fade-up-sm">
             {title && (
-              <h2
+              <h1
                 class="text-h3 has-text-highlight text-inherit"
                 set:html={formattedTitle}
               />
@@ -101,7 +101,7 @@ const formattedTitle = markdownTitle.replace(
                       isLarge ? "h-80 lg:h-96" : "h-64 lg:h-64",
                     ]}
                     src={imageItem.src}
-                    alt={title ? `${title} - MMC Financial Planning team and services` : "MMC Financial Planning consultancy services and team"}
+                    alt="MMC Financial Planning team meeting for strategic budgeting consultation"
                   />
                 </div>
               );
@@ -122,7 +122,7 @@ const formattedTitle = markdownTitle.replace(
                       isLarge ? "h-80 lg:h-96" : "h-64 lg:h-64",
                     ]}
                     src={imageItem.src}
-                    alt={title ? `${title} - MMC Financial Planning team and services` : "MMC Financial Planning consultancy services and team"}
+                    alt="MMC Financial Planning team meeting for strategic budgeting consultation"
                   />
                 </div>
               );

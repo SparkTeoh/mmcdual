@@ -1,6 +1,10 @@
 ---
-title: ""
-metaDescription: "This is a example description"
+title: "MMC Financial Planning | Licensed Financial Planning firm in Malaysia"
+metaTitle: "MMC Financial Planning | Licensed Financial Planning firm in Malaysia"
+metaDescription: "Struggling with profit growth? MMC FP is a licensed and regulated financial planning service provider in Malaysia, authorized by the Securities Commission Malaysia (SC) helping 500+ Malaysian Corporate & SMEs achieve 30%+ profit growth through strategic budgeting and corporate financial advisory. Get expert guidance."
+keywords: ["Strategic Budgeting", "Corporate Financial Planning", "Profit Growth Strategies", "SME Financial Advisory Malaysia", "Licensed Financial Planner Malaysia", "Securities Commission Licensed", "External CFO Services", "Cash Flow Management", "KPI Setting", "Business Valuation"]
+robots: "index, follow"
+disableTagline: true
 
 # Override Default Content of `/sections/services-section.md`
 # Uncomment key values that you wan to override
