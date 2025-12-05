@@ -14,7 +14,11 @@ interface Props {
 
 const { content } = Astro.props;
 const { tableOfContents } = config.settings.markup;
-const { title, image, imageAlt, masonryImage, information } = content.data;
+const { title, image, imageAlt, masonryImage, information, single } = content.data;
+
+// Get layout from single config, default to "modern-sidebar" for backward compatibility
+const layout = single?.layout || "modern-sidebar";
+const showSidebar = layout === "modern-sidebar";
 
 let tocHeadings;
 const { Content, headings } = await render(content);
@@ -30,53 +34,96 @@ const tocEnabled =
 ---
 
 <section>
-  <div
-    class="container grid grid-cols-1 gap-x-6 gap-y-16 lg:grid-cols-12 lg:items-start">
-    <Sidebar
-      content={{
-        widgets: ["RelatedPortfolios", "CtaBlock"],
-        sticky: true,
-        position: "left",
-        widgetsContent: {
-          relatedPortfolios: { currentPortfolio: content },
-        },
-      }}
-    />
+  {
+    showSidebar ? (
+      <!-- Layout with Sidebar -->
+      <div
+        class="container grid grid-cols-1 gap-x-6 gap-y-16 lg:grid-cols-12 lg:items-start">
+        <Sidebar
+          content={{
+            widgets: ["RelatedPortfolios", "CtaBlock"],
+            sticky: true,
+            position: "left",
+            widgetsContent: {
+              relatedPortfolios: { currentPortfolio: content },
+            },
+          }}
+        />
 
-    <div
-      class="has-video-modal order-1 space-y-10 lg:order-2 lg:col-span-8 lg:bg-white lg:p-5">
-      {
-        (masonryImage || image) && (
-          <OptimizedImage
-            src={(masonryImage || image) as string}
-            width={896}
-            height={384}
-            alt={imageAlt || title || "MMC Financial Planning case study portfolio"}
-            class="h-96 w-full object-cover"
-          />
-        )
-      }
+        <div
+          class="has-video-modal order-1 space-y-10 lg:order-2 lg:col-span-8 lg:bg-white lg:p-5">
+          {
+            (masonryImage || image) && (
+              <OptimizedImage
+                src={(masonryImage || image) as string}
+                width={896}
+                height={384}
+                alt={imageAlt || title || "MMC Financial Planning case study portfolio"}
+                class="h-96 w-full object-cover lg:h-[450px]"
+              />
+            )
+          }
 
-      <div class="max-w-full space-y-8">
-        <!-- List With Styled Icon -->
-        {information && <ListIcon content={information} />}
+          <div class="max-w-full space-y-8">
+            <!-- List With Styled Icon -->
+            {information && <ListIcon content={information} />}
 
-        {title && <h1 class="text-h3" set:html={title} />}
+            {title && <h1 class="text-h3" set:html={title} />}
 
-        <!-- Table of Contents -->
-        {tocEnabled && tocHeadings && <TOC toc={tocHeadings} marker={false} />}
+            <!-- Table of Contents -->
+            {tocEnabled && tocHeadings && <TOC toc={tocHeadings} marker={false} />}
 
-        <!-- Main Content -->
-        {
-          Content && (
-            <div class="prose-styles content has-video-modal">
-              <Content />
-            </div>
-          )
-        }
+            <!-- Main Content -->
+            {
+              Content && (
+                <div class="prose-styles content has-video-modal">
+                  <Content />
+                </div>
+              )
+            }
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    ) : (
+      <!-- Layout without Sidebar (Modern) -->
+      <div class="container">
+        <div class="grid grid-cols-1 justify-items-center space-y-12">
+          <!-- Portfolio Meta -->
+          <div class="max-w-full space-y-8 text-center lg:max-w-3xl">
+            {title && <h1 class="text-h3 md:text-h2" set:html={title} />}
+            {information && <ListIcon content={information} />}
+          </div>
+
+          <!-- Portfolio Image -->
+          {
+            (masonryImage || image) && (
+              <OptimizedImage
+                src={(masonryImage || image) as string}
+                width={896}
+                height={384}
+                alt={imageAlt || title || "MMC Financial Planning case study portfolio"}
+                class="h-96 w-full object-cover lg:h-[450px] lg:max-w-4xl"
+              />
+            )
+          }
+
+          <div class="w-full max-w-full space-y-8 lg:max-w-4xl">
+            <!-- Table of Contents -->
+            {tocEnabled && tocHeadings && <TOC toc={tocHeadings} marker={false} />}
+
+            <!-- Main Content -->
+            {
+              Content && (
+                <div class="prose-styles content has-video-modal">
+                  <Content />
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    )
+  }
 </section>
 
 <script>

@@ -238,6 +238,11 @@ export const portfolioCollection = defineCollection({
           }),
         )
         .optional(),
+      single: z
+        .object({
+          layout: z.enum(["modern", "modern-sidebar"]),
+        })
+        .optional(),
       indexPortfolioSection: z
         .object({
           enable: z.boolean(),

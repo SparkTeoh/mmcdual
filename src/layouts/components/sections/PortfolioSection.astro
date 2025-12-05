@@ -44,6 +44,11 @@ let {
   head: { title, subtitle, button },
 } = actualContent as sectionType;
 
+// Generate a default uniqueId if not provided (needed for filter tabs)
+if (headType === "filter" && !uniqueId) {
+  uniqueId = `portfolio-filter-${Astro.currentLocale}`;
+}
+
 let categories = await getTaxonomy(
   portfolioFolder as "case-studies",
   "categories",

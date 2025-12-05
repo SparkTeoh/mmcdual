@@ -55,9 +55,30 @@ export async function getStaticPaths() {
 }
 
 const { portfolio } = Astro.props;
+
+// Get index file to check for default single layout
+const portfolioIndex = await getEntryCTM(
+  config.settings.portfolioFolder as "case-studies",
+  "-index",
+  Astro.currentLocale,
+);
+
+// Merge single layout: individual case study overrides index default
+const singleLayout = portfolio.data.single?.layout || portfolioIndex?.data.single?.layout || "modern-sidebar";
+
+// Create merged portfolio data with single layout
+const mergedPortfolioData = {
+  ...portfolio,
+  data: {
+    ...portfolio.data,
+    single: {
+      layout: singleLayout,
+    },
+  },
+};
 ---
 
 <Base {...portfolio.data}>
-  <PortfolioSingle content={portfolio} />
+  <PortfolioSingle content={mergedPortfolioData} />
   <CallToAction />
 </Base>

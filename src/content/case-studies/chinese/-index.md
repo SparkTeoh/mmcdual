@@ -6,6 +6,10 @@ keywords: ["财务规划案例研究", "中小企业成功案例马来西亚", "
 robots: "index, follow"
 disableTagline: true
 
+# Settings of case study single page layout
+single:
+  layout: "modern" # "modern" | "modern-sidebar"
+
 # Override "Portfolio Section" data located in Portfolio list page
 indexPortfolioSection:
   enable: true # Control the visibility of this section across all pages where it is used
@@ -31,10 +35,10 @@ indexPortfolioSection:
   # Check src/types/index.d.ts `ContentList` type
   body:
     content: "portfolio"
-    layout: "masonry"
-    # columns: 3
+    layout: "grid"
+    columns: 3
     # limit: false
     # gap: "gap-6"
     card:
-      layout: "overlay" # "classic" | "overlay"
+      layout: "classic" # "classic" | "overlay"
 ---
