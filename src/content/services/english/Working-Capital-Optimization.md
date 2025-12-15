@@ -2,7 +2,7 @@
 title: "Working Capital Optimization"
 description: "Profit is opinion, cash is fact. We analyze your cash conversion cycle and implement strategies to unlock trapped capital, improve liquidity, and fuel expansion without unnecessary debt."
 
-image: "/images/services/4.jpg"
+image: "/images/services/service4.webp"
 icon: "Banknote" # Changed icon to reflect Money/Cash
 
 # Short intro about this service

@@ -2,7 +2,7 @@
 title: "常年财务战略顾问"
 description: "做您企业背后的「外部CFO」。通过月度经营分析会，我们持续监控财务健康度，进行预算差异分析和压力测试。我们不只提供报表，更提供洞察，助您根据市场波动及时校准经营策略，为企业长期盈利保驾护航。"
 
-image: "/images/services/6.jpg"
+image: "/images/services/service6.webp"
 icon: "BriefcaseBusiness" # Changed icon to reflect Professional/Advisory
 
 # Short intro about this service

@@ -18,10 +18,10 @@ gallery:
   enable: true
   list:
     - type: "image"
-      src: "/images/career/1.jpg"
+      src: "/images/career/1.webp"
       alt: "about us"
     - type: "image"
-      src: "/images/career/2.jpg"
+      src: "/images/career/2.webp"
       alt: "about us"
     - type: "stats"
       list:

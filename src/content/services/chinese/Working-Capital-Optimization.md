@@ -2,7 +2,7 @@
 title: "营运资金与现金流优化"
 description: "利润是账面数字，现金才是生存之本。我们深入诊断您的现金周转周期，制定策略激活沉淀在库存和应收账款中的资金。在不增加负债的前提下，提升企业流动性，为业务扩张提供充足的自有资金弹药。"
 
-image: "/images/services/4.jpg"
+image: "/images/services/service4.webp"
 icon: "Banknote" # Changed icon to reflect Money/Cash
 
 # Short intro about this service

@@ -2,7 +2,7 @@
 title: "Corporate Financial Advisory"
 description: "Your external CFO partner. We provide ongoing monthly or quarterly reviews to monitor financial health, stress-test your budget, and adjust strategies in response to market changes."
 
-image: "/images/services/6.jpg"
+image: "/images/services/service6.webp"
 icon: "BriefcaseBusiness" # Changed icon to reflect Professional/Advisory
 
 # Short intro about this service

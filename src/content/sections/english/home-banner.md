@@ -12,7 +12,7 @@ mainBlock:
     - title: "Turn Your Business Into A Predictable Profit Machine."
       description: |
         Stop guessing your numbers. Master the system of Strategic Budgeting and Performance Management to double your profits and regain control of your cash flow.
-      backgroundImage: "/images/banner/1.jpg"
+      backgroundImage: "/images/banner/1.webp"
       button:
         enable: true
         label: "Start Scaling Now ↗"
@@ -24,7 +24,7 @@ mainBlock:
         hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
     - title: "Is Your Team Built For Growth Or Just Busy Being Busy?"
       description: "Chaos kills expansion. We help you restructure your organization, align every KPI with financial goals, and transform your workforce into a unified execution engine."
-      backgroundImage: "/images/banner/2.jpg"
+      backgroundImage: "/images/banner/2.webp"
       button:
         enable: true
         label: "Optimize My Team ↗"
@@ -37,7 +37,7 @@ mainBlock:
     - title: "Don't Just Run A Business. Build An Investable Asset."
       description: |
         Investors buy certainty. Equip your company with a crystal-clear Financial Roadmap that proves your value, attracts capital, and secures your ultimate exit strategy.
-      backgroundImage: "/images/banner/3.jpg"
+      backgroundImage: "/images/banner/3.webp"
       button:
         enable: true
         label: "Maximize Company Value ↗"

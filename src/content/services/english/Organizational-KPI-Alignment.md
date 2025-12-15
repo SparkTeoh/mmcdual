@@ -2,7 +2,7 @@
 title: "Organizational KPI Alignment"
 description: "Strategy fails without execution. We cascade your high-level financial goals into clear, actionable KPIs for every department and individual, ensuring the entire organization pulls in the same direction."
 
-image: "/images/services/2.jpg"
+image: "/images/services/service2.webp"
 icon: "Network" # Changed icon to reflect Structure/Connection
 
 # Short intro about this service

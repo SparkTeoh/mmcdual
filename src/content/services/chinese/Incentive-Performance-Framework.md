@@ -2,7 +2,7 @@
 title: "薪酬激励与绩效机制"
 description: "设计一套真正驱动结果的分配机制。从绩效奖金、销售提成到股权激励，我们助您构建极具竞争力的薪酬体系。这不仅能吸引顶尖人才，更能激发核心团队的「合伙人」思维，让员工主动为公司创造价值，实现利益共同体。"
 
-image: "/images/services/3.jpg"
+image: "/images/services/service3.webp"
 icon: "Trophy" # Changed icon to reflect Rewards/Success
 
 # Short intro about this service

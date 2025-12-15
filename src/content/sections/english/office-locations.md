@@ -16,8 +16,8 @@ button:
 list:
   - enable: true # if this false then only background image will show
     title: "Headquarters"
-    image: "/images/office/1.jpg"
-    backgroundImage: "/images/office/1.jpg"
+    image: "/images/office/1.webp"
+    backgroundImage: "/images/office/TRX_background.webp"
     content: |
       59.20, Exchange 106,
       
@@ -29,7 +29,7 @@ list:
   - enable: false # if this false then only background image will show
     title: "Headquarters"
     image: ""
-    backgroundImage: "/images/office/2.jpg"
+    backgroundImage: "/lobby_area.webp"
     content: |
       123 Lowe Street,
 
@@ -44,7 +44,7 @@ list:
   - enable: false # if this false then only background image will show
     title: "Headquarters"
     image: ""
-    backgroundImage: "/images/office/3.jpg"
+    backgroundImage: "/images/office/mrt-link-entrance.webp"
     content: |
       123 Lowe Street,
 

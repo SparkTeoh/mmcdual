@@ -2,7 +2,7 @@
 title: "Valuation & Exit Planning"
 description: "Building a business to sell requires a different mindset. We guide you through the process of maximizing enterprise value, preparing for due diligence, and structuring your company for a lucrative exit or IPO."
 
-image: "/images/services/5.jpg"
+image: "/images/services/service5.webp"
 icon: "Handshake" # Changed icon to reflect Deal/Agreement
 
 # Short intro about this service

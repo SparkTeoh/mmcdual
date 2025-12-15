@@ -2,7 +2,7 @@
 title: "Incentive & Performance Framework"
 description: "Design compensation structures that drive results. From performance-based bonuses to equity sharing models, we help you build a reward system that attracts top talent and motivates them to think like owners."
 
-image: "/images/services/3.jpg"
+image: "/images/services/service3.webp"
 icon: "Trophy" # Changed icon to reflect Rewards/Success
 
 # Short intro about this service

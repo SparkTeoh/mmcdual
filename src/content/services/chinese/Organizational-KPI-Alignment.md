@@ -2,7 +2,7 @@
 title: "组织目标与KPI解码"
 description: "一流的战略需要一流的执行。我们将宏大的财务目标层层拆解，转化为部门与个人的关键绩效指标（KPI）。通过科学的目标管理，消除部门内耗，确保从CEO到基层员工上下同欲，力出一孔，共同为利润目标而战。"
 
-image: "/images/services/2.jpg"
+image: "/images/services/service2.webp"
 icon: "Network" # Changed icon to reflect Structure/Teamwork
 
 # Short intro about this service

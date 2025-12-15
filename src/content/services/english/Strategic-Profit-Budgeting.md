@@ -2,7 +2,7 @@
 title: "Strategic Profit Budgeting"
 description: "Move beyond basic accounting. We build a forward-looking financial model that aligns revenue targets, cost structures, and cash flow forecasts with your long-term corporate strategy."
 
-image: "/images/services/1.jpg"
+image: "/images/services/service1.webp"
 imageAlt: "Strategic Profit Budgeting - MMC Financial Planning forward-looking financial model for revenue targets and cash flow forecasting"
 icon: "ChartNoAxesCombined" 
 

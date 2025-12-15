@@ -2,7 +2,7 @@
 title: "企业估值与退出规划"
 description: "以「终局思维」经营企业。无论您是为了融资、并购(M&A) 还是IPO上市，我们全程辅导您进行企业价值管理。从合规化整改到尽职调查准备，助您最大化公司估值，实现资本价值的最终变现。"
 
-image: "/images/services/5.jpg"
+image: "/images/services/service5.webp"
 icon: "Handshake" # Changed icon to reflect Deal/Agreement
 
 # Short intro about this service

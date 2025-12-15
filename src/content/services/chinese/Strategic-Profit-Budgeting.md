@@ -2,7 +2,7 @@
 title: "战略利润预算体系"
 description: "别让未来的利润听天由命。我们助您跳出传统会计的「后视镜」思维，构建一套具有前瞻性的战略财务模型。通过科学预测收入目标、优化成本结构并规划现金流，我们将财务数据转化为企业增长的导航仪，确保每一个战略决策都有据可依。"
 
-image: "/images/services/1.jpg"
+image: "/images/services/service1.webp"
 imageAlt: "战略利润预算体系 - MMC 財務規劃前瞻性財務模型，科學預測收入目標與現金流"
 icon: "ChartNoAxesCombined" # Changed icon to reflect Finance/Growth
 
