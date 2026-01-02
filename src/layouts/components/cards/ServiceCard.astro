@@ -18,7 +18,7 @@ const { content, class: className, ...rest } = Astro.props;
 const t = await useTranslations(Astro.currentLocale as string);
 const { image, imageAlt, icon, title, description } = content.data;
 
-let slug = getLocaleUrlCTM(content.id, Astro.currentLocale, content.collection);
+let slug = getLocaleUrlCTM(content.id.toLowerCase(), Astro.currentLocale, content.collection);
 ---
 
 <div class:list={["bg-white", className]} {...rest}>

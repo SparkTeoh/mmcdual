@@ -1,0 +1,49 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CustomButton from "../CustomButton.astro";
+
+let { title, description, categories } = (
+  await getEntryCTM("sections", "training-courses", Astro.currentLocale)
+)?.data;
+---
+
+<section class="section bg-theme-light dark:bg-darkmode-theme-light" id="courses">
+  <div class="container">
+    <div class="mb-12 text-center lg:mb-16">
+      <h2 class="mb-4 text-h2" set:html={markdownify(title)} />
+      <p class="text-lg opacity-80" set:html={markdownify(description)} />
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-3">
+      {categories.map((category: any) => (
+        <div class="flex flex-col rounded-2xl bg-white p-8 shadow-sm border border-border/50 transition duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-darkmode-body dark:border-darkmode-border">
+          <div class="mb-6">
+            <h3 class="mb-2 text-2xl font-bold text-primary" set:html={markdownify(category.title)} />
+            <p class="text-sm font-medium uppercase tracking-wide text-secondary" set:html={markdownify(category.tagline)} />
+          </div>
+          
+          <p class="mb-8 opacity-80" set:html={markdownify(category.description)} />
+          
+          <div class="mb-8 grow">
+            <h4 class="mb-4 text-sm font-bold uppercase tracking-wider opacity-60">Key Courses:</h4>
+            <ul class="space-y-3">
+              {category.keyCourses.map((course: string) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1.5 block h-1.5 w-1.5 flex-none rounded-full bg-primary" />
+                  <span class="text-sm opacity-90">{course}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {category.button.enable && (
+            <div class="mt-auto">
+              <CustomButton {...category.button} class="w-full justify-center" />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

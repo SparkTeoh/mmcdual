@@ -1,0 +1,25 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import CustomButton from "../CustomButton.astro";
+
+let { title, description, button } = (
+  await getEntryCTM("sections", "training-corporate", Astro.currentLocale)
+)?.data;
+---
+
+<section class="section py-0">
+  <div class="container">
+    <div class="relative overflow-hidden rounded-2xl bg-primary px-8 py-16 text-center text-white md:px-16 lg:py-24">
+      <div class="relative z-10 max-w-3xl mx-auto">
+        <h2 class="mb-6 text-white" set:html={markdownify(title)} />
+        <p class="mb-8 text-lg opacity-90" set:html={markdownify(description)} />
+        {button.enable && <CustomButton {...button} variant="outline-white" />}
+      </div>
+      
+      <!-- Background Pattern -->
+      <div class="absolute right-0 top-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-white/5 blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 -mb-16 -ml-16 h-64 w-64 rounded-full bg-white/5 blur-3xl"></div>
+    </div>
+  </div>
+</section>

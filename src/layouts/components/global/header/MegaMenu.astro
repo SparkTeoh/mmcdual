@@ -131,7 +131,7 @@ const hasEnableMenu = menu.menus?.filter((menu) => menu.enable) || [];
                       <a
                         class="absolute inset-0 z-10 h-full w-full opacity-0"
                         href={getLocaleUrlCTM(
-                          service.id,
+                          (service.data?.customSlug || service.id).toLowerCase(),
                           Astro.currentLocale,
                           service.collection,
                         )}

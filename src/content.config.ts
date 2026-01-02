@@ -285,5 +285,6 @@ export const collections = {
   homepage: defineCollection({}),
   author: defineCollection({}),
   career: defineCollection({}),
+  training: defineCollection({}),
   widgets: defineCollection({}),
 };

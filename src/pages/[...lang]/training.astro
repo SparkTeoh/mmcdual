@@ -1,0 +1,117 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import handleDraftPage from "@/lib/utils/handleDraftPage";
+import PageHeader from "@/components/widgets/PageHeader.astro";
+import CallToAction from "@/components/sections/CallToAction.astro";
+import { generatePaths } from "@/lib/utils/i18nUtils.ts";
+
+import TrainingIntro from "@/components/sections/TrainingIntro.astro";
+import CourseCategories from "@/components/sections/CourseCategories.astro";
+import WhyMMC from "@/components/sections/WhyMMC.astro";
+import CorporateTraining from "@/components/sections/CorporateTraining.astro";
+
+export function getStaticPaths() {
+  return generatePaths();
+}
+
+const entry = await getEntryCTM("training", "-index", Astro.currentLocale);
+
+// Remove drafts pages in production
+const response = handleDraftPage(entry?.data);
+if (response) return response;
+
+// Construct Hero content from frontmatter for PageHeader
+// We want to use detailed hero content if available, but PageHeader expects title
+// We might need to customize PageHeader or use a custom Hero section if PageHeader is too simple.
+// Looking at PageHeader source, it takes title, description (via ...entry.data?)
+// Let's check PageHeader logic.
+// PageHeader props: title, hiddenPaths, paddingBottom.
+// It seems PageHeader just displays title and breadcrumbs.
+// The user request has a "Hero Section" with Headline, Subheadline, Buttons.
+// Existing PageHeader might be too simple.
+// However, the "Team" page uses PageHeader.
+// Let's look at Team page again.
+// Team page content has title: "Our Team".
+// Training page content has hero: { title, subtitle, buttons ... }
+// I should probably use a custom Hero section or the HomeBanner if it fits, or build a simplified hero in the page.
+// But wait, existing pages often use PageHeader.
+// Let's stick to PageHeader for consistency for "Title" but maybe I need a Hero component?
+// Actually, looking at Home page, it likely uses HomeBanner.
+// The user content is "Hero Section".
+// Let's try to use PageHeader for the main title, and then maybe a custom section for the "Hero" details if PageHeader is insufficient.
+// OR, I can create a `TrainingHero` if needed.
+// But for now, let's see if I can pass data to PageHeader or just use it as is?
+// PageHeader only takes title.
+// The user design says "Hero Section ... Headline ... Subheadline".
+// I'll create a `TrainingHero` section inside the page or as a component if it's complex.
+// Actually, I can just put the hero content in `TrainingIntro` or make a `TrainingHero.astro`?
+// Let's make the page structure like this:
+// Base
+//   PageHeader (Title: Training)
+//   Attributes of Hero (Headline, Subheadline) - Wait, where do these go?
+//   Maybe I should adapt `PageHeader` or use `HomeBanner`.
+//   Let's check `HomeBanner.astro`.
+//
+//   Checking `src/layouts/components/sections/HomeBanner.astro`...
+//   If it's generic enough, I can reuse it.
+//   If not, I might just hardcode the hero in the page or make `Hero.astro`.
+//   
+//   Let's modify `TrainingIntro` to include the Hero part? Or just inline it in the page?
+//   The user wants "Hero Section" -> "Intro" -> "Methodology".
+//   
+//   I will create a simple Hero section in the page setup or a dedicated component.
+//   Let's check `HomeBanner` first.
+---
+
+<Base
+  {...entry?.data}
+  structuredData={{
+    pageType: "WebPage",
+  }}>
+  <PageHeader {...entry?.data} />
+  
+  <!-- Custom Hero Section if PageHeader is not enough, or assume PageHeader covers it? -->
+  <!-- PageHeader is usually just "About Us" / "Team". -->
+  <!-- The Training page request has a specific Hero "Empower Your Leadership..." -->
+  <!-- I will add a Hero section right after PageHeader, or replace PageHeader if I want full control. -->
+  <!-- Team page has PageHeader. content/team/-index.md has title "Our Team". -->
+  <!-- content/training/-index.md has title "Training" but hero.title "Empower...". -->
+  
+  <section class="section pt-12 pb-6">
+    <div class="container text-center">
+        <h1 class="text-h1 mb-6" set:html={entry?.data.hero.title} />
+        <p class="text-lg opacity-80 mb-8 max-w-3xl mx-auto" set:html={entry?.data.hero.subtitle} />
+        <div class="flex flex-wrap justify-center gap-4">
+             {entry?.data.hero.button.enable && (
+                 <a href={entry?.data.hero.button.url} class="btn btn-primary">{entry?.data.hero.button.label}</a>
+             )}
+             {entry?.data.hero.secondaryButton.enable && (
+                 <a href={entry?.data.hero.secondaryButton.url} class="btn btn-outline-primary">{entry?.data.hero.secondaryButton.label}</a>
+             )}
+        </div>
+    </div>
+  </section>
+
+  <TrainingIntro />
+  <CourseCategories />
+  <WhyMMC />
+  <CorporateTraining />
+  
+  <!-- Custom CTA based on content -->
+  <!-- CallToAction component typically reads from `config` or `call-to-action` entry. -->
+  <!-- Content provides specific CTA "Your Next Level...". -->
+  <!-- I can pass props to CallToAction if it supports it, or create a custom one. -->
+  <!-- Checking CallToAction.astro... implies it reads from `sections/call-to-action`. -->
+  <!-- If I want a custom one, I can pass it or just use the CorporateTraining one which already has a CTA? -->
+  <!-- The content for CorporateTraining has a `cta` field. -->
+  <!-- I'll use that within CorporateTraining or as a separate block. -->
+  <!-- Let's check `CorporateTraining.astro` again. I defined `cta` in frontmatter but didn't use it in code. -->
+  <!-- I should update CorporateTraining to use it OR pass it to CallToAction. -->
+  
+  <CallToAction 
+     title={entry?.data.cta?.title}
+     description={entry?.data.cta?.subtitle}
+     button={entry?.data.cta?.button}
+  />
+</Base>

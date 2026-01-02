@@ -1,0 +1,32 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+let { title, points } = (
+  await getEntryCTM("sections", "training-why", Astro.currentLocale)
+)?.data;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="mb-12 text-center lg:mb-16">
+      <h2 class="text-h2" set:html={markdownify(title)} />
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      {points.map((point: any) => (
+        <div class="text-center">
+          <div class="mb-6 flex justify-center">
+             <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+             </div>
+          </div>
+          <h3 class="mb-4 text-xl font-bold" set:html={markdownify(point.title)} />
+          <p class="opacity-80" set:html={markdownify(point.description)} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

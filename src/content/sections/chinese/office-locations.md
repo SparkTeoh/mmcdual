@@ -16,7 +16,7 @@ button:
 list:
   - enable: true # if this false then only background image will show
     title: "Exchange 106 总部"
-    image: "/images/office/1.webp"
+    image: "/images/office/office.jpg"
     backgroundImage: "/images/office/TRX_background.webp"
     content: |
       59.20, Exchange 106,
@@ -29,7 +29,7 @@ list:
   - enable: false # if this false then only background image will show
     title: "区域办公室"
     image: ""
-    backgroundImage: "/images/office/lobby_area.webp"
+    backgroundImage: "/images/office/lobby_area.jpg"
     content: |
       123 Lowe Street,
 
@@ -44,7 +44,7 @@ list:
   - enable: false # if this false then only background image will show
     title: "创新实验室"
     image: ""
-    backgroundImage: "/images/office/mrt-link-entrance.webp"
+    backgroundImage: "/images/office/mrt-link-entrance.jpg"
     content: |
       123 Lowe Street,
 
