@@ -1,7 +1,7 @@
 ---
-title: "Trusted Licensed Financial Planning Firm In Malaysia"
-metaTitle: "MMC Financial Planning | Licensed Financial Planning firm in Malaysia"
-metaDescription: "Struggling with profit growth? MMC FP is a licensed and regulated financial planning service provider in Malaysia, authorized by the Securities Commission Malaysia (SC) helping 500+ Malaysian Corporate & SMEs achieve 30%+ profit growth through strategic budgeting and corporate financial advisory. Get expert guidance."
+title: "Strategic Corporate Advisory Malaysia | MMC Financial (SC Licensed)"
+metaTitle: "Strategic Corporate Advisory Malaysia | MMC Financial (SC Licensed)"
+metaDescription: "We are a licensed Corporate Financial Planning firm in Malaysia. We help established corporates optimize profit, align organizational KPIs, and prepare financial roadmaps for capital market."
 keywords: ["Strategic Budgeting", "Corporate Financial Planning", "Profit Growth Strategies", "SME Financial Advisory Malaysia", "Licensed Financial Planner Malaysia", "Securities Commission Licensed", "External CFO Services", "Cash Flow Management", "KPI Setting", "Business Valuation"]
 robots: "index, follow"
 disableTagline: true
@@ -10,8 +10,8 @@ disableTagline: true
 # Uncomment key values that you wan to override
 servicesSection:
   # enable: true # Control the visibility of this section across all services single
-  title: "Strategic Solutions to Drive Sustainable Growth"
-  # subtitle: "Our Services"
+  title: "Bridging the Gap Between Corporate Strategy and Team Execution"
+  # subtitle: "Our Service Ecosystem"
 
   creativeShape: # Background shape
     enable: true

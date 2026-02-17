@@ -13,7 +13,7 @@ const { content: statsBlock, ...rest } = Astro.props;
         <div
           class:list={[
             "flex flex-col py-7",
-            index % 2 !== 0 ? "order-2 ml-4 border-l pl-4" : "items-end",
+            index % 2 !== 0 ? "order-2 ml-4 border-l pl-4" : "items-end text-end",
           ]}>
           <AnimatedNumber
             class="has-gradients-text text-h3 md:text-h2 font-secondary relative mb-2 inline-flex place-items-stretch overflow-hidden leading-tight font-bold"

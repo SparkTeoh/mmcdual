@@ -28,8 +28,8 @@ if (!disableTagline) {
       (config.site.taglineSeparator || " - ") + config.site.tagline);
 }
 
-// Truncate title to recommended SEO length (50-60 characters)
-title = truncateTitle(title, 60);
+// Increase truncation limit to 100 to accommodate longer titles
+title = truncateTitle(title, 100);
 
 description = plainify(
   metaDescription
@@ -39,8 +39,8 @@ description = plainify(
       : config.site.description,
 );
 
-// Truncate description to recommended SEO length (150-160 characters)
-description = truncateMetaDescription(description, 160);
+// Increase truncation limit to 300 to accommodate longer descriptions
+description = truncateMetaDescription(description, 300);
 
 // Generate canonical URL using the current page's actual URL
 // Use pathname to ensure we get the correct URL format (Astro routes are case-insensitive)

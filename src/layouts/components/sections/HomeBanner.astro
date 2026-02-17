@@ -88,14 +88,23 @@ if (mainBlock.disableSlider) slides = [slides[0]];
       <div id="swiper-banner-content" class="swiper">
         <div class="swiper-wrapper relative">
           {
-            slides?.map((item) => (
+            slides?.map((item, index) => (
               <div class="swiper-slide overflow-y-visible!">
                 <div class="flex max-w-3xl flex-col items-start justify-center text-white">
                   {item.title && (
-                    <h2
-                      class="anim anim-fade-up text-h2 mb-6 text-inherit capitalize [--duration:900ms] md:text-5xl/tight"
-                      set:html={markdownify(item.title)}
-                    />
+                    <>
+                      {index === 0 ? (
+                        <h1
+                          class="anim anim-fade-up text-h2 mb-6 text-inherit capitalize [--duration:900ms] md:text-5xl/tight"
+                          set:html={markdownify(item.title)}
+                        />
+                      ) : (
+                        <h2
+                          class="anim anim-fade-up text-h2 mb-6 text-inherit capitalize [--duration:900ms] md:text-5xl/tight"
+                          set:html={markdownify(item.title)}
+                        />
+                      )}
+                    </>
                   )}
                   {item.description && (
                     <div class="anim anim-fade-up overflow-hidden [--delay:200ms] [--duration:900ms]">
@@ -209,7 +218,7 @@ if (mainBlock.disableSlider) slides = [slides[0]];
                 </svg>
               </button>
             )}
-            <p class="opacity-90" set:html={infoBlock.content} />
+            <div class="opacity-90" set:html={markdownify(infoBlock.content, true)} />
           </div>
         </div>
       )

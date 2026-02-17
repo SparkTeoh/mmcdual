@@ -36,6 +36,8 @@ let actualContent = overrideObjects(
 let {
   enable = true,
   title,
+  subtitle,
+  description,
   button,
   achievements,
   banner,
@@ -44,23 +46,43 @@ let {
 
 {
   enable && (
-    <section>
+    <section class="pb-12 md:pb-16 lg:pb-20">
       <div class="container flex flex-col justify-start gap-12 md:gap-16">
         {title && (
-          <div class="flex flex-wrap items-center justify-between gap-6 overflow-x-hidden md:flex-nowrap">
-            <h2
-              data-aos="fade-right-sm"
-              class="text-h3 max-w-xl"
-              set:html={markdownify(title)}
-            />
-            <div data-aos="fade-right-sm" data-aos-delay="200">
-              {button && (
+          <div class:list={[
+            "flex flex-wrap items-start gap-6 overflow-x-hidden",
+            button && button.enable ? "justify-between md:flex-nowrap" : "w-full"
+          ]}>
+            <div 
+              data-aos="fade-right-sm" 
+              class:list={[
+                button && button.enable ? "max-w-xl" : "w-full"
+              ]}>
+              {subtitle && (
+                <span
+                  class="bg-primary/5 border-secondary text-primary mb-2.5 inline-block rounded-full border px-5 py-px"
+                  set:html={markdownify(subtitle)}
+                />
+              )}
+              <h2 class="text-h3" set:html={markdownify(title)} />
+              {description && (
+                <div
+                  class:list={[
+                    "mt-6 prose-styles",
+                    button && button.enable ? "max-w-3xl" : "w-full"
+                  ]}
+                  set:html={markdownify(description, true)}
+                />
+              )}
+            </div>
+            {button && button.enable && (
+              <div data-aos="fade-right-sm" data-aos-delay="200">
                 <CustomButton
                   class="text-base-sm capitalize md:text-base"
                   {...button}
                 />
-              )}
-            </div>
+              </div>
+            )}
           </div>
         )}
         {achievements && achievements.enable && (

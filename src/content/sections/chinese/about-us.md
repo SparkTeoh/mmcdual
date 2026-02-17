@@ -1,6 +1,7 @@
 ---
 enable: true # 控制此区块显示
 title: "20年实战，专注帮助企业实现<br><strong style=\"color: var(--color-accent);\">收入利润双增长</strong>"
+subtitle: "为什么选择MMC"
 button:
   enable: true
   label: "了解我们的团队"

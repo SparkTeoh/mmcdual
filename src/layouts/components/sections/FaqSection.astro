@@ -38,6 +38,7 @@ let {
   enable = true,
   title,
   subtitle,
+  description,
   button,
   list,
   limit,
@@ -111,6 +112,12 @@ const faqSchema = list
                   <h2
                     class="text-h3 text-inherit"
                     set:html={markdownify(title)}
+                  />
+                )}
+                {description && (
+                  <div
+                    class="mt-6 prose-styles"
+                    set:html={markdownify(description, true)}
                   />
                 )}
               </div>

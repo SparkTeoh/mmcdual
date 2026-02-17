@@ -1,7 +1,7 @@
 ---
 enable: true # Control the visibility of this section across all pages where it is used
-title: "What News Do We Have Today Latest Blog"
-subtitle: "Blog"
+title: "Strategies for Profitability, Performance, and Valuation"
+subtitle: "Market Insights"
 bgPatternImage: "/images/line-pattern.svg"
 
 button:

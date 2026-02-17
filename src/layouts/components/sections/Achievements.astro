@@ -1,11 +1,15 @@
 ---
 import Icons from "@/helpers/Icons.astro";
 import CustomButton from "../CustomButton.astro";
+import Marquee from "@/components/widgets/Marquee.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import type { FeatureList, Section, StatsBlock } from "@/types";
 import CreativeStatsBlock from "@/layouts/components/widgets/CreativeStatsBlock.astro";
+import type { TypeOf } from "astro:schema";
+import type { marqueeConfig } from "@/content.config";
 
 // Type for this section data
 type sectionType = Section & {
@@ -13,6 +17,8 @@ type sectionType = Section & {
   ctaShapeTwo?: string;
   statsBlock: StatsBlock;
   featureList: FeatureList[];
+  marquee?: TypeOf<typeof marqueeConfig>;
+  list?: Array<string | { src: string; size: "large" | "small" }>;
 };
 type Props = {
   content?: sectionType;
@@ -41,12 +47,18 @@ let {
   button,
   statsBlock,
   featureList,
+  list,
+  limit,
+  marquee,
 } = actualContent as sectionType;
+
+// Limit the number of items to be displayed
+list = limit && list ? list.slice(0, limit as number) : list;
 ---
 
 {
   enable && (
-    <section>
+    <section class="overflow-hidden">
       <div class="bg-theme-light relative py-12 md:py-20">
         <div class="container grid gap-x-10 gap-y-10 overflow-hidden md:gap-y-20 lg:grid-cols-2 lg:place-items-center">
           <div class="lg:max-w-2xl">
@@ -93,7 +105,7 @@ let {
                         <h3 class="text-h5 mb-px" set:html={item.title} />
                       )}
                       {item.description && (
-                        <p class="text-sm">{item.description}</p>
+                        <div class="prose-styles text-sm" set:html={markdownify(item.description, true)} />
                       )}
                     </div>
                   </div>
@@ -105,6 +117,56 @@ let {
           <CreativeStatsBlock content={statsBlock} data-aos="fade-left-sm" />
         </div>
       </div>
+      {list && marquee && (
+        <div
+          class="relative mt-16 flex justify-center overflow-x-hidden md:mt-32"
+          data-aos="fade-up-sm"
+          data-aos-delay="300">
+          <Marquee marqueeElements={list.length} {...marquee}>
+            {list.map((item, index) => {
+              const imageItem = typeof item === "string" ? { src: item, size: index % 2 === 0 ? "large" : "small" } : item;
+              const isLarge = imageItem.size === "large";
+              return (
+                <div
+                  class:list={[
+                    "flex-shrink-0 px-4",
+                    isLarge ? "w-64 lg:w-80" : "w-64 lg:w-64",
+                  ]}>
+                  <OptimizedImage
+                    class:list={[
+                      "w-full object-cover",
+                      isLarge ? "h-80 lg:h-96" : "h-64 lg:h-64",
+                    ]}
+                    src={imageItem.src}
+                    alt="MMC Financial Planning team meeting for strategic budgeting consultation"
+                  />
+                </div>
+              );
+            })}
+            {list.map((item, index) => {
+              const imageItem = typeof item === "string" ? { src: item, size: index % 2 === 0 ? "large" : "small" } : item;
+              const isLarge = imageItem.size === "large";
+              return (
+                <div
+                  class:list={[
+                    "flex-shrink-0 px-4",
+                    isLarge ? "w-64 lg:w-80" : "w-64 lg:w-64",
+                  ]}
+                  aria-hidden="true">
+                  <OptimizedImage
+                    class:list={[
+                      "w-full object-cover",
+                      isLarge ? "h-80 lg:h-96" : "h-64 lg:h-64",
+                    ]}
+                    src={imageItem.src}
+                    alt="MMC Financial Planning team meeting for strategic budgeting consultation"
+                  />
+                </div>
+              );
+            })}
+          </Marquee>
+        </div>
+      )}
     </section>
   )
 }

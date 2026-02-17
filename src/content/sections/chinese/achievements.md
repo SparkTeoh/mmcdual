@@ -47,4 +47,26 @@ statsBlock:
       appendValue: "%+"
       title: "平均利润增长"
       description: "这是我们的客户在导入系统后，所实现的经过验证的平均利润增长。"
+
+marquee:
+  marqueeElementWidth: "25rem"
+  marqueeElementWidthResponsive: "18.75rem"
+  marqueeElementWidthAuto: false
+  marqueePauseOnHover: false
+  marqueeReverse: "" # reverse / ""
+  marqueeDuration: "50s"
+
+list:
+  - src: "/images/team/jing er.webp"
+    size: "large"
+  - src: "/images/team/summer2.webp"
+    size: "small"
+  - src: "/images/team/kaelyn.webp"
+    size: "large"
+  - src: "/images/team/spark1.webp"
+    size: "small"
+  - src: "/images/team/summer.webp"
+    size: "large"
+  - src: "/images/team/zoe.webp"
+    size: "small"
 ---

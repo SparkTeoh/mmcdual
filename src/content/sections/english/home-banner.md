@@ -4,43 +4,49 @@ enable: true # Control the visibility of this section across all pages where it 
 infoBlock:
   enable: true
   content: |
-    Most strategic plans fail in execution. We bridge the gap between your financial goals and your team's daily actions, giving you clarity, control, and a clear path to your next level of growth.
+    <strong class="block text-white mb-3 text-lg">The Strategy-Execution Gap</strong>
+
+    Most corporate plans look perfect on paper but fail in the real world.
+
+    Why? Because usually, only the founder is losing sleep over cash flow.
+
+    At MMC, we fix this. We engineer a system where profit becomes everyone’s business.
 
 mainBlock:
   disableSlider: false # if this is true then slider will be disabled and only first slide from below will be shown
   slides:
-    - title: "Turn Your Business Into A Predictable Profit Machine."
+    - title: "Strategic Corporate Advisory & Financial Planning"
       description: |
-        Stop guessing your numbers. Master the system of Strategic Budgeting and Performance Management to double your profits and regain control of your cash flow.
+        Move beyond standard accounting. We help corporates maximize profit margins, align workforce KPIs, and build a roadmap for capital market success.
       backgroundImage: "/images/banner/1.webp"
       button:
         enable: true
-        label: "Start Scaling Now ↗"
-        url: "/contact"
+        label: "View Our Services ↗"
+        url: "/services"
         rel: ""
         target: ""
         showIcon: "true"
         variant: "outline-white" # "fill", "outline", "outline-white", "text"
         hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-    - title: "Is Your Team Built For Growth Or Just Busy Being Busy?"
-      description: "Chaos kills expansion. We help you restructure your organization, align every KPI with financial goals, and transform your workforce into a unified execution engine."
+    - title: "Make Profit Everyone’s Business"
+      description: "Strategic plans fail without execution. We help you restructure your organization and align every KPI with financial goals, transforming your workforce into a unified execution engine."
       backgroundImage: "/images/banner/2.webp"
       button:
         enable: true
         label: "Optimize My Team ↗"
-        url: "/contact"
+        url: "/services"
         rel: ""
         target: ""
         showIcon: "true"
         variant: "outline-white" # "fill", "outline", "outline-white", "text"
         hoverEffect: "text-flip" # "text-flip", "creative-fill", "magnetic", "magnetic-text-flip"
-    - title: "Don't Just Run A Business. Build An Investable Asset."
+    - title: "Pre-IPO Readiness & Business Valuation"
       description: |
-        Investors buy certainty. Equip your company with a crystal-clear Financial Roadmap that proves your value, attracts capital, and secures your ultimate exit strategy.
+        Don't just run a business; build a tradable asset. We provide the internal financial housekeeping and valuation strategies required before you engage Investment Bankers.
       backgroundImage: "/images/banner/3.webp"
       button:
         enable: true
-        label: "Maximize Company Value ↗"
+        label: "Plan My Exit ↗"
         url: "/contact"
         rel: ""
         target: ""

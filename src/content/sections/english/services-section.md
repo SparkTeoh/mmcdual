@@ -1,7 +1,7 @@
 ---
 enable: true
 title: "Strategic Business Solutions for Sustainable Growth"
-subtitle: "Our Services"
+subtitle: "Our Service Ecosystem"
 
 # Services data comes from "/content/services"
 # If you enable this button, the slider navigation buttons will be hidden, and this button will be displayed.

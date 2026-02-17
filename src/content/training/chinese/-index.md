@@ -1,15 +1,10 @@
 ---
-title: "企业家培训"
-description: "赋能领导力，掌握企业增长的金融引擎。"
-hero:
-  title: "赋能领导力，<br/>**掌握企业增长的金融引擎**"
-  subtitle: "告别“拍脑袋”决策，转向“数据驱动”管理。我们的高管培训课程将复杂的财务、管理和资本语言解码为雄心勃勃的 SME 企业家的实战指南。"
-  button:
-    enable: true
-    label: "探索课程"
-    url: "#courses"
-  secondaryButton:
-    enable: true
-    label: "下载课程手册"
-    url: "#"
+title: "培训"
+metaTitle: "企业财务培训课程 | HRDF回扣 - MMC"
+metaDescription: "通过MMC企业财务培训提升团队实力。我们教授财务建模与绩效管理，让利润成为每个人的使命。"
+keywords:
+  - "企业财务培训"
+  - "财务培训课程 马来西亚"
+  - "HRDF 回扣"
+description: "企业财务培训，将员工转变为利益相关者。MMC提供马来西亚首屈一指的财务培训课程，旨在为您的团队提供推动利润增长所需的财务逻辑和绩效工具。"
 ---

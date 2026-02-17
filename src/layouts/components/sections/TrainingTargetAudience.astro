@@ -1,0 +1,81 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { Section } from "@/types";
+
+// Type for each audience card
+type AudienceCard = {
+  target: string;
+  why: string;
+};
+
+// Type for this section data
+type trainingTargetAudienceSectionType = Section & {
+  headline: string;
+  subHeadline?: string;
+  audiences: AudienceCard[];
+};
+
+type Props = {
+  content?: trainingTargetAudienceSectionType;
+};
+
+// Fetching the default content for this section
+let defaultContent = (
+  await getEntryCTM("sections", "training-target-audience", Astro.currentLocale)
+)?.data as trainingTargetAudienceSectionType;
+
+// Enables content customization with a fallback to 'defaultContent' if not provided
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as trainingTargetAudienceSectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  headline,
+  subHeadline,
+  audiences = [],
+} = actualContent as trainingTargetAudienceSectionType;
+---
+
+{
+  enable && (
+    <section class="pb-16 md:pb-28">
+      <div class="container flex flex-col justify-start gap-12 md:gap-16">
+        {headline && (
+          <div data-aos="fade-right-sm">
+            {subHeadline && (
+              <span
+                class="bg-primary/5 border-secondary text-primary mb-2.5 inline-block rounded-full border px-5 py-px"
+                set:html={markdownify(subHeadline)}
+              />
+            )}
+            <h2 class="text-h3" set:html={markdownify(headline)} />
+          </div>
+        )}
+        {audiences && audiences.length > 0 && (
+          <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {audiences.map((audience: AudienceCard, index: number) => (
+              <div
+                data-aos="fade-up-sm"
+                data-aos-delay={index * 200}
+                class="to-primary/5 space-y-4 bg-linear-to-b from-white px-8 py-10">
+                {audience.target && (
+                  <h3 class="text-primary text-h4 md:text-h3 font-semibold" set:html={markdownify(audience.target)} />
+                )}
+                {audience.why && (
+                  <div class="[&_strong]:text-[var(--color-accent)]">
+                    <p set:html={markdownify(audience.why, true)} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}

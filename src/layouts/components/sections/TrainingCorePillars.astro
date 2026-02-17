@@ -1,0 +1,136 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { Section } from "@/types";
+import CustomButton from "../CustomButton.astro";
+import type { TypeOf } from "astro:schema";
+import type { sharedButtonTag } from "@/content.config";
+import Icons from "@/helpers/Icons.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+// Type for each pillar card
+type PillarCard = {
+  icon?: string;
+  title: string;
+  tagline?: string;
+  description: string;
+  image?: string;
+  button: TypeOf<typeof sharedButtonTag>;
+};
+
+// Type for this section data
+type trainingCorePillarsSectionType = Section & {
+  tagline?: string;
+  headline: string;
+  pillars: PillarCard[];
+};
+
+type Props = {
+  content?: trainingCorePillarsSectionType;
+};
+
+// Fetching the default content for this section
+let defaultContent = (
+  await getEntryCTM("sections", "training-core-pillars", Astro.currentLocale)
+)?.data as trainingCorePillarsSectionType;
+
+// Enables content customization with a fallback to 'defaultContent' if not provided
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as trainingCorePillarsSectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  tagline,
+  headline,
+  pillars = [],
+} = actualContent as trainingCorePillarsSectionType;
+---
+
+{
+  enable && (
+    <section id="core-pillars" class="overflow-hidden">
+      <div class="flex flex-col justify-start gap-12 md:gap-16 bg-theme-dark pt-16 pb-16 md:pt-28 md:pb-28">
+        <div class="container">
+          <div class="flex flex-col flex-wrap justify-between gap-8 lg:flex-row lg:items-center">
+            <div class="shrink-0 lg:max-w-2xl" data-aos="fade-up-sm">
+              {tagline && (
+                <span
+                  class="mb-2.5 inline-block rounded-full border border-white/5 bg-white/5 px-5 py-px text-white"
+                >
+                  {tagline}
+                </span>
+              )}
+              <h2
+                class="text-h3 text-white"
+                set:html={markdownify(headline)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="has-light-shape relative after:absolute after:inset-x-0 after:h-screen after:w-full after:top-68.25 after:bg-stone-50 after:md:top-72 after:z-0"
+        >
+          <div class="relative z-10 container">
+            <div class="grid gap-5 md:grid-cols-2">
+              {
+                pillars.map((pillar: PillarCard, index: number) => (
+                  <div
+                    class="bg-white box-shadow-primary flex flex-col h-full"
+                    data-aos="fade-up-sm"
+                    data-aos-delay={(index + 1) * 100}
+                  >
+                    <div class="relative">
+                      {pillar.image && (
+                        <OptimizedImage
+                          src={pillar.image}
+                          alt={pillar.title}
+                          width={416}
+                          height={288}
+                          class="h-72 w-full min-w-full object-cover"
+                        />
+                      )}
+                      {pillar.icon && (
+                        <div class="bg-primary absolute -bottom-9 left-8 flex h-20 w-20 items-center justify-center rounded-full fill-white transition duration-300">
+                          <Icons
+                            icon={pillar.icon as any}
+                            class="h-10 w-10 stroke-1 text-white transition duration-300"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div class="px-8 pt-16 pb-10 flex flex-col flex-grow">
+                      {pillar.tagline && (
+                        <p class="mb-2 text-sm font-medium uppercase tracking-wider text-primary opacity-80" set:html={markdownify(pillar.tagline)} />
+                      )}
+                      <h3
+                        class="text-h4 after:bg-primary relative mb-4 block pb-2 opacity-80 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-10 text-dark min-h-[5rem] md:min-h-[6rem]"
+                        set:html={markdownify(pillar.title)}
+                      />
+                      <p class="mb-12 text-text" set:html={markdownify(pillar.description, true)} />
+                      {pillar.button && pillar.button.enable && (
+                        <div class="mt-8">
+                          <CustomButton
+                            variant="text"
+                            label={pillar.button.label}
+                            url={pillar.button.url}
+                            class="text-base-sm capitalize md:text-base"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+

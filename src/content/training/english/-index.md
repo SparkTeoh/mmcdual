@@ -1,15 +1,10 @@
 ---
 title: "Training"
-description: "Empower Your Leadership. Master The Financial Engines of Growth."
-hero:
-  title: "Empower Your Leadership. **Master The Financial Engines of Growth.**"
-  subtitle: "Move from \"managing by gut feeling\" to \"leading with data.\" Our executive training programs decode the complex language of finance, management, and capital into actionable playbooks for ambitious SME owners."
-  button:
-    enable: true
-    label: "Explore Our Courses"
-    url: "#courses"
-  secondaryButton:
-    enable: true
-    label: "Download Course Brochure"
-    url: "#"
+metaTitle: "Corporate Finance Training Courses Malaysia | HRDF Claimable - MMC"
+metaDescription: "Upskill your team with MMC's corporate finance training programs. We teach Financial Modelling and Performance Management to make profit everyone's business."
+keywords:
+  - "Corporate Finance Training"
+  - "Finance Training Courses Malaysia"
+  - "HRDF Claimable"
+description: "Corporate Finance Training That Transforms Employees into Stakeholders. MMC offers Malaysia's premier Finance Training Courses designed to equip your team with the financial logic and performance tools needed to drive bottom-line growth."
 ---

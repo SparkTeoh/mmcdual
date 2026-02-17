@@ -1,0 +1,154 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import Icons from "@/helpers/Icons.astro";
+import CustomButton from "../CustomButton.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+const { lang } = Astro.props;
+
+const content = {
+  en: {
+    tagline: "Our Service Ecosystem",
+    headline: "Bridging the Gap Between Corporate Strategy and Team Execution",
+    viewAllText: "View All Services",
+    viewAllLink: "/services/",
+    cards: [
+      {
+        title: "Strategic Financial Planning",
+        body: "Act as your external strategic partner. We oversee your financial roadmap, stress-test annual budgets, and monitor cash flow health to ensure your corporate strategy translates into actual profit.",
+        linkText: "Explore Our Advisory",
+        url: "/advisory/",
+        icon: "BriefcaseBusiness",
+        image: "/images/services/service6.webp",
+      },
+      {
+        title: "Corporate Finance & Management Training",
+        body: "Bridge the gap between strategy and execution. We upskill your workforce with practical frameworks in financial modeling, KPI alignment, and performance management. HRDF Claimable.",
+        linkText: "Explore Our Training",
+        url: "/training/",
+        icon: "Handshake",
+        image: "/images/services/service2.webp",
+      },
+      {
+        title: "Valuation & Exit Planning",
+        body: "Building a business to sell requires a different mindset. We guide you through the process of maximizing enterprise value, preparing for due diligence, and structuring your company for a lucrative exit or IPO.",
+        linkText: "Explore Your Exit",
+        url: "/advisory/valuation-exit-planning/",
+        icon: "TrendingUp",
+        image: "/images/services/service5.webp",
+      },
+    ],
+  },
+  zh: {
+    tagline: "我们的服务生态系统",
+    headline: "弥合企业战略与团队执行之间的差距",
+    viewAllText: "查看所有服务",
+    viewAllLink: "/zh/services/",
+    cards: [
+      {
+        title: "战略财务规划",
+        body: "作为您的外部战略合作伙伴。我们监督您的财务路线图，对年度预算进行压力测试，并监控现金流健康状况，确保您的企业战略转化为实际利润。",
+        linkText: "探索咨询服务",
+        url: "/zh/advisory/",
+        icon: "BriefcaseBusiness",
+        image: "/images/services/service6.webp",
+      },
+      {
+        title: "企业财务与管理培训",
+        body: "弥合战略与执行之间的差距。我们通过财务建模、KPI 对齐和绩效管理方面的实用框架提升您员工的技能。可申请 HRDF。",
+        linkText: "查看课程目录",
+        url: "/zh/training/",
+        icon: "TrendingUp",
+        image: "/images/services/service2.webp",
+      },
+      {
+        title: "估值与退出规划",
+        body: "建立一家可出售的企业需要不同的思维方式。我们指导您完成最大化企业价值、准备尽职调查以及构建公司结构以实现利润丰厚的退出或 IPO 的过程。",
+        linkText: "规划我的退出",
+        url: "/zh/advisory/valuation-exit-planning/",
+        icon: "Handshake",
+        image: "/images/services/service5.webp",
+      },
+    ],
+  },
+};
+
+const currentContent = lang === "zh" ? content.zh : content.en;
+---
+
+<section class="overflow-hidden">
+  <div class="flex flex-col justify-start gap-12 md:gap-16 bg-theme-dark py-16 md:py-28">
+    <div class="container">
+      <div class="flex flex-col flex-wrap justify-between gap-8 lg:flex-row lg:items-center">
+        <div class="shrink-0 lg:max-w-2xl" data-aos="fade-up-sm">
+          <span
+            class="mb-2.5 inline-block rounded-full border border-white/5 bg-white/5 px-5 py-px text-white"
+          >
+            {currentContent.tagline}
+          </span>
+          <h2
+            class="text-h3 text-white"
+            set:html={markdownify(currentContent.headline)}
+          />
+        </div>
+        <div data-aos="fade-up-sm" data-aos-delay="200">
+          <CustomButton
+            label={currentContent.viewAllText}
+            url={currentContent.viewAllLink}
+            variant="outline-white"
+            showIcon="true"
+            hoverEffect="text-flip"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="has-light-shape relative after:absolute after:inset-x-0 after:h-screen after:w-full after:top-68.25 after:bg-stone-50 after:md:top-72 after:z-0"
+    >
+      <div class="relative z-10 container">
+        <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {
+            currentContent.cards.map((item, index) => (
+              <div
+                class="bg-white box-shadow-primary flex flex-col h-full"
+                data-aos="fade-up-sm"
+                data-aos-delay={(index + 1) * 100}
+              >
+                <div class="relative">
+                  <OptimizedImage
+                    src={item.image}
+                    alt={item.title}
+                    width={416}
+                    height={288}
+                    class="h-72 w-full min-w-full object-cover"
+                  />
+                  <div class="bg-primary absolute -bottom-9 left-8 flex h-20 w-20 items-center justify-center rounded-full fill-white transition duration-300">
+                    <Icons
+                      icon={item.icon}
+                      class="h-10 w-10 stroke-1 text-white transition duration-300"
+                    />
+                  </div>
+                </div>
+                <div class="px-8 pt-16 pb-10 flex flex-col flex-grow">
+
+                  <h3
+                    class="text-h4 after:bg-primary relative mb-4 block pb-2 opacity-80 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-10 text-dark min-h-[5rem] md:min-h-[6rem] lg:min-h-[7rem]"
+                    set:html={item.title}
+                  />
+                  <p class="mb-8 text-text" set:html={item.body} />
+                  <CustomButton
+                    variant="text"
+                    label={item.linkText}
+                    url={item.url}
+                    class="text-base-sm capitalize md:text-base mt-auto"
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

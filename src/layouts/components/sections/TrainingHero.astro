@@ -1,0 +1,136 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { Section } from "@/types";
+import Icons from "@/helpers/Icons.astro";
+
+// Type for each content block
+type ContentBlock = {
+  icon?: string;
+  title: string;
+  description: string;
+};
+
+// Type for the right side content
+type RightContent = {
+  problem: ContentBlock;
+  solution: ContentBlock;
+};
+
+// Type for this section data
+type trainingHeroSectionType = Section & {
+  tagline?: string;
+  headline: string;
+  subHeadline: string;
+  rightContent: RightContent;
+};
+
+type Props = {
+  content?: trainingHeroSectionType;
+};
+
+// Fetching the default content for this section
+let defaultContent = (
+  await getEntryCTM("sections", "training-hero", Astro.currentLocale)
+)?.data as trainingHeroSectionType;
+
+// Enables content customization with a fallback to 'defaultContent' if not provided
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as trainingHeroSectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  tagline,
+  headline,
+  subHeadline,
+  rightContent,
+} = actualContent as trainingHeroSectionType;
+---
+
+{
+  enable && (
+    <section class="section pt-16 md:pt-24 lg:pt-32 pb-8 md:pb-12">
+      <div class="container">
+        <div class="grid gap-12 items-start lg:grid-cols-2 lg:gap-16">
+          {/* Left Side: Hero Content */}
+          <div data-aos="fade-right-sm">
+            {tagline && (
+              <div class="mb-6 inline-flex w-fit">
+                <span
+                  class="bg-primary/5 border-secondary text-primary inline-block rounded-full border px-5 py-px"
+                  set:html={markdownify(tagline)}
+                />
+              </div>
+            )}
+            {headline && (
+              <h1
+                class="mb-6 text-h3"
+                set:html={markdownify(headline, true)}
+              />
+            )}
+            {subHeadline && (
+              <p
+                class="text-lg opacity-80 md:text-xl"
+                set:html={markdownify(subHeadline, true)}
+              />
+            )}
+          </div>
+
+          {/* Right Side: Problem & Solution Content */}
+          {rightContent && (
+            <div data-aos="fade-left-sm" data-aos-delay="200" class="space-y-8">
+              {/* Problem Block */}
+              {rightContent.problem && (
+                <div class="flex items-center justify-start gap-x-6 py-1.5">
+                  {rightContent.problem.icon && (
+                    <div class="group-hover/item:bg-primary bg-primary/5 flex h-14 w-14 shrink-0 items-center justify-center rounded-lg transition duration-300">
+                      <Icons
+                        icon={rightContent.problem.icon as any}
+                        class="text-primary h-7 w-7 transition"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    {rightContent.problem.title && (
+                      <h3 class="text-h5 mb-px" set:html={markdownify(rightContent.problem.title)} />
+                    )}
+                    {rightContent.problem.description && (
+                      <div class="prose-styles text-sm" set:html={markdownify(rightContent.problem.description, true)} />
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Solution Block */}
+              {rightContent.solution && (
+                <div class="flex items-center justify-start gap-x-6 py-1.5">
+                  {rightContent.solution.icon && (
+                    <div class="group-hover/item:bg-primary bg-primary/5 flex h-14 w-14 shrink-0 items-center justify-center rounded-lg transition duration-300">
+                      <Icons
+                        icon={rightContent.solution.icon as any}
+                        class="text-primary h-7 w-7 transition"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    {rightContent.solution.title && (
+                      <h3 class="text-h5 mb-px" set:html={markdownify(rightContent.solution.title)} />
+                    )}
+                    {rightContent.solution.description && (
+                      <div class="prose-styles text-sm" set:html={markdownify(rightContent.solution.description, true)} />
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+

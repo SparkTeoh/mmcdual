@@ -13,13 +13,5 @@ image:
   alt: "MMC Financial Securities Commission Malaysia Registration Certificate"
   caption: "Securities Commission Malaysia Public Register - MMC FP Sdn Bhd Registration Details"
 
-featureList:
-  # For icon names, see [Lucide Icons](https://lucide.dev/icons/?search=) (remember to capitalize the icon name)
-  - icon: "BadgeCheck"
-    title: "Licensed & Compliant"
-    description: "Operating under the Capital Markets Services Licence issued by the SC, ensuring absolute compliance and integrity in every financial strategy we deliver."
-  - icon: "TrendingUp"
-    title: "18+ Years of Expertise"
-    description: "Since obtaining our license in 2008, we have cultivated over 18 years of specialized experience, successfully serving 500+ enterprises with compliant financial solutions."
 ---
 
