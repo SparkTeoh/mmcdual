@@ -4,7 +4,7 @@ import { getEntryCTM } from "@/lib/contentParser.astro";
 import handleDraftPage from "@/lib/utils/handleDraftPage";
 import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 
-import TrainingHero from "@/components/sections/TrainingHero.astro";
+import PerformanceManagementHero from "@/components/sections/PerformanceManagementHero.astro";
 import TrainingCorePillars from "@/components/sections/TrainingCorePillars.astro";
 import TrainingMethodology from "@/components/sections/TrainingMethodology.astro";
 import TrainingTargetAudience from "@/components/sections/TrainingTargetAudience.astro";
@@ -34,7 +34,7 @@ const heroContent = await getEntryCTM(
   structuredData={{
     pageType: "WebPage",
   }}>
-  <TrainingHero content={heroContent?.data} />
+  <PerformanceManagementHero content={heroContent?.data} />
   <TrainingCorePillars />
   <TrainingMethodology />
   <TrainingTargetAudience />

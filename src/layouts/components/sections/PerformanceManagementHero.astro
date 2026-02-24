@@ -1,0 +1,99 @@
+---
+import { getEntryCTM } from "@/lib/contentParser.astro";
+import overrideObjects from "@/lib/utils/overrideObjects.ts";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { Section } from "@/types";
+import CustomButton from "../CustomButton.astro";
+import type { TypeOf } from "astro:schema";
+import type { sharedButtonTag } from "@/content.config";
+
+// Type for this section data
+type performanceManagementHeroSectionType = Section & {
+  tagline?: string;
+  headline: string;
+  subHeadline: string;
+  primaryCta?: TypeOf<typeof sharedButtonTag>;
+  secondaryCta?: TypeOf<typeof sharedButtonTag>;
+};
+
+type Props = {
+  content?: performanceManagementHeroSectionType;
+};
+
+// Fetching the default content for this section
+let defaultContent = (
+  await getEntryCTM("sections", "training-performance-management-hero", Astro.currentLocale)
+)?.data as performanceManagementHeroSectionType;
+
+// Enables content customization with a fallback to 'defaultContent' if not provided
+let actualContent = overrideObjects(
+  { ...defaultContent },
+  Astro.props.content,
+) as performanceManagementHeroSectionType;
+
+// Extracting required values from 'content' object
+let {
+  enable = true,
+  tagline,
+  headline,
+  subHeadline,
+  primaryCta,
+  secondaryCta,
+} = actualContent as performanceManagementHeroSectionType;
+---
+
+{
+  enable && (
+    <section class="section pt-16 md:pt-24 lg:pt-32 pb-8 md:pb-12">
+      <div class="container">
+        <div class="max-w-3xl">
+          {/* Tagline */}
+          {tagline && (
+            <div class="mb-6 inline-flex w-fit" data-aos="fade-up-sm">
+              <span
+                class="bg-primary/5 border-secondary text-primary inline-block rounded-full border px-5 py-px uppercase text-sm font-medium"
+                set:html={markdownify(tagline)}
+              />
+            </div>
+          )}
+          
+          {/* Headline */}
+          {headline && (
+            <h1
+              class="mb-6 text-h3"
+              data-aos="fade-up-sm"
+              data-aos-delay="100"
+              set:html={markdownify(headline, true)}
+            />
+          )}
+          
+          {/* Sub-headline */}
+          {subHeadline && (
+            <p
+              class="text-lg opacity-80 md:text-xl mb-14 md:mb-16"
+              data-aos="fade-up-sm"
+              data-aos-delay="200"
+              set:html={markdownify(subHeadline, true)}
+            />
+          )}
+          
+          {/* CTA Buttons */}
+          {(primaryCta || secondaryCta) && (
+            <div 
+              class="flex flex-col sm:flex-row gap-5"
+              data-aos="fade-up-sm"
+              data-aos-delay="300"
+            >
+              {primaryCta && primaryCta.enable && (
+                <CustomButton size="md" {...primaryCta} />
+              )}
+              {secondaryCta && secondaryCta.enable && (
+                <CustomButton size="md" {...secondaryCta} />
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

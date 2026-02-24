@@ -1,0 +1,279 @@
+---
+import Base from "@/layouts/Base.astro";
+import { generatePaths } from "@/lib/utils/i18nUtils.ts";
+
+export function getStaticPaths() {
+  return generatePaths();
+}
+---
+
+<Base>
+  <!-- Hero Section -->
+  <section class="bg-primary text-white py-20 lg:py-32 relative overflow-hidden">
+    <div class="container relative z-10 text-center max-w-4xl mx-auto">
+      <div class="inline-block bg-accent text-dark px-4 py-1 rounded-full text-sm font-semibold mb-6">
+        🚀 别让全公司都在“瞎忙”！
+      </div>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-accent">
+        OGSM + KFI <br class="hidden md:block"/> 利润突围实战工作坊
+      </h1>
+      <p class="text-xl md:text-2xl opacity-90 mb-10 text-secondary">
+        “为什么员工 KPI 全部满分，公司却没赚到钱？”<br/>
+        底层忙忙碌碌，高层焦虑利润？是时候重塑你的 OGSM 了
+      </p>
+      <a href="#registration-form" class="inline-block bg-accent hover:bg-white text-dark font-bold text-lg px-8 py-4 rounded-full transition duration-300 shadow-xl">
+        🎯 立即抢占席位
+      </a>
+    </div>
+  </section>
+
+  <!-- Section 1: The Pain -->
+  <section class="py-20 bg-theme-light">
+    <div class="container max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">👋 只有老板心里最清楚的“无力感”</h2>
+      </div>
+      <div class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-border-light text-lg space-y-6 text-light">
+        <p>如果你在复盘公司经营时，经常有这种感觉：</p>
+        <ul class="list-disc pl-6 space-y-4">
+          <li><strong>明明大家都在加班</strong>，为什么月底看报表，利润少得可怜？</li>
+          <li><strong>明明战略定得很完美</strong>，传到底下就变成了机械的“交作业”？</li>
+        </ul>
+        <p class="text-dark font-semibold text-xl pt-4 border-t border-border-light">
+          这不怪员工执行力差，是因为你的目标（OGSM）里，少了“算账”的逻辑。
+        </p>
+        <p>
+          欢迎来到 《OGSM + KFI（财务指标）实战工作坊》。我们不讲听不懂的理论，直接带你换个脑子：<strong>从“管人”变成“管生意”</strong>。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: 3 Mistakes -->
+  <section class="py-20 bg-white">
+    <div class="container max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-6">🛑 你的团队是不是也犯了这 3 个错？</h2>
+        <p class="text-lg text-light">辅导了上百家企业后，我们发现 <span class="text-primary font-bold">90%</span> 的公司都在这里栽了跟头：</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Mistake 1 -->
+        <div class="bg-theme-light p-8 rounded-2xl">
+          <div class="text-5xl font-black text-secondary mb-4">01</div>
+          <h3 class="text-xl font-bold text-dark mb-3">各管各的，甚至“互相扯后腿”</h3>
+          <p class="text-light text-base">销售在前面拼命拿单，后勤、研发在后面“看戏”，甚至还在浪费钱。因为大家的目标没对齐，劲儿没往一处使。</p>
+        </div>
+        <!-- Mistake 2 -->
+        <div class="bg-theme-light p-8 rounded-2xl">
+          <div class="text-5xl font-black text-secondary mb-4">02</div>
+          <h3 class="text-xl font-bold text-dark mb-3">只管“做了没”，不管“赚没赚”</h3>
+          <p class="text-light text-base">员工觉得“我发了100篇 Social Media文章”工作就完成了，至于带来了多少客户？那是老板的事。这就是“瞎忙”。</p>
+        </div>
+        <!-- Mistake 3 -->
+        <div class="bg-theme-light p-8 rounded-2xl">
+          <div class="text-5xl font-black text-secondary mb-4">03</div>
+          <h3 class="text-xl font-bold text-dark mb-3">指标很好看，钱包很干净</h3>
+          <p class="text-light text-base">只考核“苦劳”（工作量），不考核“功劳”（利润贡献）。这种 OGSM 就是自欺欺人。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Takeaways -->
+  <section class="py-20 bg-theme-dark text-white">
+    <div class="container max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-accent">💡 来这儿一趟，你能带走什么？</h2>
+        <p class="text-lg text-secondary max-w-2xl mx-auto">
+          老板想轻松，员工想拿奖金，必须把 OGSM 和 KFI（钱）绑死！<br/>
+          MMC Financial Planning 战略预算导师 Spark Liang 将带你现场实操，做一张“能落地、能算账”的新地图：
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white/10 p-8 rounded-2xl border border-white/20 flex flex-col md:flex-row gap-6 items-start">
+          <div class="bg-accent text-dark p-4 rounded-xl text-3xl">💰</div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2 text-accent">怎么搞钱（收入质量）</h3>
+            <p class="text-secondary">别只盯着销售额狂奔。我们会教你算清楚：这一单到底赚不赚？获客成本 (CAC) 是多少？老客户会不会回头（复购率）？让你的增长实实在在。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white/10 p-8 rounded-2xl border border-white/20 flex flex-col md:flex-row gap-6 items-start">
+          <div class="bg-accent text-dark p-4 rounded-xl text-3xl">📉</div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2 text-accent">怎么省钱（效率提升）</h3>
+            <p class="text-secondary">让二线部门也知道怎么帮你省钱。HR、行政、研发不能只花钱。我们会教你制定人效指标 (ROI)，让每一个岗位都能算出产出，哪怕是不背业绩的人。</p>
+          </div>
+        </div>
+
+        <div class="bg-white/10 p-8 rounded-2xl border border-white/20 flex flex-col md:flex-row gap-6 items-start">
+          <div class="bg-accent text-dark p-4 rounded-xl text-3xl">🛣️</div>
+          <div>
+            <h3 class="text-2xl font-bold mb-2 text-accent">怎么铺路（未来资产）</h3>
+            <p class="text-secondary">不仅要今天的钱，还要明天的路。怎么把今天的投入，变成明天的壁垒？（比如品牌名气大了多少、技术强了多少），把虚的东西变成实的目标。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-16 bg-accent rounded-2xl p-8 md:p-12 text-dark text-center">
+        <h3 class="text-2xl font-bold mb-4">👉 结果承诺：</h3>
+        <p class="text-lg">
+          带着你现在的年度计划来，我们现场“体检”、现场“动刀”。<br/>
+          <strong>你带走的不再是一堆口号，而是一张剔除无效工作、全员一条心、直接对利润负责的 2026 作战图！</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Instructor -->
+  <section class="py-20 bg-theme-light">
+    <div class="container max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">👨‍🏫 谁来教你？“搞钱”才是硬道理</h2>
+        <p class="text-lg text-light max-w-3xl mx-auto">
+          本次工作坊由 MMC Financial Planning 战略预算导师 Spark Liang 领衔主讲。
+          他将把 张敏敏老师（OGSM畅销书作者） 的经典管理框架，结合他最擅长的 “财务规划 (Financial Planning)”，打造一套专门针对老板的“利润版 OGSM”。
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10">
+        <!-- Instructor Details -->
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-border-light">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold">
+              SL
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-dark">Spark Liang (张开亮)</h3>
+              <p class="text-primary font-medium">MMC Financial Planning 战略预算导师</p>
+            </div>
+          </div>
+          <div class="space-y-4 text-light">
+            <p><strong>他是真的“会算账”：</strong><br/>咨询过上百家企业以及上市公司集团，他是企业战略预算专家。他最擅长的，就是透过财务报表看透业务本质。</p>
+            <p><strong>他来教你什么：</strong><br/>很多老板做 OGSM 只是在“列清单”，Spark 会教你“算利润”。创造净利润，而不是在浪费钱。</p>
+          </div>
+        </div>
+
+        <!-- Methodology -->
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-border-light">
+          <h3 class="text-xl font-bold text-dark mb-4 border-b border-border-light pb-4">
+            📚 方法论基石：源自《OGSM打造高敏捷团队》<br/>
+            <span class="text-base font-normal text-light">(基于张敏敏老师的经典框架)</span>
+          </h3>
+          <div class="space-y-4 text-light">
+            <p><strong>这套课的“底子”有多硬？</strong><br/>本课程的核心逻辑，源自 张敏敏老师（前雅诗兰黛/资生堂高管、畅销书作者）的实战体系。</p>
+            <p><strong>为什么这很重要？</strong><br/>Spark 讲的不是野路子，而是经过跨国大厂验证的正规军打法。他把这套复杂的“管理学”，翻译成了老板最爱听的“生意经”。</p>
+            <p class="text-dark font-semibold italic mt-4 pt-4 border-t border-border-light">
+              —— 不讲虚的 MBA 理论，只给你一张能落地、能搞钱的作战地图。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Event Details & Form -->
+  <section class="py-20 bg-white" id="registration-form">
+    <div class="container max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-5 gap-12">
+        
+        <!-- Details sidebar -->
+        <div class="lg:col-span-2 space-y-8">
+          <div>
+            <h2 class="text-3xl font-bold text-dark mb-6">📅 活动详情</h2>
+            <div class="space-y-4 text-lg">
+              <div class="flex gap-4 items-start">
+                <span class="text-2xl">⏰</span>
+                <div>
+                  <h4 class="font-bold text-dark">时间</h4>
+                  <p class="text-light">2026年3月15日（周日）<br/>下午 2:00 - 5:00</p>
+                </div>
+              </div>
+              <div class="flex gap-4 items-start">
+                <span class="text-2xl">📍</span>
+                <div>
+                  <h4 class="font-bold text-dark">地点</h4>
+                  <p class="text-light">[填写详细地点]</p>
+                </div>
+              </div>
+              <div class="flex gap-4 items-start">
+                <span class="text-2xl">👥</span>
+                <div>
+                  <h4 class="font-bold text-dark">适合谁听</h4>
+                  <p class="text-light text-base mt-1">
+                    <strong>强烈建议：</strong> 老板别一个人来！带上财务总监、核心高管一起听。<br/>
+                    <span class="italic opacity-80 mt-2 block">（划重点：因为这套逻辑要改很多东西，你一个人学会了，回去大概率推不动。）</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#FFF4E5] border border-[#FFD9A1] p-6 rounded-2xl">
+            <h3 class="text-xl font-bold text-dark mb-2 flex items-center gap-2">⚠️ 席位有限，先到先得</h3>
+            <p class="text-light">
+              为了保证大家都能在现场得到老师的指导，我们只收 <strong>40 个人（或 10 家企业）</strong>。<br/><br/>
+              名额报满，报名通道立刻关闭。
+            </p>
+          </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="lg:col-span-3">
+          <div class="bg-theme-light border border-border-light p-8 md:p-10 rounded-2xl shadow-lg">
+            <h3 class="text-2xl font-bold text-dark mb-2">📝 报名表单</h3>
+            <p class="text-light mb-8 pb-6 border-b border-border-light">请填写信息，我们的顾问会在 24 小时内联系您，确认是否还有座位：</p>
+            
+            <form class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="name" class="block text-sm font-semibold text-dark mb-2">姓名 *</label>
+                  <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的姓名">
+                </div>
+                <div>
+                  <label for="company" class="block text-sm font-semibold text-dark mb-2">公司名称 *</label>
+                  <input type="text" id="company" name="company" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的公司">
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label for="position" class="block text-sm font-semibold text-dark mb-2">职位 * <span class="text-xs font-normal text-light">(建议决策层填写)</span></label>
+                  <input type="text" id="position" name="position" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：CEO、财务总监">
+                </div>
+                <div>
+                  <label for="phone" class="block text-sm font-semibold text-dark mb-2">联系电话 *</label>
+                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的手机号码">
+                </div>
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-semibold text-dark mb-2">邮箱 *</label>
+                <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="your.email@example.com">
+              </div>
+
+              <div class="bg-primary/5 p-6 rounded-xl border border-primary/20">
+                <label for="diagnosis" class="block text-sm font-semibold text-dark mb-3">
+                  🔥 课前诊断 (必填) ：<br/>
+                  <span class="text-light font-normal mt-1 block leading-relaxed">
+                    为了让老师讲课时能用到您的例子，请用大白话说一句：您现在推行目标管理，最头疼的一个具体事儿是什么？<br/>
+                    <em class="text-xs text-primary/80 mt-1 block">[ 例如：研发和销售老吵架、定好KPI员工不认账、大家都只顾自己部门利益... ]</em>
+                  </span>
+                </label>
+                <textarea id="diagnosis" name="diagnosis" rows="3" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" required placeholder="请写下您现在的痛点..."></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
+                ✅ 确认提交
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</Base>
