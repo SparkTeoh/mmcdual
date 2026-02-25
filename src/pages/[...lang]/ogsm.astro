@@ -8,14 +8,29 @@ export function getStaticPaths() {
 ---
 
 <Base>
-  <!-- Hero Section -->
-  <section class="bg-primary text-white py-20 lg:py-32 relative overflow-hidden">
-    <div class="container relative z-10 text-center max-w-4xl mx-auto">
+  <!-- Hero Section: height fits the image, no gap below nav -->
+  <section class="text-white relative overflow-hidden pt-0!">
+    <img
+      src="/images/banner/OGSM_banner.jpeg"
+      alt=""
+      class="block w-full h-auto"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+    />
+    <!-- Green overlay -->
+    <div
+      class="absolute inset-0 z-0 bg-primary/75"
+      aria-hidden="true"
+    />
+    <div class="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 py-12 md:py-16">
+      <div class="container text-center max-w-4xl mx-auto">
       <div class="inline-block bg-accent text-dark px-4 py-1 rounded-full text-sm font-semibold mb-6">
         🚀 别让全公司都在“瞎忙”！
       </div>
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-accent">
-        OGSM + KFI <br class="hidden md:block"/> 利润突围实战工作坊
+        <span class="block">OGSM + KFI</span>
+        <span class="block">利润突围实战工作坊</span>
       </h1>
       <p class="text-xl md:text-2xl opacity-90 mb-10 text-secondary">
         “为什么员工 KPI 全部满分，公司却没赚到钱？”<br/>
@@ -24,6 +39,7 @@ export function getStaticPaths() {
       <a href="#registration-form" class="inline-block bg-accent hover:bg-white text-dark font-bold text-lg px-8 py-4 rounded-full transition duration-300 shadow-xl">
         🎯 立即抢占席位
       </a>
+      </div>
     </div>
   </section>
 
