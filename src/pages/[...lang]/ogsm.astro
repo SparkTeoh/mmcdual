@@ -8,19 +8,19 @@ export function getStaticPaths() {
 ---
 
 <Base>
-  <!-- Hero Section: height fits the image, no gap below nav -->
-  <section class="text-white relative overflow-hidden pt-0!">
+  <!-- Hero Section: solid bg on mobile, banner image on desktop -->
+  <section class="text-white relative overflow-hidden pt-0! bg-primary md:bg-transparent min-h-[70vh] md:min-h-0">
     <img
       src="/images/banner/OGSM_banner.jpeg"
       alt=""
-      class="block w-full h-auto"
+      class="hidden md:block w-full h-auto"
       width="1920"
       height="1080"
       fetchpriority="high"
     />
-    <!-- Oval overlay with gradient feather – behind wording only -->
+    <!-- Desktop: oval overlay with gradient feather – behind wording only -->
     <div
-      class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
+      class="absolute inset-0 z-0 hidden md:flex items-center justify-center pointer-events-none"
       aria-hidden="true"
     >
       <div
@@ -47,6 +47,18 @@ export function getStaticPaths() {
       </div>
     </div>
   </section>
+
+  <!-- Mobile only: banner image below hero -->
+  <div class="md:hidden">
+    <img
+      src="/images/banner/OGSM_banner.jpeg"
+      alt="OGSM + KFI 利润突围实战工作坊"
+      class="block w-full h-auto"
+      width="1920"
+      height="1080"
+      loading="lazy"
+    />
+  </div>
 
   <!-- Section 1: The Pain -->
   <section class="py-20 bg-theme-light">
