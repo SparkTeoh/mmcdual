@@ -267,7 +267,7 @@ export function getStaticPaths() {
             <h3 class="text-2xl font-bold text-dark mb-2">📝 报名表单</h3>
             <p class="text-light mb-8 pb-6 border-b border-border-light">请填写信息，我们的顾问会在 24 小时内联系您，确认是否还有座位：</p>
             
-            <form class="space-y-6">
+            <form id="ogsm-form" class="space-y-6">
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
                   <label for="name" class="block text-sm font-semibold text-dark mb-2">姓名 *</label>
@@ -306,10 +306,53 @@ export function getStaticPaths() {
                 <textarea id="diagnosis" name="diagnosis" rows="3" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" required placeholder="请写下您现在的痛点..."></textarea>
               </div>
 
+              <!-- Pax Selection & Pricing -->
+              <div class="bg-accent/10 p-6 rounded-xl border border-accent/30">
+                <label class="block text-sm font-semibold text-dark mb-3">👥 报名人数 *</label>
+                <div class="flex items-center gap-4 mb-4">
+                  <button type="button" id="pax-minus" class="w-10 h-10 rounded-full bg-primary text-white text-xl font-bold flex items-center justify-center hover:bg-theme-dark transition-all shadow-sm select-none">−</button>
+                  <input type="number" id="pax" name="pax" value="1" min="1" max="20" readonly class="w-16 text-center text-2xl font-bold text-dark border-none bg-transparent outline-none" />
+                  <button type="button" id="pax-plus" class="w-10 h-10 rounded-full bg-primary text-white text-xl font-bold flex items-center justify-center hover:bg-theme-dark transition-all shadow-sm select-none">+</button>
+                </div>
+                <!-- Pricing Breakdown -->
+                <div id="pricing-breakdown" class="space-y-2 text-base">
+                  <div id="row-original" class="flex justify-between items-center hidden">
+                    <span class="text-light">原价 (RM 128 × <span id="pax-count">1</span> 人)</span>
+                    <span id="price-original" class="font-semibold text-light line-through">RM 128</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-light">小计</span>
+                    <span id="price-subtotal" class="font-semibold text-dark">RM 128.00</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-light">SST (8%)</span>
+                    <span id="price-sst" class="font-semibold text-dark">RM 10.24</span>
+                  </div>
+                  <div class="flex justify-between items-center pt-2 border-t border-accent/30">
+                    <span class="font-bold text-dark text-lg">总计</span>
+                    <span id="price-total" class="font-bold text-primary text-2xl">RM 138.24</span>
+                  </div>
+                </div>
+                <!-- Savings hint (shown for 2+ pax) -->
+                <div id="savings-hint" class="mt-3 text-sm text-primary font-medium hidden">
+                  🎉 <span id="savings-text"></span>
+                </div>
+              </div>
+
               <button type="submit" class="w-full bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
                 ✅ 确认提交
               </button>
             </form>
+
+            <!-- Thank You Message (hidden by default) -->
+            <div id="thank-you-msg" class="hidden text-center py-12 space-y-6">
+              <div class="text-6xl mb-4">🎉</div>
+              <h3 class="text-2xl font-bold text-dark">谢谢您的报名！</h3>
+              <p class="text-light text-lg">感谢您的购买！我们会尽快与您联系，确认席位详情。</p>
+              <button id="buy-again-btn" type="button" class="inline-block bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
+                🔄 再次报名
+              </button>
+            </div>
           </div>
         </div>
 
@@ -318,3 +361,210 @@ export function getStaticPaths() {
   </section>
 
 </Base>
+
+<script>
+  const paxInput = document.getElementById('pax') as HTMLInputElement;
+  const minusBtn = document.getElementById('pax-minus')!;
+  const plusBtn = document.getElementById('pax-plus')!;
+  const rowOriginal = document.getElementById('row-original')!;
+  const paxCount = document.getElementById('pax-count')!;
+  const priceOriginal = document.getElementById('price-original')!;
+  const priceSubtotal = document.getElementById('price-subtotal')!;
+  const priceSst = document.getElementById('price-sst')!;
+  const priceTotal = document.getElementById('price-total')!;
+  const savingsHint = document.getElementById('savings-hint')!;
+  const savingsText = document.getElementById('savings-text')!;
+
+  const PRICE_PER_PAX = 128;
+  const SST_RATE = 0.08;
+
+  function calcSubtotal(pax: number): number {
+    if (pax === 1) return 128;
+    if (pax === 2) return 199;
+    // 3+ pax: base 199 + 99 for each person beyond 2
+    return 199 + (pax - 2) * 99;
+  }
+
+  function updatePricing() {
+    const pax = parseInt(paxInput.value) || 1;
+    const fullPrice = pax * PRICE_PER_PAX;
+    const subtotal = calcSubtotal(pax);
+    const sst = subtotal * SST_RATE;
+    const total = subtotal + sst;
+
+    // Show original price row only when there's a discount (2+ pax)
+    if (pax >= 2) {
+      paxCount.textContent = String(pax);
+      priceOriginal.textContent = `RM ${fullPrice.toFixed(2)}`;
+      rowOriginal.classList.remove('hidden');
+      const saved = fullPrice - subtotal;
+      savingsHint.classList.remove('hidden');
+      savingsText.textContent = `团报优惠！省下 RM ${saved.toFixed(2)}`;
+    } else {
+      rowOriginal.classList.add('hidden');
+      savingsHint.classList.add('hidden');
+    }
+
+    priceSubtotal.textContent = `RM ${subtotal.toFixed(2)}`;
+    priceSst.textContent = `RM ${sst.toFixed(2)}`;
+    priceTotal.textContent = `RM ${total.toFixed(2)}`;
+  }
+
+  minusBtn.addEventListener('click', () => {
+    const current = parseInt(paxInput.value) || 1;
+    if (current > 1) {
+      paxInput.value = String(current - 1);
+      updatePricing();
+    }
+  });
+
+  plusBtn.addEventListener('click', () => {
+    const current = parseInt(paxInput.value) || 1;
+    if (current < 20) {
+      paxInput.value = String(current + 1);
+      updatePricing();
+    }
+  });
+
+  // Initialize
+  updatePricing();
+
+  // --- Payment submission flow ---
+  const form = document.getElementById('ogsm-form') as HTMLFormElement;
+  const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const originalBtnText = submitBtn.innerHTML;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validate all required fields
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    // Get form values
+    const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+    const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const pax = parseInt(paxInput.value) || 1;
+    const subtotal = calcSubtotal(pax);
+    const sst = subtotal * SST_RATE;
+    const total = subtotal + sst;
+    const totalRounded = parseFloat(total.toFixed(2));
+
+    const billDesc = `${pax} pax《OGSM + KFI（财务指标）实战工作坊》`;
+
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '⏳ 处理中...';
+
+    // Open popup IMMEDIATELY (must be in direct click context to avoid popup blocker)
+    const w = 500, h = 650;
+    const left = (screen.width - w) / 2;
+    const top = (screen.height - h) / 2;
+    const popup = window.open('about:blank', 'fiuu_payment', `width=${w},height=${h},left=${left},top=${top},scrollbars=yes,resizable=yes`);
+    if (popup) {
+      popup.document.write('<html><body style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#555;"><p>⏳ 正在加载支付页面...</p></body></html>');
+    }
+
+    try {
+      const res = await fetch('/api/checkout/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: totalRounded,
+          bill_name: name,
+          bill_email: email,
+          bill_mobile: phone,
+          bill_desc: billDesc,
+          pax: pax,
+          company: (document.getElementById('company') as HTMLInputElement).value.trim(),
+          position: (document.getElementById('position') as HTMLInputElement).value.trim(),
+          diagnosis: (document.getElementById('diagnosis') as HTMLTextAreaElement).value.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Checkout failed');
+      }
+
+      const paymentData = await res.json();
+
+      // Build hidden form targeting the already-open popup
+      const paymentForm = document.createElement('form');
+      paymentForm.method = 'POST';
+      paymentForm.action = paymentData.payment_url;
+      paymentForm.target = 'fiuu_payment';
+      paymentForm.style.display = 'none';
+
+      // Gather extra form data not in standard FIUU fields
+      const company = (document.getElementById('company') as HTMLInputElement).value.trim();
+      const position = (document.getElementById('position') as HTMLInputElement).value.trim();
+      const diagnosis = (document.getElementById('diagnosis') as HTMLTextAreaElement).value.trim();
+
+      const fields: Record<string, string> = {
+        merchant_id: paymentData.merchant_id,
+        amount: paymentData.amount,
+        orderid: paymentData.orderid,
+        bill_name: paymentData.bill_name,
+        bill_email: paymentData.bill_email,
+        bill_mobile: paymentData.bill_mobile,
+        bill_desc: paymentData.bill_desc,
+        vcode: paymentData.vcode,
+        currency: paymentData.currency,
+        channel: paymentData.channel,
+        returnurl: paymentData.returnurl,
+        callbackurl: paymentData.callbackurl,
+        extraP: JSON.stringify({ company, position, diagnosis, pax }),
+      };
+
+      for (const [key, val] of Object.entries(fields)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = val;
+        paymentForm.appendChild(input);
+      }
+
+      // Submit form into the popup window
+      document.body.appendChild(paymentForm);
+      paymentForm.submit();
+      paymentForm.remove();
+
+      // Poll for popup close → show thank you
+      const pollTimer = setInterval(() => {
+        if (!popup || popup.closed) {
+          clearInterval(pollTimer);
+          showThankYou();
+        }
+      }, 500);
+
+    } catch (err: any) {
+      if (popup && !popup.closed) popup.close();
+      alert('\u63d0\u4ea4\u5931\u8d25\uff1a' + (err.message || '\u8bf7\u7a0d\u540e\u518d\u8bd5'));
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
+  });
+
+  // --- Thank you / buy again flow ---
+  const thankYouMsg = document.getElementById('thank-you-msg')!;
+  const buyAgainBtn = document.getElementById('buy-again-btn')!;
+
+  function showThankYou() {
+    form.classList.add('hidden');
+    thankYouMsg.classList.remove('hidden');
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
+  }
+
+  buyAgainBtn.addEventListener('click', () => {
+    form.reset();
+    paxInput.value = '1';
+    updatePricing();
+    thankYouMsg.classList.add('hidden');
+    form.classList.remove('hidden');
+  });
+</script>
