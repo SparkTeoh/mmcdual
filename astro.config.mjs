@@ -10,7 +10,7 @@ import { enabledLanguages } from "./src/lib/utils/i18nUtils.ts";
 import remarkParseContent from "./src/lib/utils/remarkParseContent.ts";
 import { generateAstroFontsConfig } from "./src/lib/utils/AstroFont.ts";
 import config from "./.astro/config.generated.json" with { type: "json" };
-import cloudflare from "@astrojs/cloudflare";
+import netlify from "@astrojs/netlify";
 import compressor from "astro-compressor";
 
 const fonts = generateAstroFontsConfig(fontsJson);
@@ -24,7 +24,7 @@ let {
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: cloudflare(),
+  adapter: netlify(),
   site: config.site.baseUrl ? config.site.baseUrl : "http://examplesite.com",
   trailingSlash: config.site.trailingSlash ? "always" : "never",
   experimental: {

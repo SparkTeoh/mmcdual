@@ -23,7 +23,7 @@
     "yarn": ">=1.22.22"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.12",
+    "@astrojs/netlify": "^6.6.4",
     "@floating-ui/dom": "^1.7.4",
     "@lucide/astro": "^0.548.0",
     "@popperjs/core": "^2.11.8",
