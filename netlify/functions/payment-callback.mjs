@@ -1,12 +1,13 @@
-// Standalone Netlify Function for FIUU payment callback
+// Standalone Netlify Function (v1 format) for FIUU payment callback
+// Accessible at /.netlify/functions/payment-callback
 // Bypasses Netlify CDN cross-site POST protection
 
-export default async (req) => {
+export async function handler(event, context) {
     const FIUU_SECRET_KEY = process.env.FIUU_SECRET_KEY;
     const SHEET_WEBHOOK = process.env.GOOGLE_SHEET_WEBHOOK_URL;
 
     // --- Parse form-urlencoded body from FIUU ---
-    const text = await req.text();
+    const text = event.body || '';
     const params = new URLSearchParams(text);
     const data = {};
     for (const [key, value] of params.entries()) {
@@ -37,7 +38,7 @@ export default async (req) => {
 
         if (key1 !== skey) {
             console.log('⚠️ SKEY VERIFICATION FAILED — possible spoofed callback!');
-            return new Response('CAPTURED', { status: 200 });
+            return { statusCode: 200, body: 'CAPTURED' };
         }
         console.log('✅ SKEY verified — callback is genuine');
     }
@@ -63,8 +64,8 @@ export default async (req) => {
     }
 
     // --- FIUU requires "CAPTURED" response ---
-    return new Response('CAPTURED', { status: 200 });
-};
+    return { statusCode: 200, body: 'CAPTURED' };
+}
 
 // --- Pure JS MD5 ---
 function md5Pure(string) {
@@ -143,8 +144,3 @@ function md5Pure(string) {
     function add32(a, b) { return (a + b) & 0xFFFFFFFF; }
     return hex(md51(string));
 }
-
-export const config = {
-    path: "/api/payment-callback",
-    preferStatic: false,
-};
