@@ -129,7 +129,7 @@ export const POST: APIRoute = async ({ request }) => {
         currency: 'MYR',
         channel: '',
         returnurl: `${origin}/ogsm/`,
-        callbackurl: `${origin}/api/payment-callback/`,
+        callbackurl: `${origin}/.netlify/functions/payment-callback`,
         payment_url: baseUrl,
         environment: FIUU_ENV,
     };

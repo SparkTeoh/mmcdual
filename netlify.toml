@@ -22,16 +22,3 @@
     Access-Control-Allow-Methods = "POST, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type"
     X-Robots-Tag = "noindex"
-
-# Force payment callback to SSR function — bypasses Netlify CDN cross-site POST block
-[[redirects]]
-  from = "/api/payment-callback"
-  to = "/.netlify/functions/ssr"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/payment-callback/"
-  to = "/.netlify/functions/ssr"
-  status = 200
-  force = true
