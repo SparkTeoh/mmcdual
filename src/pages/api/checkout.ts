@@ -91,25 +91,30 @@ export const POST: APIRoute = async ({ request }) => {
     console.log('╚══════════════════════════════════════════════════════╝');
     console.log('');
 
-    // --- Fire-and-forget: save form data to pending_orders sheet ---
+    // --- Save form data to pending_orders sheet (must await to prevent Netlify from killing the request) ---
     if (SHEET_WEBHOOK) {
-        fetch(SHEET_WEBHOOK, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                action: 'save_pending',
-                orderid: orderid,
-                bill_name: body.bill_name || '',
-                bill_email: body.bill_email || '',
-                bill_mobile: body.bill_mobile || '',
-                company: body.company || '',
-                position: body.position || '',
-                pax: body.pax || 1,
-                amount: amountStr,
-                bill_desc: billDesc,
-                diagnosis: body.diagnosis || '',
-            }),
-        }).catch(() => {});
+        try {
+            await fetch(SHEET_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'save_pending',
+                    orderid: orderid,
+                    bill_name: body.bill_name || '',
+                    bill_email: body.bill_email || '',
+                    bill_mobile: body.bill_mobile || '',
+                    company: body.company || '',
+                    position: body.position || '',
+                    pax: body.pax || 1,
+                    amount: amountStr,
+                    bill_desc: billDesc,
+                    diagnosis: body.diagnosis || '',
+                }),
+            });
+            console.log('✅ Pending order saved to sheet:', orderid);
+        } catch (err) {
+            console.error('❌ Failed to save pending order:', err);
+        }
     }
 
     // --- Derive base URL from request for callback/return URLs ---
