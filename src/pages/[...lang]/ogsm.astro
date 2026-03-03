@@ -339,6 +339,17 @@ export function getStaticPaths() {
                 </div>
               </div>
               <div class="flex gap-4 items-start">
+                <span class="text-2xl">🎫</span>
+                <div>
+                  <h4 class="font-bold text-dark">票价</h4>
+                  <p class="text-light text-base mt-1 leading-relaxed">
+                    <span class="line-through text-light/70">原价 RM499</span><br/>
+                    <strong class="text-primary text-lg">RM128</strong> + 8% SST / 一个人<br/>
+                    <strong class="text-primary text-lg">RM199</strong> + 8% SST / 两个人
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-4 items-start">
                 <span class="text-2xl">📍</span>
                 <div>
                   <h4 class="font-bold text-dark">地点</h4>
@@ -412,8 +423,17 @@ export function getStaticPaths() {
                 <textarea id="diagnosis" name="diagnosis" rows="3" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" required placeholder="请写下您现在的痛点..."></textarea>
               </div>
 
-              <!-- Pax Selection & Pricing -->
-              <div class="bg-accent/10 p-6 rounded-xl border border-accent/30">
+              <button type="submit" id="next-step-btn" class="w-full bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
+                ➡️ 下一步 (选择人数并付款)
+              </button>
+            </form>
+
+            <!-- Payment Section (hidden initially) -->
+            <div id="payment-section" class="hidden py-8">
+              <h3 class="text-2xl font-bold text-dark text-center mb-6">✅ 报名信息已记录，请确认人数及付款</h3>
+              
+              <!-- Pax Selection & Pricing moved to Step 2 -->
+              <div class="bg-accent/10 p-6 rounded-xl border border-accent/30 max-w-md mx-auto mb-8">
                 <label class="block text-sm font-semibold text-dark mb-3">👥 报名人数 *</label>
                 <div class="flex items-center gap-4 mb-4">
                   <button type="button" id="pax-minus" class="w-10 h-10 rounded-full bg-primary text-white text-xl font-bold flex items-center justify-center hover:bg-theme-dark transition-all shadow-sm select-none">−</button>
@@ -445,16 +465,25 @@ export function getStaticPaths() {
                 </div>
               </div>
 
-              <button type="submit" class="w-full bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
-                ✅ 确认提交
-              </button>
-            </form>
+              <div class="text-center">
+                <button id="pay-now-btn" type="button" class="w-full max-w-md mx-auto bg-[#ffb700] hover:bg-[#e5a400] text-dark font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md flex items-center justify-center gap-2">
+                  💳 立即付款 (Pay Now)
+                </button>
+                <div id="pay-now-loading" class="hidden text-light text-sm mt-3 flex items-center justify-center gap-2">
+                  <div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                  正在处理订单并打开支付页面...
+                </div>
+                <button type="button" id="back-to-step1-btn" class="mt-4 text-light hover:text-dark underline text-sm">
+                  🔙 返回修改信息
+                </button>
+              </div>
+            </div>
 
             <!-- Thank You Message (hidden by default) -->
             <div id="thank-you-msg" class="hidden text-center py-12 space-y-6">
               <div class="text-6xl mb-4">🎉</div>
               <h3 class="text-2xl font-bold text-dark">谢谢您的报名！</h3>
-              <p class="text-light text-lg">感谢您的购买！我们会尽快与您联系，确认席位详情。</p>
+              <p class="text-light text-lg">付款成功！我们会尽快与您联系，确认席位详情。</p>
               <button id="buy-again-btn" type="button" class="inline-block bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
                 🔄 再次报名
               </button>
@@ -535,21 +564,77 @@ export function getStaticPaths() {
   // Initialize
   updatePricing();
 
-  // --- Payment submission flow ---
+  // --- Form & Step Transition logic ---
   const form = document.getElementById('ogsm-form') as HTMLFormElement;
-  const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-  const originalBtnText = submitBtn.innerHTML;
+  const paymentSection = document.getElementById('payment-section')!;
+  const payNowBtn = document.getElementById('pay-now-btn') as HTMLButtonElement;
+  const backToStep1Btn = document.getElementById('back-to-step1-btn')!;
+  const payNowLoading = document.getElementById('pay-now-loading')!;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Validate all required fields
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
 
-    // Get form values
+    const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+    const company = (document.getElementById('company') as HTMLInputElement).value.trim();
+    const position = (document.getElementById('position') as HTMLInputElement).value.trim();
+    const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const diagnosis = (document.getElementById('diagnosis') as HTMLTextAreaElement).value.trim();
+
+    const nextBtn = document.getElementById('next-step-btn') as HTMLButtonElement;
+    const originalNextText = nextBtn.innerHTML;
+
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = '⏳ 正在保存信息...';
+
+    try {
+      // Step 1: Save the lead into Google Sheet immediately
+      const res = await fetch('/api/save_lead/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, company, position, phone, email, diagnosis
+        }),
+      });
+
+      if (!res.ok) {
+         console.warn("Could not save lead to Google Sheet, but letting user continue.");
+      }
+
+      // Switch UI to Step 2
+      form.classList.add('hidden');
+      paymentSection.classList.remove('hidden');
+      
+      // Make sure pricing is up to date based on whatever pax is selected
+      updatePricing(); 
+    } catch (err) {
+      console.error(err);
+      alert('保存失败，请检查网络后重试。');
+    } finally {
+      nextBtn.disabled = false;
+      nextBtn.innerHTML = originalNextText;
+    }
+  });
+
+  backToStep1Btn.addEventListener('click', () => {
+    paymentSection.classList.add('hidden');
+    form.classList.remove('hidden');
+  });
+
+  // --- Payment submission flow (Step 2) ---
+  payNowBtn.addEventListener('click', async () => {
+    
+    // Double check form values are still valid (e.g. if manipulated)
+    if (!form.checkValidity()) {
+      alert("请返回上一步填写完整信息");
+      return;
+    }
+
     const name = (document.getElementById('name') as HTMLInputElement).value.trim();
     const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
     const email = (document.getElementById('email') as HTMLInputElement).value.trim();
@@ -559,22 +644,29 @@ export function getStaticPaths() {
     const total = subtotal + sst;
     const totalRounded = parseFloat(total.toFixed(2));
 
+    const company = (document.getElementById('company') as HTMLInputElement).value.trim();
+    const position = (document.getElementById('position') as HTMLInputElement).value.trim();
+    const diagnosis = (document.getElementById('diagnosis') as HTMLTextAreaElement).value.trim();
+
     const billDesc = `${pax} pax《OGSM + KFI（财务指标）实战工作坊》`;
 
-    // Show loading state
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '⏳ 处理中...';
-
-    // Open popup IMMEDIATELY (must be in direct click context to avoid popup blocker)
+    // 1. Immediately open window in sync click handler to bypass block
     const w = 500, h = 650;
     const left = (screen.width - w) / 2;
     const top = (screen.height - h) / 2;
-    const popup = window.open('about:blank', 'fiuu_payment', `width=${w},height=${h},left=${left},top=${top},scrollbars=yes,resizable=yes`);
+    let popup = window.open('about:blank', 'fiuu_payment', `width=${w},height=${h},left=${left},top=${top},scrollbars=yes,resizable=yes`);
+    
     if (popup) {
-      popup.document.write('<html><body style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#555;"><p>⏳ 正在加载支付页面...</p></body></html>');
+      popup.document.write('<html><body style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#555;flex-direction:column;"><div style="border: 3px solid #f3f3f3; border-top: 3px solid #ffb700; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px;"></div><p>⏳ 请稍等，正在创建订单与支付页面...</p><style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style></body></html>');
     }
 
+    // Update UI Loading State
+    payNowBtn.classList.add('hidden');
+    payNowLoading.classList.remove('hidden');
+    backToStep1Btn.classList.add('hidden');
+
     try {
+      // 2. Await API creation of Order and Webhook event
       const res = await fetch('/api/checkout/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -585,9 +677,9 @@ export function getStaticPaths() {
           bill_mobile: phone,
           bill_desc: billDesc,
           pax: pax,
-          company: (document.getElementById('company') as HTMLInputElement).value.trim(),
-          position: (document.getElementById('position') as HTMLInputElement).value.trim(),
-          diagnosis: (document.getElementById('diagnosis') as HTMLTextAreaElement).value.trim(),
+          company: company,
+          position: position,
+          diagnosis: diagnosis,
         }),
       });
 
@@ -597,18 +689,17 @@ export function getStaticPaths() {
       }
 
       const paymentData = await res.json();
+      
+      const extraParams = {
+        company, position, diagnosis, pax
+      };
 
-      // Build hidden form targeting the already-open popup
+      // 3. Post to FIUU in the launched window
       const paymentForm = document.createElement('form');
       paymentForm.method = 'POST';
       paymentForm.action = paymentData.payment_url;
       paymentForm.target = 'fiuu_payment';
       paymentForm.style.display = 'none';
-
-      // Gather extra form data not in standard FIUU fields
-      const company = (document.getElementById('company') as HTMLInputElement).value.trim();
-      const position = (document.getElementById('position') as HTMLInputElement).value.trim();
-      const diagnosis = (document.getElementById('diagnosis') as HTMLTextAreaElement).value.trim();
 
       const fields: Record<string, string> = {
         merchant_id: paymentData.merchant_id,
@@ -623,7 +714,7 @@ export function getStaticPaths() {
         channel: paymentData.channel,
         returnurl: paymentData.returnurl,
         callbackurl: paymentData.callbackurl,
-        extraP: JSON.stringify({ company, position, diagnosis, pax }),
+        extraP: JSON.stringify(extraParams),
       };
 
       for (const [key, val] of Object.entries(fields)) {
@@ -634,12 +725,11 @@ export function getStaticPaths() {
         paymentForm.appendChild(input);
       }
 
-      // Submit form into the popup window
       document.body.appendChild(paymentForm);
       paymentForm.submit();
       paymentForm.remove();
 
-      // Poll for popup close → show thank you
+      // Start polling for popup closure
       const pollTimer = setInterval(() => {
         if (!popup || popup.closed) {
           clearInterval(pollTimer);
@@ -650,8 +740,10 @@ export function getStaticPaths() {
     } catch (err: any) {
       if (popup && !popup.closed) popup.close();
       alert('\u63d0\u4ea4\u5931\u8d25\uff1a' + (err.message || '\u8bf7\u7a0d\u540e\u518d\u8bd5'));
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
+    } finally {
+      payNowBtn.classList.remove('hidden');
+      payNowLoading.classList.add('hidden');
+      backToStep1Btn.classList.remove('hidden');
     }
   });
 
@@ -661,6 +753,7 @@ export function getStaticPaths() {
 
   function showThankYou() {
     form.classList.add('hidden');
+    paymentSection.classList.add('hidden');
     thankYouMsg.classList.remove('hidden');
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalBtnText;
@@ -671,6 +764,7 @@ export function getStaticPaths() {
     paxInput.value = '1';
     updatePricing();
     thankYouMsg.classList.add('hidden');
+    paymentSection.classList.add('hidden');
     form.classList.remove('hidden');
   });
 </script>
