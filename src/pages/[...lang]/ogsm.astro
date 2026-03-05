@@ -498,6 +498,11 @@ export function getStaticPaths() {
 </Base>
 
 <script>
+  // --- Capture UTM parameters from URL on page load ---
+  const _urlParams = new URLSearchParams(window.location.search);
+  const utmMedium = _urlParams.get('utm_medium') || '';
+  const utmContent = _urlParams.get('utm_content') || '';
+
   const paxInput = document.getElementById('pax') as HTMLInputElement;
   const minusBtn = document.getElementById('pax-minus')!;
   const plusBtn = document.getElementById('pax-plus')!;
@@ -598,7 +603,9 @@ export function getStaticPaths() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name, company, position, phone, email, diagnosis
+          name, company, position, phone, email, diagnosis,
+          utm_medium: utmMedium,
+          utm_content: utmContent,
         }),
       });
 

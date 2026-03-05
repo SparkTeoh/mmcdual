@@ -39,6 +39,8 @@ export const POST: APIRoute = async ({ request }) => {
                 company: body.company || '',
                 position: body.position || '',
                 diagnosis: body.diagnosis || '',
+                utm_medium: body.utm_medium || '',
+                utm_content: body.utm_content || '',
             }),
         });
 
