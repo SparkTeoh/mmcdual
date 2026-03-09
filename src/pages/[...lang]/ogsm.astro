@@ -428,7 +428,42 @@ export function getStaticPaths() {
               </button>
             </form>
 
-            <!-- Payment Section (hidden initially) -->
+            <!-- Invoice Details Section (Step 2, hidden initially) -->
+            <div id="invoice-section" class="hidden py-8">
+              <h3 class="text-2xl font-bold text-dark text-center mb-2">🧾 发票信息 (Invoice Details)</h3>
+              <p class="text-light text-center mb-4 text-base">发票将在课程结束后发出（预计 2026年3月17日 或之后数天内）。</p>
+              <p class="text-xs text-light/70 text-center mb-8 pb-6 border-b border-border-light">⚠️ 以下信息仅用于开具发票，我们不会将其用于其他用途。</p>
+
+              <form id="invoice-form" class="space-y-6">
+                <div>
+                  <label for="inv_company" class="block text-sm font-semibold text-dark mb-2">公司名称 (Company Name) *</label>
+                  <input type="text" id="inv_company" name="inv_company" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="发票上的公司名称">
+                </div>
+                <div>
+                  <label for="inv_address" class="block text-sm font-semibold text-dark mb-2">公司地址 (Company Address) *</label>
+                  <textarea id="inv_address" name="inv_address" rows="2" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" required placeholder="发票上的公司地址"></textarea>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="inv_phone" class="block text-sm font-semibold text-dark mb-2">联系电话 (Phone) *</label>
+                    <input type="tel" id="inv_phone" name="inv_phone" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="发票上的联系电话">
+                  </div>
+                  <div>
+                    <label for="inv_email" class="block text-sm font-semibold text-dark mb-2">邮箱 (Email) *</label>
+                    <input type="email" id="inv_email" name="inv_email" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="接收发票的邮箱">
+                  </div>
+                </div>
+
+                <button type="submit" id="invoice-next-btn" class="w-full bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
+                  ➡️ 下一步 (选择人数并付款)
+                </button>
+                <button type="button" id="back-to-step1-from-invoice" class="w-full mt-2 text-light hover:text-dark underline text-sm">
+                  🔙 返回修改报名信息
+                </button>
+              </form>
+            </div>
+
+            <!-- Payment Section (Step 3, hidden initially) -->
             <div id="payment-section" class="hidden py-8">
               <h3 class="text-2xl font-bold text-dark text-center mb-6">✅ 报名信息已记录，请确认人数及付款</h3>
               
@@ -569,13 +604,17 @@ export function getStaticPaths() {
   // Initialize
   updatePricing();
 
-  // --- Form & Step Transition logic ---
+  // --- Element references ---
   const form = document.getElementById('ogsm-form') as HTMLFormElement;
+  const invoiceSection = document.getElementById('invoice-section')!;
+  const invoiceForm = document.getElementById('invoice-form') as HTMLFormElement;
   const paymentSection = document.getElementById('payment-section')!;
   const payNowBtn = document.getElementById('pay-now-btn') as HTMLButtonElement;
   const backToStep1Btn = document.getElementById('back-to-step1-btn')!;
   const payNowLoading = document.getElementById('pay-now-loading')!;
+  const backToStep1FromInvoice = document.getElementById('back-to-step1-from-invoice')!;
 
+  // --- Step 1 → Step 2: Save lead, then show invoice form ---
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -598,11 +637,12 @@ export function getStaticPaths() {
     nextBtn.innerHTML = '⏳ 正在保存信息...';
 
     try {
-      // Step 1: Save the lead into Google Sheet immediately
+      // Save the lead into Google Sheet immediately
       const res = await fetch('/api/save_lead/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          action: 'save_lead',
           name, company, position, phone, email, diagnosis,
           utm_medium: utmMedium,
           utm_content: utmContent,
@@ -613,12 +653,17 @@ export function getStaticPaths() {
          console.warn("Could not save lead to Google Sheet, but letting user continue.");
       }
 
-      // Switch UI to Step 2
+      // Auto-fill invoice fields from Step 1 data
+      const invCompanyEl = document.getElementById('inv_company') as HTMLInputElement;
+      const invPhoneEl = document.getElementById('inv_phone') as HTMLInputElement;
+      const invEmailEl = document.getElementById('inv_email') as HTMLInputElement;
+      if (!invCompanyEl.value) invCompanyEl.value = company;
+      if (!invPhoneEl.value) invPhoneEl.value = phone;
+      if (!invEmailEl.value) invEmailEl.value = email;
+
+      // Switch UI: Step 1 → Step 2 (Invoice)
       form.classList.add('hidden');
-      paymentSection.classList.remove('hidden');
-      
-      // Make sure pricing is up to date based on whatever pax is selected
-      updatePricing(); 
+      invoiceSection.classList.remove('hidden');
     } catch (err) {
       console.error(err);
       alert('保存失败，请检查网络后重试。');
@@ -628,17 +673,76 @@ export function getStaticPaths() {
     }
   });
 
-  backToStep1Btn.addEventListener('click', () => {
-    paymentSection.classList.add('hidden');
+  // --- Step 2 back → Step 1 ---
+  backToStep1FromInvoice.addEventListener('click', () => {
+    invoiceSection.classList.add('hidden');
     form.classList.remove('hidden');
   });
 
-  // --- Payment submission flow (Step 2) ---
+  // --- Step 2 → Step 3: Validate invoice, save to sheet, then show payment ---
+  invoiceForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!invoiceForm.checkValidity()) {
+      invoiceForm.reportValidity();
+      return;
+    }
+
+    const invCompany = (document.getElementById('inv_company') as HTMLInputElement).value.trim();
+    const invAddress = (document.getElementById('inv_address') as HTMLTextAreaElement).value.trim();
+    const invPhone = (document.getElementById('inv_phone') as HTMLInputElement).value.trim();
+    const invEmail = (document.getElementById('inv_email') as HTMLInputElement).value.trim();
+    const leadEmail = (document.getElementById('email') as HTMLInputElement).value.trim();
+
+    const invoiceNextBtn = document.getElementById('invoice-next-btn') as HTMLButtonElement;
+    const originalInvoiceText = invoiceNextBtn.innerHTML;
+
+    invoiceNextBtn.disabled = true;
+    invoiceNextBtn.innerHTML = '⏳ 正在保存发票信息...';
+
+    try {
+      const res = await fetch('/api/save_lead/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'save_invoice',
+          bill_email: leadEmail,
+          inv_company: invCompany,
+          inv_address: invAddress,
+          inv_phone: invPhone,
+          inv_email: invEmail,
+        }),
+      });
+
+      if (!res.ok) {
+        console.warn('Could not save invoice to Google Sheet, but letting user continue.');
+      }
+
+      // Switch UI: Step 2 → Step 3 (Payment)
+      invoiceSection.classList.add('hidden');
+      paymentSection.classList.remove('hidden');
+      updatePricing();
+    } catch (err) {
+      console.error(err);
+      alert('保存发票信息失败，请检查网络后重试。');
+    } finally {
+      invoiceNextBtn.disabled = false;
+      invoiceNextBtn.innerHTML = originalInvoiceText;
+    }
+  });
+
+  // --- Step 3 back → Step 2 ---
+  backToStep1Btn.addEventListener('click', () => {
+    paymentSection.classList.add('hidden');
+    invoiceSection.classList.remove('hidden');
+  });
+
+  // --- Payment submission flow (Step 3) ---
   payNowBtn.addEventListener('click', async () => {
     
     // Double check form values are still valid (e.g. if manipulated)
     if (!form.checkValidity()) {
-      alert("请返回上一步填写完整信息");
+      alert("请返回第一步填写完整信息");
       return;
     }
 
@@ -760,18 +864,19 @@ export function getStaticPaths() {
 
   function showThankYou() {
     form.classList.add('hidden');
+    invoiceSection.classList.add('hidden');
     paymentSection.classList.add('hidden');
     thankYouMsg.classList.remove('hidden');
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = originalBtnText;
   }
 
   buyAgainBtn.addEventListener('click', () => {
     form.reset();
+    invoiceForm.reset();
     paxInput.value = '1';
     updatePricing();
     thankYouMsg.classList.add('hidden');
     paymentSection.classList.add('hidden');
+    invoiceSection.classList.add('hidden');
     form.classList.remove('hidden');
   });
 </script>

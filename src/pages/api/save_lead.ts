@@ -25,34 +25,59 @@ export const POST: APIRoute = async ({ request }) => {
         );
     }
 
-    try {
-        // We use 'save_lead' so your Google Apps script can differentiate it
-        // from 'save_pending' (which means they reached the payment screen)
-        await fetch(SHEET_WEBHOOK, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                action: 'save_lead',
-                bill_name: body.name || '',
-                bill_email: body.email || '',
-                bill_mobile: body.phone || '',
-                company: body.company || '',
-                position: body.position || '',
-                diagnosis: body.diagnosis || '',
-                utm_medium: body.utm_medium || '',
-                utm_content: body.utm_content || '',
-            }),
-        });
+    const action = body.action || 'save_lead';
 
-        console.log('✅ Lead saved to sheet successfully');
+    try {
+        if (action === 'save_lead') {
+            // Save lead row to Google Sheet
+            await fetch(SHEET_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'save_lead',
+                    bill_name: body.name || '',
+                    bill_email: body.email || '',
+                    bill_mobile: body.phone || '',
+                    company: body.company || '',
+                    position: body.position || '',
+                    diagnosis: body.diagnosis || '',
+                    utm_medium: body.utm_medium || '',
+                    utm_content: body.utm_content || '',
+                }),
+            });
+
+            console.log('✅ Lead saved to sheet successfully');
+        } else if (action === 'save_invoice') {
+            // Update invoice columns on existing lead row (matched by email)
+            await fetch(SHEET_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'save_invoice',
+                    bill_email: body.bill_email || '',
+                    inv_company: body.inv_company || '',
+                    inv_address: body.inv_address || '',
+                    inv_phone: body.inv_phone || '',
+                    inv_email: body.inv_email || '',
+                }),
+            });
+
+            console.log('✅ Invoice details saved to sheet successfully');
+        } else {
+            return new Response(
+                JSON.stringify({ error: `Unknown action: ${action}` }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
+            );
+        }
+
         return new Response(JSON.stringify({ success: true }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' },
         });
     } catch (err) {
-        console.error('❌ Failed to save lead:', err);
+        console.error(`❌ Failed to ${action}:`, err);
         return new Response(
-            JSON.stringify({ error: 'Failed to save lead' }),
+            JSON.stringify({ error: `Failed to ${action}` }),
             { status: 500, headers: { 'Content-Type': 'application/json' } }
         );
     }
