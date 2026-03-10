@@ -63,6 +63,20 @@ export const POST: APIRoute = async ({ request }) => {
             });
 
             console.log('✅ Invoice details saved to sheet successfully');
+        } else if (action === 'save_attendees') {
+            // Update attendees columns on existing lead row (matched by email)
+            await fetch(SHEET_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'save_attendees',
+                    bill_email: body.bill_email || '',
+                    pax: body.pax || 1,
+                    attendees: body.attendees || []
+                }),
+            });
+
+            console.log('✅ Attendees saved to sheet successfully');
         } else {
             return new Response(
                 JSON.stringify({ error: `Unknown action: ${action}` }),

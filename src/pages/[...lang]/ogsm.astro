@@ -428,9 +428,63 @@ export function getStaticPaths() {
               </button>
             </form>
 
-            <!-- Invoice Details Section (Step 2, hidden initially) -->
+            <!-- Participants Section (Step 2, hidden initially) -->
+            <div id="participants-section" class="hidden py-8">
+              <h3 class="text-2xl font-bold text-dark text-center mb-6">👥 Step 2: 参与者信息</h3>
+              
+              <form id="participants-form">
+                <!-- Pax Selection & Pricing moved to Step 2 -->
+                <div class="bg-accent/10 p-6 rounded-xl border border-accent/30 max-w-md mx-auto mb-8">
+                  <label class="block text-sm font-semibold text-dark mb-3">👥 报名人数 *</label>
+                  <div class="flex items-center gap-4 mb-4">
+                    <button type="button" id="pax-minus" class="w-10 h-10 rounded-full bg-primary text-white text-xl font-bold flex items-center justify-center hover:bg-theme-dark transition-all shadow-sm select-none">−</button>
+                    <input type="number" id="pax" name="pax" value="1" min="1" max="20" readonly class="w-16 text-center text-2xl font-bold text-dark border-none bg-transparent outline-none" />
+                    <button type="button" id="pax-plus" class="w-10 h-10 rounded-full bg-primary text-white text-xl font-bold flex items-center justify-center hover:bg-theme-dark transition-all shadow-sm select-none">+</button>
+                  </div>
+                  <!-- Pricing Breakdown -->
+                  <div id="pricing-breakdown" class="space-y-2 text-base">
+                    <div id="row-original" class="flex justify-between items-center hidden">
+                      <span class="text-light">原价 (RM 128 × <span id="pax-count">1</span> 人)</span>
+                      <span id="price-original" class="font-semibold text-light line-through">RM 128</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-light">小计</span>
+                      <span id="price-subtotal" class="font-semibold text-dark">RM 128.00</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="text-light">SST (8%)</span>
+                      <span id="price-sst" class="font-semibold text-dark">RM 10.24</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-2 border-t border-accent/30">
+                      <span class="font-bold text-dark text-lg">总计</span>
+                      <span id="price-total" class="font-bold text-primary text-2xl">RM 138.24</span>
+                    </div>
+                  </div>
+                  <!-- Savings hint (shown for 2+ pax) -->
+                  <div id="savings-hint" class="mt-3 text-sm text-primary font-medium hidden">
+                    🎉 <span id="savings-text"></span>
+                  </div>
+                </div>
+
+                <!-- Attendee Details Container -->
+                <div id="attendees-container" class="space-y-6 max-w-md mx-auto mb-8">
+                  <!-- JS Injects attendee block here -->
+                </div>
+
+                <div class="text-center">
+                  <button id="participants-next-btn" type="submit" class="w-full max-w-md mx-auto bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md flex items-center justify-center gap-2">
+                    ➡️ 下一步 (填写发票信息)
+                  </button>
+                  <button type="button" id="back-to-step1-from-participants" class="mt-4 text-light hover:text-dark underline text-sm">
+                    🔙 返回修改报名信息
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Invoice Details Section (Step 3, hidden initially) -->
             <div id="invoice-section" class="hidden py-8">
-              <h3 class="text-2xl font-bold text-dark text-center mb-2">🧾 Invoice Details</h3>
+              <h3 class="text-2xl font-bold text-dark text-center mb-2">🧾 Step 3: Invoice Details</h3>
               <p class="text-light text-center mb-8 pb-6 border-b border-border-light text-base">发票将在成功付款后的 24 小时内发出。</p>
 
               <form id="invoice-form" class="space-y-6">
@@ -453,49 +507,40 @@ export function getStaticPaths() {
                   </div>
                 </div>
 
-                <button type="submit" id="invoice-next-btn" class="w-full bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
-                  ➡️ 下一步 (选择人数并付款)
-                </button>
-                <button type="button" id="back-to-step1-from-invoice" class="w-full mt-2 text-light hover:text-dark underline text-sm">
-                  🔙 返回修改报名信息
-                </button>
+                <div class="text-center">
+                  <button type="submit" id="invoice-next-btn" class="w-full max-w-md mx-auto bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
+                    ➡️ 下一步 (前往付款)
+                  </button>
+                  <button type="button" id="back-to-step2-from-invoice" class="mt-4 text-light hover:text-dark underline text-sm block mx-auto">
+                    🔙 返回修改参与者信息
+                  </button>
+                </div>
               </form>
             </div>
 
-            <!-- Payment Section (Step 3, hidden initially) -->
-            <div id="payment-section" class="hidden py-8">
-              <h3 class="text-2xl font-bold text-dark text-center mb-6">✅ 报名信息已记录，请确认人数及付款</h3>
+            <!-- Checkout Section (Step 4, hidden initially) -->
+            <div id="checkout-section" class="hidden py-8">
+              <h3 class="text-2xl font-bold text-dark text-center mb-6">✅ Step 4: 确认并付款</h3>
               
-              <!-- Pax Selection & Pricing moved to Step 2 -->
-              <div class="bg-accent/10 p-6 rounded-xl border border-accent/30 max-w-md mx-auto mb-8">
-                <label class="block text-sm font-semibold text-dark mb-3">👥 报名人数 *</label>
-                <div class="flex items-center gap-4 mb-4">
-                  <button type="button" id="pax-minus" class="w-10 h-10 rounded-full bg-primary text-white text-xl font-bold flex items-center justify-center hover:bg-theme-dark transition-all shadow-sm select-none">−</button>
-                  <input type="number" id="pax" name="pax" value="1" min="1" max="20" readonly class="w-16 text-center text-2xl font-bold text-dark border-none bg-transparent outline-none" />
-                  <button type="button" id="pax-plus" class="w-10 h-10 rounded-full bg-primary text-white text-xl font-bold flex items-center justify-center hover:bg-theme-dark transition-all shadow-sm select-none">+</button>
-                </div>
-                <!-- Pricing Breakdown -->
-                <div id="pricing-breakdown" class="space-y-2 text-base">
-                  <div id="row-original" class="flex justify-between items-center hidden">
-                    <span class="text-light">原价 (RM 128 × <span id="pax-count">1</span> 人)</span>
-                    <span id="price-original" class="font-semibold text-light line-through">RM 128</span>
+              <div class="bg-theme-light border border-border-light p-8 rounded-xl max-w-md mx-auto mb-8 shadow-sm">
+                <h4 class="font-bold text-dark border-b border-border-light pb-2 mb-4">订单摘要</h4>
+                <div class="space-y-3 text-base">
+                  <div class="flex justify-between">
+                    <span class="text-light">报名人数:</span>
+                    <span class="font-bold text-dark" id="summary-pax">1 人</span>
                   </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-light">小计</span>
-                    <span id="price-subtotal" class="font-semibold text-dark">RM 128.00</span>
+                  <div class="flex justify-between">
+                    <span class="text-light">小计:</span>
+                    <span class="font-bold text-dark" id="summary-subtotal">RM 128.00</span>
                   </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-light">SST (8%)</span>
-                    <span id="price-sst" class="font-semibold text-dark">RM 10.24</span>
+                  <div class="flex justify-between">
+                    <span class="text-light">SST (8%):</span>
+                    <span class="font-bold text-dark" id="summary-sst">RM 10.24</span>
                   </div>
-                  <div class="flex justify-between items-center pt-2 border-t border-accent/30">
-                    <span class="font-bold text-dark text-lg">总计</span>
-                    <span id="price-total" class="font-bold text-primary text-2xl">RM 138.24</span>
+                  <div class="flex justify-between pt-3 border-t border-border-light">
+                    <span class="font-bold text-dark text-lg">总计:</span>
+                    <span class="font-bold text-primary text-2xl" id="summary-total">RM 138.24</span>
                   </div>
-                </div>
-                <!-- Savings hint (shown for 2+ pax) -->
-                <div id="savings-hint" class="mt-3 text-sm text-primary font-medium hidden">
-                  🎉 <span id="savings-text"></span>
                 </div>
               </div>
 
@@ -507,8 +552,8 @@ export function getStaticPaths() {
                   <div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
                   正在处理订单并打开支付页面...
                 </div>
-                <button type="button" id="back-to-step1-btn" class="mt-4 text-light hover:text-dark underline text-sm">
-                  🔙 返回修改信息
+                <button type="button" id="back-to-step3-btn" class="mt-4 text-light hover:text-dark underline text-sm">
+                  🔙 返回修改发票信息
                 </button>
               </div>
             </div>
@@ -548,6 +593,7 @@ export function getStaticPaths() {
   const priceTotal = document.getElementById('price-total')!;
   const savingsHint = document.getElementById('savings-hint')!;
   const savingsText = document.getElementById('savings-text')!;
+  const attendeesContainer = document.getElementById('attendees-container')!;
 
   const PRICE_PER_PAX = 128;
   const SST_RATE = 0.08;
@@ -582,6 +628,46 @@ export function getStaticPaths() {
     priceSubtotal.textContent = `RM ${subtotal.toFixed(2)}`;
     priceSst.textContent = `RM ${sst.toFixed(2)}`;
     priceTotal.textContent = `RM ${total.toFixed(2)}`;
+    
+    updateAttendeeFields(pax);
+  }
+
+  function updateAttendeeFields(pax: number) {
+    if (!attendeesContainer) return;
+    const currentCount = attendeesContainer.children.length;
+    
+    if (pax > currentCount) {
+        // Add new blocks
+        for (let i = currentCount + 1; i <= pax; i++) {
+            const div = document.createElement('div');
+            div.className = 'bg-theme-light border border-border-light p-6 rounded-xl space-y-4 attendee-block';
+            div.id = `attendee-block-${i}`;
+            div.innerHTML = `
+              <h4 class="font-bold text-dark border-b border-border-light pb-2 mb-4">Participant ${i} (参与者 ${i})</h4>
+              <div>
+                <label class="block text-sm font-semibold text-dark mb-2">FULL NAME as per IC *</label>
+                <input type="text" name="attendee_name_${i}" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：Ali Bin Ahmad">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-dark mb-2">IC No. *</label>
+                <input type="text" name="attendee_ic_${i}" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：900101-14-1234">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-dark mb-2">Phone No. *</label>
+                <input type="tel" name="attendee_phone_${i}" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：0123456789">
+              </div>
+            `;
+            attendeesContainer.appendChild(div);
+        }
+    } else if (pax < currentCount) {
+        // Remove extra blocks
+        for (let i = currentCount; i > pax; i--) {
+            const block = document.getElementById(`attendee-block-${i}`);
+            if (block) {
+                block.remove();
+            }
+        }
+    }
   }
 
   minusBtn.addEventListener('click', () => {
@@ -607,13 +693,22 @@ export function getStaticPaths() {
   const form = document.getElementById('ogsm-form') as HTMLFormElement;
   const invoiceSection = document.getElementById('invoice-section')!;
   const invoiceForm = document.getElementById('invoice-form') as HTMLFormElement;
-  const paymentSection = document.getElementById('payment-section')!;
+  const participantsSection = document.getElementById('participants-section')!;
+  const participantsForm = document.getElementById('participants-form') as HTMLFormElement;
+  const checkoutSection = document.getElementById('checkout-section')!;
   const payNowBtn = document.getElementById('pay-now-btn') as HTMLButtonElement;
-  const backToStep1Btn = document.getElementById('back-to-step1-btn')!;
   const payNowLoading = document.getElementById('pay-now-loading')!;
-  const backToStep1FromInvoice = document.getElementById('back-to-step1-from-invoice')!;
+  
+  const backToStep1FromParticipants = document.getElementById('back-to-step1-from-participants')!;
+  const backToStep2FromInvoice = document.getElementById('back-to-step2-from-invoice')!;
+  const backToStep3Btn = document.getElementById('back-to-step3-btn')!;
 
-  // --- Step 1 → Step 2: Save lead, then show invoice form ---
+  const summaryPax = document.getElementById('summary-pax')!;
+  const summarySubtotal = document.getElementById('summary-subtotal')!;
+  const summarySst = document.getElementById('summary-sst')!;
+  const summaryTotal = document.getElementById('summary-total')!;
+
+  // --- Step 1 → Step 2: Save lead, then show Participants form ---
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -652,17 +747,18 @@ export function getStaticPaths() {
          console.warn("Could not save lead to Google Sheet, but letting user continue.");
       }
 
-      // Auto-fill invoice fields from Step 1 data
-      const invCompanyEl = document.getElementById('inv_company') as HTMLInputElement;
-      const invPhoneEl = document.getElementById('inv_phone') as HTMLInputElement;
-      const invEmailEl = document.getElementById('inv_email') as HTMLInputElement;
-      if (!invCompanyEl.value) invCompanyEl.value = company;
-      if (!invPhoneEl.value) invPhoneEl.value = phone;
-      if (!invEmailEl.value) invEmailEl.value = email;
+      // Initialize Attendee fields if first time viewing Step 2
+      updatePricing();
 
-      // Switch UI: Step 1 → Step 2 (Invoice)
+      // Auto-fill Attendee 1 based on Step 1 lead info
+      const t1Name = document.querySelector('input[name="attendee_name_1"]') as HTMLInputElement;
+      const t1Phone = document.querySelector('input[name="attendee_phone_1"]') as HTMLInputElement;
+      if (t1Name && !t1Name.value) t1Name.value = name;
+      if (t1Phone && !t1Phone.value) t1Phone.value = phone;
+
+      // Switch UI: Step 1 → Step 2 (Participants)
       form.classList.add('hidden');
-      invoiceSection.classList.remove('hidden');
+      participantsSection.classList.remove('hidden');
     } catch (err) {
       console.error(err);
       alert('保存失败，请检查网络后重试。');
@@ -673,17 +769,100 @@ export function getStaticPaths() {
   });
 
   // --- Step 2 back → Step 1 ---
-  backToStep1FromInvoice.addEventListener('click', () => {
-    invoiceSection.classList.add('hidden');
+  backToStep1FromParticipants.addEventListener('click', () => {
+    participantsSection.classList.add('hidden');
     form.classList.remove('hidden');
   });
 
-  // --- Step 2 → Step 3: Validate invoice, save to sheet, then show payment ---
+  // --- Step 2 → Step 3: Save participants, then show invoice ---
+  participantsForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!participantsForm.checkValidity()) {
+      participantsForm.reportValidity();
+      return;
+    }
+
+    // Double check Step 1 values are still valid
+    if (!form.checkValidity()) {
+      alert("请返回第一步填写完整信息");
+      return;
+    }
+
+    const pax = parseInt(paxInput.value) || 1;
+    const attendeesData = [];
+    for (let i = 1; i <= pax; i++) {
+      attendeesData.push({
+        name: (document.querySelector(`input[name="attendee_name_${i}"]`) as HTMLInputElement)?.value || '',
+        ic: (document.querySelector(`input[name="attendee_ic_${i}"]`) as HTMLInputElement)?.value || '',
+        phone: (document.querySelector(`input[name="attendee_phone_${i}"]`) as HTMLInputElement)?.value || '',
+      });
+    }
+
+    const leadEmail = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const btn = document.getElementById('participants-next-btn') as HTMLButtonElement;
+    const originalText = btn.innerHTML;
+    
+    btn.disabled = true;
+    btn.innerHTML = '⏳ 正在保存信息...';
+
+    try {
+      const res = await fetch('/api/save_lead/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'save_attendees',
+          bill_email: leadEmail,
+          pax: pax,
+          attendees: attendeesData,
+        }),
+      });
+
+      if (!res.ok) {
+        console.warn('Could not save attendees to Google Sheet, but letting user continue.');
+      }
+
+      // Auto-fill invoice fields from Step 1 data
+      const company = (document.getElementById('company') as HTMLInputElement).value.trim();
+      const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+      const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+      
+      const invCompanyEl = document.getElementById('inv_company') as HTMLInputElement;
+      const invPhoneEl = document.getElementById('inv_phone') as HTMLInputElement;
+      const invEmailEl = document.getElementById('inv_email') as HTMLInputElement;
+      if (!invCompanyEl.value) invCompanyEl.value = company;
+      if (!invPhoneEl.value) invPhoneEl.value = phone;
+      if (!invEmailEl.value) invEmailEl.value = email;
+
+      // Switch UI: Step 2 → Step 3 (Invoice)
+      participantsSection.classList.add('hidden');
+      invoiceSection.classList.remove('hidden');
+    } catch (err) {
+      console.error(err);
+      alert('保存参与者信息失败，请检查网络后重试。');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    }
+  });
+
+  // --- Step 3 back → Step 2 ---
+  backToStep2FromInvoice.addEventListener('click', () => {
+    invoiceSection.classList.add('hidden');
+    participantsSection.classList.remove('hidden');
+  });
+
+  // --- Step 3 → Step 4: Validate invoice, save to sheet, then show Summary/Payment ---
   invoiceForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (!invoiceForm.checkValidity()) {
       invoiceForm.reportValidity();
+      return;
+    }
+
+    // Validate Previous forms again just in case
+    if (!form.checkValidity() || !participantsForm.checkValidity()) {
+      alert("请确保前面的信息已填写完整");
       return;
     }
 
@@ -717,10 +896,16 @@ export function getStaticPaths() {
         console.warn('Could not save invoice to Google Sheet, but letting user continue.');
       }
 
-      // Switch UI: Step 2 → Step 3 (Payment)
+      // Update Step 4 Summary UI
+      const pax = parseInt(paxInput.value) || 1;
+      summaryPax.textContent = `${pax} 人`;
+      summarySubtotal.textContent = priceSubtotal.textContent;
+      summarySst.textContent = priceSst.textContent;
+      summaryTotal.textContent = priceTotal.textContent;
+
+      // Switch UI: Step 3 → Step 4 (Summary)
       invoiceSection.classList.add('hidden');
-      paymentSection.classList.remove('hidden');
-      updatePricing();
+      checkoutSection.classList.remove('hidden');
     } catch (err) {
       console.error(err);
       alert('保存发票信息失败，请检查网络后重试。');
@@ -730,16 +915,16 @@ export function getStaticPaths() {
     }
   });
 
-  // --- Step 3 back → Step 2 ---
-  backToStep1Btn.addEventListener('click', () => {
-    paymentSection.classList.add('hidden');
+  // --- Step 4 back → Step 3 ---
+  backToStep3Btn.addEventListener('click', () => {
+    checkoutSection.classList.add('hidden');
     invoiceSection.classList.remove('hidden');
   });
 
-  // --- Payment submission flow (Step 3) ---
+  // --- Payment submission flow (Step 4) ---
   payNowBtn.addEventListener('click', async () => {
     
-    // Double check form values are still valid (e.g. if manipulated)
+    // Double check form values are still valid
     if (!form.checkValidity()) {
       alert("请返回第一步填写完整信息");
       return;
@@ -853,7 +1038,7 @@ export function getStaticPaths() {
     } finally {
       payNowBtn.classList.remove('hidden');
       payNowLoading.classList.add('hidden');
-      backToStep1Btn.classList.remove('hidden');
+      backToStep3Btn.classList.remove('hidden');
     }
   });
 
@@ -864,17 +1049,21 @@ export function getStaticPaths() {
   function showThankYou() {
     form.classList.add('hidden');
     invoiceSection.classList.add('hidden');
-    paymentSection.classList.add('hidden');
+    participantsSection.classList.add('hidden');
+    checkoutSection.classList.add('hidden');
     thankYouMsg.classList.remove('hidden');
   }
 
   buyAgainBtn.addEventListener('click', () => {
     form.reset();
     invoiceForm.reset();
+    if (participantsForm) participantsForm.reset();
+    if (attendeesContainer) attendeesContainer.innerHTML = '';
     paxInput.value = '1';
     updatePricing();
     thankYouMsg.classList.add('hidden');
-    paymentSection.classList.add('hidden');
+    checkoutSection.classList.add('hidden');
+    participantsSection.classList.add('hidden');
     invoiceSection.classList.add('hidden');
     form.classList.remove('hidden');
   });
