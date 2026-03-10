@@ -403,7 +403,7 @@ export function getStaticPaths() {
                 </div>
                 <div>
                   <label for="phone" class="block text-sm font-semibold text-dark mb-2">联系电话 *</label>
-                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的手机号码">
+                  <input type="tel" id="phone" name="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的手机号码">
                 </div>
               </div>
 
@@ -499,7 +499,7 @@ export function getStaticPaths() {
                 <div class="grid md:grid-cols-2 gap-6">
                   <div>
                     <label for="inv_phone" class="block text-sm font-semibold text-dark mb-2">联系电话 (Phone) *</label>
-                    <input type="tel" id="inv_phone" name="inv_phone" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="发票上的联系电话">
+                    <input type="tel" id="inv_phone" name="inv_phone" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="发票上的联系电话">
                   </div>
                   <div>
                     <label for="inv_email" class="block text-sm font-semibold text-dark mb-2">邮箱 (Email) *</label>
@@ -654,7 +654,7 @@ export function getStaticPaths() {
               </div>
               <div>
                 <label class="block text-sm font-semibold text-dark mb-2">Phone No. *</label>
-                <input type="tel" name="attendee_phone_${i}" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：0123456789">
+                <input type="tel" name="attendee_phone_${i}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：0123456789">
               </div>
             `;
             attendeesContainer.appendChild(div);
