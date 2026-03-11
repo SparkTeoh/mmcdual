@@ -591,6 +591,23 @@ export function getStaticPaths() {
           container.innerHTML = `🔥 紧急！仅剩 <strong class="text-2xl text-red-600">${data.remainingPax}</strong> 个席位！`;
         } else if (data.remainingPax <= 0) {
           container.innerHTML = `🚫 名额已满！`;
+          
+          // Disable the Step 1 form if sold out
+          const ogsmForm = document.getElementById('ogsm-form');
+          if (ogsmForm) {
+            // Disable all inputs and textareas
+            const elements = ogsmForm.querySelectorAll('input, textarea');
+            elements.forEach(el => (el as HTMLInputElement).disabled = true);
+            
+            // Disable submit button and change text
+            const nextBtn = document.getElementById('next-step-btn') as HTMLButtonElement;
+            if (nextBtn) {
+              nextBtn.disabled = true;
+              nextBtn.innerHTML = '🚫 已满额，报名通道关闭';
+              nextBtn.classList.remove('bg-primary', 'hover:bg-theme-dark');
+              nextBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+            }
+          }
         } else {
           container.innerHTML = `✅ 席位充足`;
         }
