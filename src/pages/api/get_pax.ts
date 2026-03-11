@@ -4,9 +4,9 @@ import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async () => {
   try {
-    const appScriptUrl = import.meta.env.PUBLIC_GOOGLE_SHEET_COUNTDOWN || process.env.PUBLIC_GOOGLE_SHEET_COUNTDOWN;
+    const appScriptUrl = import.meta.env.GOOGLE_SHEET_COUNTDOWN || process.env.GOOGLE_SHEET_COUNTDOWN;
     if (!appScriptUrl) {
-      return new Response(JSON.stringify({ error: "API Config error: PUBLIC_GOOGLE_SHEET_COUNTDOWN not found" }), { status: 500 });
+      return new Response(JSON.stringify({ error: "API Config error: GOOGLE_SHEET_COUNTDOWN not found" }), { status: 500 });
     }
 
     // Google Apps Script Web Apps often return a 302 Redirection
