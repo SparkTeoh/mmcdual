@@ -5,6 +5,9 @@ import { generatePaths } from "@/lib/utils/i18nUtils.ts";
 export function getStaticPaths() {
   return generatePaths();
 }
+
+// 👇 SWITCH: Toggle this to true to show the Pax Countdown, false to hide it.
+const SHOW_PAX_COUNTDOWN = false;
 ---
 
 <Base>
@@ -335,7 +338,11 @@ export function getStaticPaths() {
                 <span class="text-2xl">⏰</span>
                 <div>
                   <h4 class="font-bold text-dark">时间</h4>
-                  <p class="text-light">2026年3月17日 (星期二）<br/>下午 1点 - 6点 <span class="text-base opacity-80">(不是普通的分享会，是一个可实战工作坊）</span></p>
+                  <p class="text-light">
+                    <span class="text-red-500 font-bold">3月场已满额 (March session is full)</span><br/>
+                    下一场预计：2026年4月21日 (星期二）<br/>
+                    下午 1点 - 6点 <span class="text-base opacity-80">(不是普通的分享会，是一个可实战工作坊）</span>
+                  </p>
                 </div>
               </div>
               <div class="flex gap-4 items-start">
@@ -369,21 +376,23 @@ export function getStaticPaths() {
             </div>
           </div>
 
-          <div class="bg-[#FFF4E5] border border-[#FFD9A1] p-6 rounded-2xl">
-            <h3 class="text-xl font-bold text-dark mb-2 flex items-center gap-2">⚠️ 席位有限，先到先得</h3>
-            <p class="text-light">
-              为了保证大家都能在现场得到老师的指导，我们只收 <strong>40 个人（或 10 家企业）</strong>。<br/><br/>
-              名额报满，报名通道立刻关闭。
-            </p>
-            <div id="pax-countdown-container" class="hidden mt-4 pt-4 border-t border-[#FFD9A1] text-lg text-center animate-pulse"></div>
-          </div>
+          {SHOW_PAX_COUNTDOWN && (
+            <div class="bg-[#FFF4E5] border border-[#FFD9A1] p-6 rounded-2xl">
+              <h3 class="text-xl font-bold text-dark mb-2 flex items-center gap-2">⚠️ 席位有限，先到先得</h3>
+              <p class="text-light">
+                为了保证大家都能在现场得到老师的指导，我们只收 <strong>40 个人（或 10 家企业）</strong>。<br/><br/>
+                名额报满，报名通道立刻关闭。
+              </p>
+              <div id="pax-countdown-container" class="hidden mt-4 pt-4 border-t border-[#FFD9A1] text-lg text-center animate-pulse"></div>
+            </div>
+          )}
         </div>
 
         <!-- Registration Form -->
         <div class="lg:col-span-3">
           <div class="bg-theme-light border border-border-light p-8 md:p-10 rounded-2xl shadow-lg">
             <h3 class="text-2xl font-bold text-dark mb-2">📝 报名表单</h3>
-            <p class="text-light mb-8 pb-6 border-b border-border-light">请填写信息，我们的顾问会在 24 小时内联系您，确认是否还有座位：</p>
+            <div class="mb-8 pb-6 border-b border-border-light"></div>
             
             <form id="ogsm-form" class="space-y-6">
               <div class="grid md:grid-cols-2 gap-6">
@@ -404,7 +413,7 @@ export function getStaticPaths() {
                 </div>
                 <div>
                   <label for="phone" class="block text-sm font-semibold text-dark mb-2">联系电话 *</label>
-                  <input type="tel" id="phone" name="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的手机号码">
+                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的手机号码">
                 </div>
               </div>
 
@@ -486,7 +495,7 @@ export function getStaticPaths() {
             <!-- Invoice Details Section (Step 3, hidden initially) -->
             <div id="invoice-section" class="hidden py-8">
               <h3 class="text-2xl font-bold text-dark text-center mb-2">🧾 Step 3: Invoice Details</h3>
-              <p class="text-light text-center mb-8 pb-6 border-b border-border-light text-base">发票将在成功付款后的 24 小时内发出。</p>
+              <p class="text-light text-center mb-8 pb-6 border-b border-border-light text-base">发票将在课程结束后发出。 (我们会在24小时内发送进您的邮箱)</p>
 
               <form id="invoice-form" class="space-y-6">
                 <div>
@@ -500,7 +509,7 @@ export function getStaticPaths() {
                 <div class="grid md:grid-cols-2 gap-6">
                   <div>
                     <label for="inv_phone" class="block text-sm font-semibold text-dark mb-2">联系电话 (Phone) *</label>
-                    <input type="tel" id="inv_phone" name="inv_phone" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="发票上的联系电话">
+                    <input type="tel" id="inv_phone" name="inv_phone" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="发票上的联系电话">
                   </div>
                   <div>
                     <label for="inv_email" class="block text-sm font-semibold text-dark mb-2">邮箱 (Email) *</label>
@@ -580,11 +589,12 @@ export function getStaticPaths() {
 <script>
   // --- Dynamic Pax Availability ---
   document.addEventListener('DOMContentLoaded', async () => {
+    const container = document.getElementById('pax-countdown-container');
+    if (!container) return; // Exit early if the section is disabled via SHOW_PAX_COUNTDOWN
+
     try {
       const response = await fetch('/api/get_pax/');
       const data = await response.json();
-      
-      const container = document.getElementById('pax-countdown-container');
       if (container && data.remainingPax !== undefined) {
         container.classList.remove('hidden');
         if (data.remainingPax > 0 && data.remainingPax <= 20) {
@@ -694,7 +704,7 @@ export function getStaticPaths() {
               </div>
               <div>
                 <label class="block text-sm font-semibold text-dark mb-2">Phone No. *</label>
-                <input type="tel" name="attendee_phone_${i}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：0123456789">
+                <input type="tel" name="attendee_phone_${i}" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：0123456789">
               </div>
             `;
             attendeesContainer.appendChild(div);
@@ -729,6 +739,50 @@ export function getStaticPaths() {
   // Initialize
   updatePricing();
 
+  // --- Formatting Event Listener ---
+  document.addEventListener('input', (e: any) => {
+    const target = e.target as HTMLInputElement;
+    if (!target || !target.name) return;
+    
+    // Phone Formatter
+    if (target.name === 'phone' || target.name.startsWith('attendee_phone_') || target.name === 'inv_phone') {
+      let val = target.value.replace(/\D/g, '');
+      if (val.length > 11) val = val.slice(0, 11);
+      
+      if (val.startsWith('011')) {
+        if (val.length > 7) {
+          target.value = val.slice(0, 3) + ' ' + val.slice(3, 7) + ' ' + val.slice(7);
+        } else if (val.length > 3) {
+          target.value = val.slice(0, 3) + ' ' + val.slice(3);
+        } else {
+          target.value = val;
+        }
+      } else {
+        if (val.length > 6) {
+          target.value = val.slice(0, 3) + '-' + val.slice(3, 6) + ' ' + val.slice(6);
+        } else if (val.length > 3) {
+          target.value = val.slice(0, 3) + '-' + val.slice(3);
+        } else {
+          target.value = val;
+        }
+      }
+    }
+    
+    // IC Formatter
+    if (target.name.startsWith('attendee_ic_')) {
+      let val = target.value.replace(/\D/g, '');
+      if (val.length > 12) val = val.slice(0, 12);
+      
+      if (val.length > 8) {
+        target.value = val.slice(0, 6) + '-' + val.slice(6, 8) + '-' + val.slice(8);
+      } else if (val.length > 6) {
+        target.value = val.slice(0, 6) + '-' + val.slice(6);
+      } else {
+        target.value = val;
+      }
+    }
+  });
+
   // --- Element references ---
   const form = document.getElementById('ogsm-form') as HTMLFormElement;
   const invoiceSection = document.getElementById('invoice-section')!;
@@ -760,7 +814,7 @@ export function getStaticPaths() {
     const name = (document.getElementById('name') as HTMLInputElement).value.trim();
     const company = (document.getElementById('company') as HTMLInputElement).value.trim();
     const position = (document.getElementById('position') as HTMLInputElement).value.trim();
-    const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+    const phone = ((document.getElementById('phone') as HTMLInputElement).value.trim()).replace(/\D/g, '');
     const email = (document.getElementById('email') as HTMLInputElement).value.trim();
     const diagnosis = (document.getElementById('diagnosis') as HTMLTextAreaElement).value.trim();
 
@@ -833,8 +887,8 @@ export function getStaticPaths() {
     for (let i = 1; i <= pax; i++) {
       attendeesData.push({
         name: (document.querySelector(`input[name="attendee_name_${i}"]`) as HTMLInputElement)?.value || '',
-        ic: (document.querySelector(`input[name="attendee_ic_${i}"]`) as HTMLInputElement)?.value || '',
-        phone: (document.querySelector(`input[name="attendee_phone_${i}"]`) as HTMLInputElement)?.value || '',
+        ic: ((document.querySelector(`input[name="attendee_ic_${i}"]`) as HTMLInputElement)?.value || '').replace(/\D/g, ''),
+        phone: ((document.querySelector(`input[name="attendee_phone_${i}"]`) as HTMLInputElement)?.value || '').replace(/\D/g, ''),
       });
     }
 
@@ -908,7 +962,7 @@ export function getStaticPaths() {
 
     const invCompany = (document.getElementById('inv_company') as HTMLInputElement).value.trim();
     const invAddress = (document.getElementById('inv_address') as HTMLTextAreaElement).value.trim();
-    const invPhone = (document.getElementById('inv_phone') as HTMLInputElement).value.trim();
+    const invPhone = ((document.getElementById('inv_phone') as HTMLInputElement).value.trim()).replace(/\D/g, '');
     const invEmail = (document.getElementById('inv_email') as HTMLInputElement).value.trim();
     const leadEmail = (document.getElementById('email') as HTMLInputElement).value.trim();
 
@@ -971,7 +1025,7 @@ export function getStaticPaths() {
     }
 
     const name = (document.getElementById('name') as HTMLInputElement).value.trim();
-    const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+    const phone = ((document.getElementById('phone') as HTMLInputElement).value.trim()).replace(/\D/g, '');
     const email = (document.getElementById('email') as HTMLInputElement).value.trim();
     const pax = parseInt(paxInput.value) || 1;
     const subtotal = calcSubtotal(pax);
