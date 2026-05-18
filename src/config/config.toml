@@ -103,7 +103,7 @@
 # Specific OpenGraph settings, using values from the [site] section where possible.
 # -----------------------------------------------------------------------------------------------------------------------------------
 [opengraph]
-  image       = "/images/MMCLOGO.png" # Image used in OpenGraph previews
+  image       = "/images/banner/OGSM_banner.jpeg" # Image used in OpenGraph previews
   ogLocale    = "zh" # Locale setting for OpenGraph
   ogType      = "website" # Type of content for OpenGraph protocol
   twitter     = "" # Twitter handle for Twitter Card meta tags
