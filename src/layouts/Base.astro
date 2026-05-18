@@ -7,7 +7,7 @@ import Header from "@/components/global/header/Header.astro";
 import type { JSONLDProps } from "@/lib/utils/JsonLdGenerator";
 import GlobalScripts from "./components/widgets/GlobalScripts.astro";
 
-import config from ".astro/config.generated.json" with { type: "json" };
+import config from "../.astro/config.generated.json" with { type: "json" };
 import PageLoader from "./components/utilities/PageLoader.astro";
 
 type Props = JSONLDProps & {
