@@ -357,7 +357,7 @@ const SHOW_PAX_COUNTDOWN = false;
                 <div>
                   <h4 class="font-bold text-dark">时间</h4>
                   <p class="text-light mt-1">
-                    <strong class="text-primary text-lg block mb-1">2026年5月21日 (星期四）</strong>
+                    <strong class="text-primary text-lg block mb-1">2026年6月23日 (星期二）</strong>
                     下午 1点 - 6点 <span class="text-base opacity-80">(不是普通的分享会，是一个可实战工作坊）</span>
                   </p>
                 </div>
@@ -411,37 +411,32 @@ const SHOW_PAX_COUNTDOWN = false;
             <h3 class="text-2xl font-bold text-dark mb-2">📝 报名表单</h3>
             <div class="mb-8 pb-6 border-b border-border-light"></div>
             
-            <div class="mb-6 bg-red-50 border border-red-200 rounded-xl px-6 py-4 text-center">
-              <p class="text-red-600 font-bold text-lg">🚫 报名已截止，名额已满！</p>
-              <p class="text-red-500 text-sm mt-1">感谢您的关注，本次工作坊席位已全部报满。</p>
-            </div>
-
             <form id="ogsm-form" class="space-y-6">
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
                   <label for="name" class="block text-sm font-semibold text-dark mb-2">姓名 *</label>
-                  <input type="text" id="name" name="name" disabled class="w-full px-4 py-3 rounded-lg border border-border-light outline-none transition-all bg-gray-100 text-gray-400 cursor-not-allowed" placeholder="您的姓名">
+                  <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的姓名">
                 </div>
                 <div>
                   <label for="company" class="block text-sm font-semibold text-dark mb-2">公司名称 *</label>
-                  <input type="text" id="company" name="company" disabled class="w-full px-4 py-3 rounded-lg border border-border-light outline-none transition-all bg-gray-100 text-gray-400 cursor-not-allowed" placeholder="您的公司">
+                  <input type="text" id="company" name="company" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的公司">
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
                   <label for="position" class="block text-sm font-semibold text-dark mb-2">职位 * <span class="text-xs font-normal text-light">(建议决策层填写)</span></label>
-                  <input type="text" id="position" name="position" disabled class="w-full px-4 py-3 rounded-lg border border-border-light outline-none transition-all bg-gray-100 text-gray-400 cursor-not-allowed" placeholder="如：CEO、财务总监">
+                  <input type="text" id="position" name="position" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="如：CEO、财务总监">
                 </div>
                 <div>
                   <label for="phone" class="block text-sm font-semibold text-dark mb-2">联系电话 *</label>
-                  <input type="tel" id="phone" name="phone" disabled class="w-full px-4 py-3 rounded-lg border border-border-light outline-none transition-all bg-gray-100 text-gray-400 cursor-not-allowed" placeholder="您的手机号码">
+                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="您的手机号码">
                 </div>
               </div>
 
               <div>
                 <label for="email" class="block text-sm font-semibold text-dark mb-2">邮箱 *</label>
-                <input type="email" id="email" name="email" disabled class="w-full px-4 py-3 rounded-lg border border-border-light outline-none transition-all bg-gray-100 text-gray-400 cursor-not-allowed" placeholder="your.email@example.com">
+                <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required placeholder="your.email@example.com">
               </div>
 
               <div class="bg-primary/5 p-6 rounded-xl border border-primary/20">
@@ -452,11 +447,11 @@ const SHOW_PAX_COUNTDOWN = false;
                     <em class="text-xs text-primary/80 mt-1 block">[ 例如：研发和销售老吵架、定好KPI员工不认账、大家都只顾自己部门利益... ]</em>
                   </span>
                 </label>
-                <textarea id="diagnosis" name="diagnosis" rows="3" disabled class="w-full px-4 py-3 rounded-lg border border-border-light outline-none transition-all resize-none bg-gray-100 text-gray-400 cursor-not-allowed" placeholder="请写下您现在的痛点..."></textarea>
+                <textarea id="diagnosis" name="diagnosis" rows="3" class="w-full px-4 py-3 rounded-lg border border-border-light focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" required placeholder="请写下您现在的痛点..."></textarea>
               </div>
 
-              <button type="button" id="next-step-btn" disabled class="w-full bg-gray-400 text-white font-bold text-lg px-8 py-4 rounded-xl cursor-not-allowed shadow-md">
-                🚫 名额已满，报名通道关闭
+              <button type="submit" id="next-step-btn" class="w-full bg-primary hover:bg-theme-dark text-white font-bold text-lg px-8 py-4 rounded-xl transition duration-300 shadow-md">
+                ➡️ 下一步 (选择人数并付款)
               </button>
             </form>
 
